@@ -3,3 +3,8 @@ run in terminal for root directory, frontend directory, backend directory npm in
 ```
 npm i
 ```
+
+To start dev server run
+```
+npm start
+```
