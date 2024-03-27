@@ -7,7 +7,7 @@ const app = express()
 //rout for api
 app.get("/api", (req, res) => {
     res.json({
-        "users": ["userOne", "userTwo", "userThree", "userFour", "userFive"]
+        "users": ["userOne", "userTwo", "userThree", "userFour"]
     }) //only for test
 })
 

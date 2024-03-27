@@ -1,6 +1,8 @@
-import React, { useEffect, useState} from 'react'
+import { useState, useEffect } from 'react'
 
-const App = () => {
+import './App.css'
+
+function App() {
 
   const [backendData, setBackendData] = useState([{}])
 
@@ -16,8 +18,10 @@ const App = () => {
   }, [])
 
   // this returns what you want the client to see
+
   return (
-    <div>
+    <>
+      <div>
       {(typeof backendData.users === 'undefined') ? (
         <p>Loading....</p>
       ): (
@@ -27,6 +31,8 @@ const App = () => {
       )}
 
     </div>
+
+    </>
   )
 }
 
