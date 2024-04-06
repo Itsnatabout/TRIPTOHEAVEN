@@ -8,3 +8,22 @@ To start dev server run
 ```
 npm start
 ```
+
+
+dependencies
+
+frontend
+```
+npm i bootstrap@5.3.3
+
+npm i axios
+
+```
+
+
+backend
+```
+npm i mysql
+
+npm i cors
+```
