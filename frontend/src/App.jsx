@@ -1,27 +1,27 @@
 import { useState, useEffect } from 'react'
-
+import Signup from './components/Signup';
 import './App.css'
 
 function App() {
 
-  const [backendData, setBackendData] = useState([{}])
+  // const [backendData, setBackendData] = useState([{}])
 
-  useEffect(() => {
-    fetch("/api").then(
-      response => response.json()
+  // useEffect(() => {
+  //   fetch("/api").then(
+  //     response => response.json()
       
-    ).then(
-      data => {
-        setBackendData(data)
-      }
-    )
-  }, [])
+  //   ).then(
+  //     data => {
+  //       setBackendData(data)
+  //     }
+  //   )
+  // }, [])
 
   // this returns what you want the client to see
 
   return (
     <>
-      <div>
+      {/* <div>
       {(typeof backendData.users === 'undefined') ? (
         <p>Loading....</p>
       ): (
@@ -30,8 +30,10 @@ function App() {
         ))        
       )}
 
-    </div>
-
+    </div> */}
+      
+      <Signup />
+      
     </>
   )
 }
