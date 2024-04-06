@@ -26,4 +26,6 @@ backend
 npm i mysql
 
 npm i cors
+
+npm i nodemon
 ```
