@@ -12,7 +12,7 @@ app.use(express.json())
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'root',
     database: 'triptoheaven'
 })
 
@@ -20,6 +20,8 @@ const db = mysql.createConnection({
 //     if (err) throw err;
 //     console.log("connected")
 // })
+
+
 
 
 app.post('/signup', (req, res) => {
@@ -57,5 +59,9 @@ app.post('/signup', (req, res) => {
 // listen for requests
 app.listen(5000, () => {
     console.log('server listening on port 5000')
+    db.connect(function (err) {
+        if (err) throw err;
+        console.log("database connected");
+    })
 
 })

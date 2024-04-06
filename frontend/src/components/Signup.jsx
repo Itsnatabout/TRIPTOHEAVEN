@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 import Validation from "./Validation"
 
@@ -10,7 +10,7 @@ const Signup = () => {
     lastname: ``,
     email: ``,
     dateofbirth: ``,
-    age: `2`, // need to calculate age 
+    age: ``, 
     flexRadioDefault: ``, //sex
     mobilenumber: ``,
     role: `1`,
@@ -20,39 +20,55 @@ const Signup = () => {
 
   const [errors, setErrors] = useState({})
 
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const handleInput = (event) => {
     setValues((prev) => ({
       ...prev,
-      [event.target.name]: [event.target.value],
+      [event.target.name]: event.target.value,
     }))
   }
 
+  const calculateAge = () => {
+    const today = new Date();
+    const birthDate = new Date(values.dateofbirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    setValues((prev) => ({
+      ...prev,
+      age: age.toString(), // Convert age to string before setting it
+    }));
+  };
+
+ useEffect(() => {
+    // Check for errors only if form is submitted
+      const checkError = Object.values(errors).every(error => error === "")
+      if (formSubmitted && checkError) {
+        // No errors and form has been submitted, proceed with form submission
+        axios
+          .post("http://localhost:5000/signup", values)
+          .then((res) =>
+            console.log(res)
+          )
+          .catch((err) => console.log(err));
+
+        // Reset formSubmitted after successful submission
+        setFormSubmitted(false);
+      } else {
+        setFormSubmitted(false);
+      }
+  }, [values, errors, formSubmitted]); // This effect depends on errors and values
+  
   const handleSubmit = (event) => {
     event.preventDefault()
+    calculateAge();
     setErrors(Validation(values));
-    if (
-      errors.username === "" &&
-      errors.firstname === "" &&
-      errors.middlename === "" &&
-      errors.lastname === "" &&
-      errors.email === "" &&
-      errors.dateofbirth === "" &&
-      errors.flexRadioDefault === "" &&
-      errors.mobilenumber === "" &&
-      errors.password === "" &&
-      errors.rptpassword === ""
-    ) {
-      axios
-        .post("http://localhost:5000/signup", values)
-        .then((res) =>
-          console.log(res) //error with axios di ko alam baket 
-        )
-        .catch((err) => console.log(err));
-    }
-    else {
-      console.log("error")
-      
-    }
+    setFormSubmitted(true);
   }
 
   return (
@@ -148,6 +164,7 @@ const Signup = () => {
                     type="radio"
                     name="flexRadioDefault"
                     id="Male"
+                    value="Male"
                     onChange={handleInput} //how to handle radio buttons
                   />
                   <label className="form-check-label" htmlFor="">
@@ -160,6 +177,7 @@ const Signup = () => {
                     type="radio"
                     name="flexRadioDefault"
                     id="Female"
+                    value="Female"
                     onChange={handleInput} //how to handle radio buttons
                   />
                   <label className="form-check-label" htmlFor="">
