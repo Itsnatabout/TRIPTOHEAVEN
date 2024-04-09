@@ -1,39 +1,38 @@
 import { useState, useEffect } from 'react'
 import Signup from './components/Signup';
+import Login from './components/Login';
+import ErrorPage from './components/ErrorPage';
+import Home from './components/Home';
 import './App.css'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/home",
+    element: <Home />,
+    errorElement: <ErrorPage />
+  }
+])
 function App() {
 
-  // const [backendData, setBackendData] = useState([{}])
 
-  // useEffect(() => {
-  //   fetch("/api").then(
-  //     response => response.json()
-      
-  //   ).then(
-  //     data => {
-  //       setBackendData(data)
-  //     }
-  //   )
-  // }, [])
-
-  // this returns what you want the client to see
 
   return (
     <>
-      {/* <div>
-      {(typeof backendData.users === 'undefined') ? (
-        <p>Loading....</p>
-      ): (
-          backendData.users.map((user, i) => (
-            <p key={i}>{user}</p>
-        ))        
-      )}
-
-    </div> */}
-      
-      <Signup />
-      
+       <RouterProvider router={router} />
     </>
   )
 }

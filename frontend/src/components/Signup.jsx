@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import Validation from "./Validation"
+import { Link, useNavigate } from "react-router-dom"
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -17,10 +18,9 @@ const Signup = () => {
     password: ``,
     rptpassword: ``,
   })
-
   const [errors, setErrors] = useState({})
-
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleInput = (event) => {
     setValues((prev) => ({
@@ -52,8 +52,9 @@ const Signup = () => {
         // No errors and form has been submitted, proceed with form submission
         axios
           .post("http://localhost:5000/signup", values)
-          .then((res) =>
-            console.log(res)
+          .then(
+            alert("Registered Sucessfully!"),
+            navigate('/')
           )
           .catch((err) => console.log(err));
 
@@ -62,7 +63,7 @@ const Signup = () => {
       } else {
         setFormSubmitted(false);
       }
-  }, [values, errors, formSubmitted]); // This effect depends on errors and values
+  }, [values, errors, formSubmitted, navigate]); // This effect depends on errors and values
   
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -262,6 +263,7 @@ const Signup = () => {
               Check me out
             </label>
           </div>
+          <Link to="/" className="btn btn-deafult border w-100 bg-light rounded-0 text-decoration-none mt-3">Login</Link>
           <button type="submit" className="btn btn-primary m-3">
             Submit
           </button>

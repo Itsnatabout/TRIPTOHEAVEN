@@ -1,13 +1,22 @@
 const express = require('express')
 const mysql = require('mysql')
 const cors = require('cors')
+const bcrypt = require('bcrypt')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 
-
+const saltRounds = 10;
 // express app
 const app = express()
 
 
-app.use(cors())
+app.use(cors({
+    origin: ["http://localhost:5173"],
+    methods: ['GET', 'POST'],
+    credentials: true
+}))
+
 app.use(express.json())
 const db = mysql.createConnection({
     host: 'localhost',
@@ -16,42 +25,101 @@ const db = mysql.createConnection({
     database: 'triptoheaven'
 })
 
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(session({
+    key: "userID",
+    secret: "test",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60 * 60 * 24,
+    },
+}))
 // db.connect(function (err) {
 //     if (err) throw err;
 //     console.log("connected")
 // })
 
-
-
-
 app.post('/signup', (req, res) => {
     const sql = "INSERT INTO user (`username`,`firstname`,`middlename`,`lastname`, `email`, `dateofbirth`, `Age`,`gender`, `mobilenum`, `role`, `password` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    const values = [
-        req.body.username,
-        req.body.firstname,
-        req.body.middlename,
-        req.body.lastname,
-        req.body.email,
-        req.body.dateofbirth,
-        req.body.age,
-        req.body.flexRadioDefault, //sex
-        req.body.mobilenumber,
-        req.body.role,
-        req.body.password,
-    ]
-
-    db.query(sql, values, (err, result) => {
-        if (err) {
-            console.error("Error occurred while inserting user:", err);
-            return res.status(500).json({ error: "Internal server error" });
+    
+    const password = req.body.password.toString();
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+        if(err) {
+            console.log(err);
         }
-        return res.status(201).json({ message: "User created successfully", userId: result.insertId });
-    })
+         
+        const values = [
+            req.body.username,
+            req.body.firstname,
+            req.body.middlename,
+            req.body.lastname,
+            req.body.email,
+            req.body.dateofbirth,
+            req.body.age,
+            req.body.flexRadioDefault, //sex
+            req.body.mobilenumber,
+            req.body.role,
+            hash
+        ]
 
+        db.query(sql, values, (err, result) => {
+            if (err) {
+                console.error("Error occurred while inserting user:", err);
+                return res.status(500).json({ error: "Internal server error" });
+            }
+            return res.status(201).json({ message: "User created successfully", userId: result.insertId }); // make modal that shows user created successfully
+        })
 
+    });
 })
 
 
+app.get('/login', (req, res) => { 
+    if (req.session.user) {
+       // Send response only after session data is fully set
+       process.nextTick(() => {
+        res.send({ loggedIn: true, user: req.session.user });
+        });
+    } else {
+        res.send({ loggedIn: false })
+    }
+})
+
+app.post('/login', (req, res) => { 
+
+    const sql = "SELECT * FROM user WHERE email = ?"
+
+
+    db.query(sql, [req.body.loginEmail], (err, result) => { 
+        if (err) {
+            return res.status(500).send({ message: "Internal server error" }); // Handle database error
+        }
+        if (result.length > 0) {
+            // Load hash from your password DB.
+            bcrypt.compare(req.body.loginPass, result[0].password, (error, response) => {
+                if (error) {
+                    return res.status(500).send({ message: "Internal server error" }); // Handle bcrypt error
+                }
+             
+                if (response) {
+                    req.session.user = result; // Set user session
+                    return res.send({loggedIn: true}); // Successful login
+                } else {
+                    return res.send({message: "Incorrect Password"}); // Incorrect password
+                }
+            }); 
+        } else {
+            return res.send({message: "User does not exist"}); // No user with the provided email
+        }
+
+       
+        
+
+    })
+})
 
 
 

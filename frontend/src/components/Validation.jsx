@@ -7,6 +7,9 @@ function Validation(values) {
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-+=~])[A-Za-z\d!@#$%^&*()-+=~]{8,}$/
     const mobRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/
 
+  
+  
+  //--------------------SIGNUP--------------------------------------------
   //username
   if (values.username === "") {
     error.username = "Username should not be empty."
@@ -67,7 +70,7 @@ function Validation(values) {
   if (values.mobilenumber === "") {
     error.mobilenumber = "Enter Mobile Number."
   } else if (!mobRegex.test(values.mobilenumber)) {
-    error.mobilenumber = "Enter valid Mobile Number"
+    error.mobilenumber = "Enter valid Mobile Number" //FIX check for the length
   } else {
     error.mobilenumber = ""
   }

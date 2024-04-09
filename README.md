@@ -18,6 +18,8 @@ npm i bootstrap@5.3.3
 
 npm i axios
 
+npm i react-router-dom
+
 ```
 
 
@@ -26,4 +28,8 @@ backend
 npm i mysql
 
 npm i cors
+
+npm i bcrypt
+
+npm i express-session body-parser cookie-parser
 ```
