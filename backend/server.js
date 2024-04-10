@@ -4,12 +4,6 @@ const express = require('express')
 const app = express()
 
 
-//rout for api
-app.get("/api", (req, res) => {
-    res.json({
-        "users": ["userOne", "userTwo", "userThree", "userFour"]
-    }) //only for test
-})
 
 // listen for requests
 app.listen(5000, () => {

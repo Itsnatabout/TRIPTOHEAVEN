@@ -1,37 +1,19 @@
 import { useState, useEffect } from 'react'
 
 import './App.css'
+import Header from './components/Header'
+import Home from './components/Home'
+import Book from './components/Book'
 
 function App() {
 
-  const [backendData, setBackendData] = useState([{}])
-
-  useEffect(() => {
-    fetch("/api").then(
-      response => response.json()
-      
-    ).then(
-      data => {
-        setBackendData(data)
-      }
-    )
-  }, [])
-
-  // this returns what you want the client to see
+  
 
   return (
     <>
-      <div>
-      {(typeof backendData.users === 'undefined') ? (
-        <p>Loading....</p>
-      ): (
-          backendData.users.map((user, i) => (
-            <p key={i}>{user}</p>
-        ))        
-      )}
-
-    </div>
-
+      <Header/> 
+      <Home />
+      {/* <Book/> Di gumagana */}
     </>
   )
 }
