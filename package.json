@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "concurrently": "8.2.2"
+    "concurrently": "8.2.2",
+    "start": "^5.1.0"
   },
   "scripts": {
     "start": "concurrently \"cd ./backend && npm run dev\" \"cd ./frontend && npm run dev\""
