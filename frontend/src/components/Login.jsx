@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import Validation from "./LoginValidation"
-
+import '../styles/Login.css'
 
 const Login = () => {
 
@@ -56,13 +56,14 @@ const Login = () => {
 
 
   return (
-      <div className="text-bg-dark d-flex justify-content-center align-items-center vh-100">
-          <div className="text-bg-light p-3 rounded w-25 container">
+    <div className="d-flex justify-content-center align-items-center vh-100" >
+      <div className="text-bg-dark p-3 rounded w-25 container">
+        <h3 className="text-center">Login</h3>
             <form action="" onSubmit={handleSubmit}>
                 <div className="form-group mx-3 pt-3">
                     <label htmlFor="exampleInputEmail1">Email address</label>
                     <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="loginEmail" onChange={handleInput}/>
-                      <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small><br />
+                      <small id="emailHelp" className="form-text text-reset">We'll never share your email with anyone else.</small><br />
                       {errors.loginEmail && (
                   <span className="text-danger">{errors.loginEmail}</span>
                 )}
