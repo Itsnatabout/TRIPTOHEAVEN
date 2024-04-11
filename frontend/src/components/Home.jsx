@@ -1,9 +1,11 @@
 import React from 'react'
+import Header from './Header'
+import Book from './Book'
 
 const home = () => {
   return (
-   
-// <!-- landing page -->
+   <>
+    <Header/>
     <section className="home" id="home">
         <div className="content">
             <h3>Providing you with the best and safest travel experience!</h3>
@@ -17,6 +19,10 @@ const home = () => {
         </div>
 
     </section>
+   </>
+// <!-- landing page -->
+    
+    
   )
 }
 
