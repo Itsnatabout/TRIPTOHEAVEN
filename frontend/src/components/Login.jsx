@@ -21,30 +21,33 @@ const Login = () => {
         }))
       }
 
-      useEffect(() => {
-        // Check for errors only if form is submitted
-          const checkError = Object.values(errors).every(error => error === "")
-          if (formSubmitted && checkError) {
-            // No errors and form has been submitted, proceed with form submission
-            axios
-              .post("http://localhost:5000/login", values)
-              .then((response) => { 
-                if (response.data.loggedIn) {
-                  alert('Successfully Logged in'),
-                  setTimeout(() => {
-                    navigate('/home');
-                  }, 500); // bandaid fix to bug where if the user entered the password wrong once, the session is not set.
-                } else {
-                  alert(response.data.message)
-                }
-              })
-              .catch((err) => console.log(err));
-    
-            // Reset formSubmitted after successful submission
-            setFormSubmitted(false);
+  useEffect(() => {
+    const checkSubmit = async () => {
+      // Check for errors only if form is submitted
+      const checkError = Object.values(errors).every(error => error === "");
+      
+      if (formSubmitted && checkError) {
+        try {
+          // No errors and form has been submitted, proceed with form submission
+          const response = await axios.post("http://localhost:5000/login", values);
+          
+          if (response.data.loggedIn) {
+            alert('Successfully Logged in');
+            navigate('/home');
           } else {
-            setFormSubmitted(false);
+            alert(response.data.message);
           }
+        } catch (error) {
+          console.log(error);
+        }
+        
+        // Reset formSubmitted after successful submission
+        setFormSubmitted(false);
+      } else {
+        setFormSubmitted(false);
+      }
+    };
+      checkSubmit()
       }, [values, errors, formSubmitted, navigate]); // This effect depends on errors and values
 
 
