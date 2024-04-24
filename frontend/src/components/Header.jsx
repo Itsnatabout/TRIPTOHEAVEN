@@ -1,8 +1,15 @@
-import React from "react"
+import {useState, useEffect} from "react"
 import CheckLogin from "./CheckLogin"
+import { FaSearch } from "react-icons/fa";
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const user = CheckLogin()
+
+  useEffect(() => { 
+
+    setIsLoggedIn(user !== null);
+  }, [user])
 
   return (
     <header>
@@ -27,8 +34,10 @@ const Header = () => {
       <div className="icons">
         {/* <i className="fas fa-search" id="search-btn"></i>
         <i className="fas fa-user" id="login-btn"></i> */}
-        <p>search</p>
-        <p>login</p>
+        <p><FaSearch /></p>
+        {isLoggedIn ? (<p>{user}</p>)
+        : (<p>Login</p>)}
+        
       </div>
 
       <form action="" className="search-bar-container">

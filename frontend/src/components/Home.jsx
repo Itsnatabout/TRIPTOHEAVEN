@@ -10,7 +10,7 @@ const home = () => {
         <div className="content">
             <h3>Providing you with the best and safest travel experience!</h3>
             <p>Discover new Places with us!</p>
-            <a href="#" className="btn" id="bookNowBtn">Book Now</a>
+            <a href="#" className="bookbtn" id="bookNowBtn">Book Now</a>
         </div>
 
 
