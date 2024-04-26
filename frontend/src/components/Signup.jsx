@@ -77,7 +77,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
+    <div className="d-flex justify-content-center align-items-center vh-100 coverbody">
       <Header/>
       <div className="text-bg-dark p-3 mt-5 rounded w-50 container">
       <h3 className="text-center">Sign Up</h3>

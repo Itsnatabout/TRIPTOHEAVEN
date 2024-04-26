@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
 import Signup from './components/Signup';
 import Login from './components/Login';
 import ErrorPage from './components/ErrorPage';
 import Home from './components/Home';
+import Book from './components/Book';
 import './App.css'
 import {
   createBrowserRouter,
@@ -23,6 +23,11 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/book",
+    element: <Book />,
     errorElement: <ErrorPage />
   }
 ])

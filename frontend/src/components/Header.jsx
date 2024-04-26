@@ -4,7 +4,6 @@ import CheckLogin from "./CheckLogin"
 import { FaSearch } from "react-icons/fa"
 import axios from "axios"
 
-
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const user = CheckLogin()
@@ -13,18 +12,18 @@ const Header = () => {
     setIsLoggedIn(user !== null)
   }, [user])
 
-
   const handleLogout = () => {
-    axios.post("http://localhost:5000/logout")
+    axios
+      .post("http://localhost:5000/logout")
       .then(() => {
-        setIsLoggedIn(false); // Update local state to reflect logout
-        alert("Successfully logged out");
+        setIsLoggedIn(false) // Update local state to reflect logout
+        alert("Successfully logged out")
       })
       .catch((error) => {
-        console.error('Logout error:', error);
+        console.error("Logout error:", error)
         // Handle logout error
-      });
-  };
+      })
+  }
 
   return (
     <header>
@@ -40,14 +39,24 @@ const Header = () => {
       </Link>
 
       <nav className="navbar">
-        <Link to="/" className="Link-no-decoration">
+        <Link to="/">
           <a href="">Home</a>
         </Link>
-        <a href="#book">Book</a>
-        <a href="#packages">Packages</a>
-        <a href="#manage">Manage</a>
-        <a href="#travel">Travel Info</a>
-        <a href="#explore">Explore</a>
+        <Link to="/book">
+          <a href="">Book</a>
+        </Link>
+        <Link to="">
+          <a href="#packages">Packages</a>
+        </Link>
+        <Link to="">
+          <a href="#manage">Manage</a>
+        </Link>
+        <Link to="">
+          <a href="#travel">Travel Info</a>
+        </Link>
+        <Link to="">
+          <a href="#explore">Explore</a>
+        </Link>
       </nav>
 
       <div className="icons">
