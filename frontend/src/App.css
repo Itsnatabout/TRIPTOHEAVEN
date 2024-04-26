@@ -16,13 +16,16 @@
   background: var(--orange);
   color: #fff;
 }
+
 /* html{
 	font-size: 62.5%;
 	overflow-x: hidden;
 	scroll-padding-top: 6rem;
 	scroll-behavior: smooth;
 } */
-
+.Link-no-decoration{
+  text-decoration: none;
+}
 section {
   padding: 2rem 9%;
 }
@@ -108,7 +111,17 @@ header .icons p {
   margin: 1rem;
   color: #fff;
   cursor: pointer;
+  text-decoration: none;
 }
+.user-info{
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+.user-info p {
+  display: inline; /* Display as inline elements */
+  margin-right: 10px; /* Adjust as needed */
+}
+
 header .icons i:hover {
   color: var(--orange);
 }

@@ -37,10 +37,17 @@ app.use(session({
         expires: 60 * 60 * 24,
     },
 }))
-// db.connect(function (err) {
-//     if (err) throw err;
-//     console.log("connected")
-// })
+
+//This is for authentication when the dashboard and admin is completed.
+const isAuth = (req, res, next) => {
+    if (req.session.isAuth) {
+        next()
+    } else {
+        res.send()
+    }
+}
+
+
 
 app.post('/signup', (req, res) => {
     const sql = "INSERT INTO user (`username`,`firstname`,`middlename`,`lastname`, `email`, `dateofbirth`, `Age`,`gender`, `mobilenum`, `role`, `password` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -106,6 +113,7 @@ app.post('/login', (req, res) => {
              
                 if (response) {
                     req.session.user = result; // Set user session
+                    req.session.isAuth = true; // Set session
                     return res.send({loggedIn: true}); // Successful login
                 } else {
                     return res.send({message: "Incorrect Password"}); // Incorrect password
@@ -120,6 +128,14 @@ app.post('/login', (req, res) => {
 
     })
 })
+
+app.post('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) throw err;
+        res.send({ loggedIn: false })
+    })
+})
+
 
 
 

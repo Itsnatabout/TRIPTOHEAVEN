@@ -3,6 +3,9 @@ import axios from "axios"
 import Validation from "./Validation"
 import { Link, useNavigate } from "react-router-dom"
 import '../styles/Login.css'
+import Header from './Header'
+
+
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -55,7 +58,7 @@ const Signup = () => {
           .post("http://localhost:5000/signup", values)
           .then(
             alert("Registered Sucessfully!"),
-            navigate('/')
+            navigate('/login')
           )
           .catch((err) => console.log(err));
 
@@ -75,7 +78,8 @@ const Signup = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
-      <div className="text-bg-dark p-3 rounded w-50 container">
+      <Header/>
+      <div className="text-bg-dark p-3 mt-5 rounded w-50 container">
       <h3 className="text-center">Sign Up</h3>
         <form action="" onSubmit={handleSubmit}>
           <div className="row">
@@ -265,7 +269,7 @@ const Signup = () => {
               Check me out
             </label>
           </div>
-          <Link to="/" className="btn btn-deafult border w-100 bg-light rounded-0 text-decoration-none mt-3">Login</Link>
+          <Link to="/login" className="btn btn-deafult border w-100 bg-light rounded-0 text-decoration-none mt-3">Login</Link>
           <button type="submit" className="btn btn-primary m-3">
             Submit
           </button>

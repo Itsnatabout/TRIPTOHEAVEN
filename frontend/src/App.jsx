@@ -12,7 +12,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
+    element: <Home />,
     errorElement: <ErrorPage />
   },
   {
@@ -21,8 +21,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/home",
-    element: <Home />,
+    path: "/login",
+    element: <Login />,
     errorElement: <ErrorPage />
   }
 ])

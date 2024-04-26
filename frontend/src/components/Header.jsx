@@ -1,29 +1,48 @@
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import CheckLogin from "./CheckLogin"
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa"
+import axios from "axios"
+
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const user = CheckLogin()
 
-  useEffect(() => { 
-
-    setIsLoggedIn(user !== null);
+  useEffect(() => {
+    setIsLoggedIn(user !== null)
   }, [user])
+
+
+  const handleLogout = () => {
+    axios.post("http://localhost:5000/logout")
+      .then(() => {
+        setIsLoggedIn(false); // Update local state to reflect logout
+        alert("Successfully logged out");
+      })
+      .catch((error) => {
+        console.error('Logout error:', error);
+        // Handle logout error
+      });
+  };
 
   return (
     <header>
       {/* <div id="menu-bar" className="fas fa-bars"></div> */}
 
       {/* <h2>{user}</h2> */}
-      <div className="logo">
-        <a href="#">
-          <span>T</span>rip to Heaven
-        </a>
-      </div>
+      <Link to="/" className="Link-no-decoration">
+        <div className="logo">
+          <a href="">
+            <span>T</span>rip to Heaven
+          </a>
+        </div>
+      </Link>
 
       <nav className="navbar">
-        <a href="#home">Home</a>
+        <Link to="/" className="Link-no-decoration">
+          <a href="">Home</a>
+        </Link>
         <a href="#book">Book</a>
         <a href="#packages">Packages</a>
         <a href="#manage">Manage</a>
@@ -34,10 +53,19 @@ const Header = () => {
       <div className="icons">
         {/* <i className="fas fa-search" id="search-btn"></i>
         <i className="fas fa-user" id="login-btn"></i> */}
-        <p><FaSearch /></p>
-        {isLoggedIn ? (<p>{user}</p>)
-        : (<p>Login</p>)}
-        
+        <p>
+          <FaSearch />
+        </p>
+        {isLoggedIn ? (
+          <div className="user-info">
+            <p>{user}</p>
+            <p onClick={handleLogout}>Logout</p>
+          </div>
+        ) : (
+          <Link to="/login" className="Link-no-decoration">
+            <p>Login</p>
+          </Link>
+        )}
       </div>
 
       <form action="" className="search-bar-container">

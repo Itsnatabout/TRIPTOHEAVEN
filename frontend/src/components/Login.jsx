@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Validation from "./LoginValidation"
 import '../styles/Login.css'
+import Header from './Header'
+
 
 const Login = () => {
 
@@ -33,10 +35,9 @@ const Login = () => {
           
           if (response.data.loggedIn) {
             alert('Successfully Logged in');
-            navigate('/home');
-          } else {
-            alert(response.data.message);
-          }
+            navigate('/');
+          } 
+
         } catch (error) {
           console.log(error);
         }
@@ -60,7 +61,8 @@ const Login = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100" >
-      <div className="text-bg-dark p-3 rounded w-25 container">
+      <Header/>
+      <div className="text-bg-dark p-3 mt-5 rounded w-25 container">
         <h3 className="text-center">Login</h3>
             <form action="" onSubmit={handleSubmit}>
                 <div className="form-group mx-3 pt-3">
