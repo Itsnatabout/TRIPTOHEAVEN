@@ -18,6 +18,10 @@ npm i bootstrap@5.3.3
 
 npm i axios
 
+npm i react-router-dom
+
+npm install react-icons --save
+
 ```
 
 
@@ -27,5 +31,7 @@ npm i mysql
 
 npm i cors
 
-npm i nodemon
+npm i bcrypt
+
+npm i express-session body-parser cookie-parser
 ```
