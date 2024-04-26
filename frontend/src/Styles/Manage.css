@@ -1,0 +1,54 @@
+body{
+    background-image: url("/images/bg1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden; 
+    font-family: Arial, Helvetica, sans-serif;
+}
+.card{
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 10px rgba(11, 10, 10, 0.2);
+    margin-top: 10vh;
+    border-radius: 20px;
+}
+.Title{
+    margin-bottom: 3vh;
+}
+
+label{
+    color: black;
+    font-size: 20px;
+}
+#cardBody{
+    width: 50vh;
+    margin: 0 auto;
+}
+span{
+    color: goldenrod;
+}
+#email{
+    background: rgba(255, 255, 255, .3);
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(11, 10, 10, 0.2);
+}
+#RefNum{
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(11, 10, 10, 0.2);
+}
+#submit{
+    background-color: goldenrod;
+    border-color: gold;
+    border-radius: 20px;
+    width: 20vh;
+    color: rgb(246, 255, 190)
+}
+.subContainer{
+    margin-top: 1vh;
+}
+a{
+    color: gold;
+}
+
