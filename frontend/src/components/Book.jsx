@@ -21,9 +21,9 @@ const Book = () => {
           <span>h</span>
           <span>t</span>
         </h1>
-        <div className="card shadow mb-5 bg-white rounded">
+        <div className="custom-card shadow mb-5 bg-white rounded ">
           <form className="card-body">
-            <p className="card-title text-center shadow mb-5 rounded">
+            <p className="custom-card-title text-center shadow mb-5 rounded">
               Travel Booking Form
             </p>
 

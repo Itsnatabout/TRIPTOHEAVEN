@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Book from './Book'
+import Packages from './Packages'
 import { Link, useNavigate } from "react-router-dom"
 
 const home = () => {
@@ -21,6 +22,7 @@ const home = () => {
         </div>
 
       </section>
+      <Packages/>
    </>
 // <!-- landing page -->
     

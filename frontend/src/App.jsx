@@ -3,6 +3,7 @@ import Login from './components/Login';
 import ErrorPage from './components/ErrorPage';
 import Home from './components/Home';
 import Book from './components/Book';
+import Packages from './components/Packages';
 import './App.css'
 import {
   createBrowserRouter,
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
   {
     path: "/book",
     element: <Book />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/packages",
+    element: <Packages />,
     errorElement: <ErrorPage />
   }
 ])
