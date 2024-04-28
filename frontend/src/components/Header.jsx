@@ -45,7 +45,7 @@ const Header = () => {
         <Link to="/book">
           <a href="">Book</a>
         </Link>
-        <Link to="">
+        <Link to="/packages">
           <a href="#packages">Packages</a>
         </Link>
         <Link to="">

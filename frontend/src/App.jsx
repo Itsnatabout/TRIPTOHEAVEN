@@ -4,6 +4,8 @@ import ErrorPage from './components/ErrorPage';
 import Home from './components/Home';
 import Book from './components/Book';
 import Packages from './components/Packages';
+import Cebu from './components/places/Cebu';
+import Boracay from './components/places/Boracay';
 import './App.css'
 import {
   createBrowserRouter,
@@ -35,7 +37,18 @@ const router = createBrowserRouter([
     path: "/packages",
     element: <Packages />,
     errorElement: <ErrorPage />
-  }
+  },
+  {
+    path: "/packages/Cebu",
+    element: <Cebu/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/packages/Boracay",
+    element: <Boracay/>,
+    errorElement: <ErrorPage />
+  },
+
 ])
 function App() {
 
