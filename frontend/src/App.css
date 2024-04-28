@@ -54,6 +54,7 @@ section {
 }
 header {
   position: sticky;
+  width: 100%;
   background: #333;
   z-index: 1;
   display: flex;

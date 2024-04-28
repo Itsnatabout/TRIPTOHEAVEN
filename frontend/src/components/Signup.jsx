@@ -77,8 +77,9 @@ const Signup = () => {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 coverbody">
-      <Header/>
+    <>
+     <Header/>
+     <div className="d-flex justify-content-center align-items-center vh-100 coverbody">    
       <div className="text-bg-dark p-3 mt-5 rounded w-50 container">
       <h3 className="text-center">Sign Up</h3>
         <form action="" onSubmit={handleSubmit}>
@@ -276,6 +277,8 @@ const Signup = () => {
         </form>
       </div>
     </div>
+    </>
+   
   )
 }
 

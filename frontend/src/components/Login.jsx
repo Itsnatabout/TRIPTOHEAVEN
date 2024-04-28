@@ -60,8 +60,9 @@ const Login = () => {
 
 
   return (
+    <>
+      <Header />
     <div className="d-flex justify-content-center align-items-center vh-100 coverbody" >
-      <Header/>
       <div className="text-bg-dark p-3 mt-5 rounded w-25 container">
         <h3 className="text-center">Login</h3>
             <form action="" onSubmit={handleSubmit}>
@@ -91,6 +92,8 @@ const Login = () => {
           </div>
        
     </div>
+    </>
+    
   )
 }
 
