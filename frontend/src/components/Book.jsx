@@ -1,12 +1,14 @@
-import React from "react"
-import axios from "axios"
-import Header from "./Header"
-import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 const Book = () => {
+  const [tripType, setTripType] = useState("return")
+
+  const handleTripTypeChange = (e) => {
+    setTripType(e.target.value)
+  }
+
   return (
     <>
-      <Header />
       <section className="book" id="book">
         <h1 className="heading ">
           <span>B</span>
@@ -21,7 +23,7 @@ const Book = () => {
           <span>h</span>
           <span>t</span>
         </h1>
-        <div className="custom-card shadow mb-5 bg-white rounded ">
+        <div className="custom-card shadow mb-5 bg-white rounded">
           <form className="card-body">
             <p className="custom-card-title text-center shadow mb-5 rounded">
               Travel Booking Form
@@ -48,7 +50,9 @@ const Book = () => {
                     type="radio"
                     name="inlineRadioOptions"
                     id="inlineRadio1"
-                    value="option1"
+                    value="return"
+                    checked={tripType === "return"}
+                    onChange={handleTripTypeChange}
                   />
                   <label className="form-check-label" htmlFor="inlineRadio1">
                     Return
@@ -60,7 +64,9 @@ const Book = () => {
                     type="radio"
                     name="inlineRadioOptions"
                     id="inlineRadio2"
-                    value="option2"
+                    value="oneWay"
+                    checked={tripType === "oneWay"}
+                    onChange={handleTripTypeChange}
                   />
                   <label className="form-check-label" htmlFor="inlineRadio2">
                     One-Way
@@ -75,9 +81,7 @@ const Book = () => {
                     <option value="" disabled selected>
                       From
                     </option>
-                    <option value="1">Manila</option>
-                    <option value="2">Mumbai</option>
-                    <option value="3">Bangalore</option>
+                    {/* options here */}
                   </select>
                 </div>
 
@@ -86,9 +90,7 @@ const Book = () => {
                     <option value="" disabled selected>
                       To
                     </option>
-                    <option value="1">Japan</option>
-                    <option value="2">China</option>
-                    <option value="3">Singapore</option>
+                    {/* options here */}
                   </select>
                 </div>
               </div>
@@ -97,13 +99,22 @@ const Book = () => {
                 <div className="col-sm-6">
                   <div className="input-group mb-4">
                     <span className="input-group-text">Depart</span>
-                    <input type="date" className="form-control" />
+                    <input
+                      type="date"
+                      className="form-control"
+                      min={new Date().toISOString().split("T")[0]}
+                    />
                   </div>
                 </div>
                 <div className="col-sm-6">
                   <div className="input-group mb-4">
                     <span className="input-group-text">Return</span>
-                    <input type="date" className="form-control" />
+                    <input
+                      type="date"
+                      className="form-control"
+                      min={new Date().toISOString().split("T")[0]}
+                      disabled={tripType === "oneWay"}
+                    />
                   </div>
                 </div>
               </div>

@@ -2,7 +2,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import ErrorPage from './components/ErrorPage';
 import Home from './components/Home';
-import Book from './components/Book';
+import Booking from './components/Booking';
 import Packages from './components/Packages';
 import Cebu from './components/places/Cebu';
 import Boracay from './components/places/Boracay';
@@ -29,8 +29,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/book",
-    element: <Book />,
+    path: "/booking",
+    element: <Booking />,
     errorElement: <ErrorPage />
   },
   {
