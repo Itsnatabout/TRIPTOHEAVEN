@@ -141,7 +141,7 @@ app.get("/airports", (req, res) => {
       return;
     }
     // Send the result as a JSON response
-    return res.json({ airports: result });
+    return res.json(result);
   })
 })
 

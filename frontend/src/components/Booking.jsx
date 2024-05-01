@@ -1,33 +1,36 @@
-import {useEffect} from 'react'
+import { useState, useEffect } from "react"
 import axios from "axios"
 import Header from "./Header"
 import Book from "./Book"
 import { Link, useNavigate } from "react-router-dom"
 
 const Booking = () => {
+  const [airports, setAirports] = useState([])
 
+  useEffect(() => {
     const fetchData = async () => {
-        try {
-          const response = await axios.get('http://localhost:5000/airports');
-          return console.log(response.data); // Assuming the response contains the data you need
-        } catch (error) {
-          console.error('Error fetching data:', error);
-          throw error; // Rethrow the error to handle it in the calling code
-        }
-      };
+      try {
+        const response = await axios.get("http://localhost:5000/airports")
+        setAirports(response.data) // Store the fetched data in state
+      } catch (error) {
+        console.error("Error fetching data:", error)
+        // Handle the error appropriately, e.g., show a message to the user
+      }
+    }
 
-    fetchData();
+    fetchData()
+  }, []) 
 
   return (
     <>
-          <Header />
-          <Book/>
-          {/* note future self:
-          You will need to pass the response here as a prop to display it.
-          getting the data from the server is now ok. 
-          
+      <Header />
+      {/* Conditional rendering of Book component */}
+      {airports.length > 0 && <Book airport={airports} />}
+      {/* Show a loading indicator while data is being fetched */}
+      {airports.length === 0 && <h1>Loading...</h1>}
+      {/* note future nat:
+       Edit this to have a better loading screen omg so lazy having only loading hahaah
           */}
-
     </>
   )
 }

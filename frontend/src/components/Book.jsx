@@ -1,12 +1,32 @@
 import { useState } from "react"
 
-const Book = () => {
+const Book = ({ airport }) => {
   const [tripType, setTripType] = useState("return")
+  const [selectedFromAirport, setSelectedFromAirport] = useState("")
+  const [selectedToAirport, setSelectedToAirport] = useState("")
 
   const handleTripTypeChange = (e) => {
     setTripType(e.target.value)
   }
+  const handleFromAirportChange = (e) => {
+    const selectedAirport = e.target.value;
+    setSelectedFromAirport(selectedAirport);
+    
+    // Disable the corresponding option in the "To" selection field if it's selected in the "From" selection field
+    if (selectedToAirport === selectedAirport) {
+      setSelectedToAirport("");
+    }
+  };
 
+  const handleToAirportChange = (e) => {
+    const selectedAirport = e.target.value;
+    setSelectedToAirport(selectedAirport);
+    
+    // Disable the corresponding option in the "From" selection field if it's selected in the "To" selection field
+    if (selectedFromAirport === selectedAirport) {
+      setSelectedFromAirport("");
+    }
+  };
   return (
     <>
       <section className="book" id="book">
@@ -77,20 +97,47 @@ const Book = () => {
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
-                  <select className="form-select mb-4" id="fromSelect">
+                  <select
+                    className="form-select mb-4"
+                    id="fromSelect"
+                    value={selectedFromAirport}
+                    onChange={handleFromAirportChange}
+                  >
                     <option value="" disabled selected>
                       From
                     </option>
-                    {/* options here */}
+                    {airport.map((airport) => (
+                      <option
+                        key={airport.airportID}
+                        value={airport.airportID}
+                        disabled={selectedToAirport == airport.airportID}
+                      >
+                        {airport.municipality} ({airport.iata_code})
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 <div className="col-sm-6">
-                  <select className="form-select mb-4" id="toSelect">
+                  <select
+                    className="form-select mb-4"
+                    id="toSelect"
+                    value={selectedToAirport}
+                    onChange={handleToAirportChange}
+                  >
                     <option value="" disabled selected>
                       To
                     </option>
-                    {/* options here */}
+                    {/* Map through the airports array to render options */}
+                    {airport.map((airport) => (
+                      <option
+                        key={airport.airportID}
+                        value={airport.airportID}
+                        disabled={selectedFromAirport == airport.airportID}
+                      >
+                        {airport.municipality} ({airport.iata_code})
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
