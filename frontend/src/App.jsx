@@ -6,6 +6,12 @@ import Booking from './components/Booking';
 import Packages from './components/Packages';
 import Cebu from './components/places/Cebu';
 import Boracay from './components/places/Boracay';
+import Palawan from './components/places/Palawan';
+import Siargao from './components/places/Siargao';
+import Bohol from './components/places/Bohol';
+import Albay from './components/places/Albay';
+
+
 import './App.css'
 import {
   createBrowserRouter,
@@ -48,7 +54,26 @@ const router = createBrowserRouter([
     element: <Boracay/>,
     errorElement: <ErrorPage />
   },
-
+  {
+    path: "/packages/Palawan",
+    element: <Palawan/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/packages/Siargao",
+    element: <Siargao/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/packages/Bohol",
+    element: <Bohol/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/packages/Albay",
+    element: <Albay/>,
+    errorElement: <ErrorPage />
+  },
 ])
 function App() {
 

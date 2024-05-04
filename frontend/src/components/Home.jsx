@@ -40,7 +40,7 @@ const home = () => {
           />
           <Card
             imageUrl="./img/palawan.jpg"
-            title="El Nido, Palawan"
+            title="Palawan"
             description="Renowned for its breathtaking limestone cliffs, crystal-clear waters, and hidden lagoons, El Nido offers unparalleled beauty and tranquility. "
             price="9500"
         />
