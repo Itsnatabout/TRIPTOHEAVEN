@@ -136,7 +136,7 @@ app.get("/airports", (req, res) => {
 
   db.query(sql, (err, result) => {
     if (err) {
-      console.error("Error executing SQL query:", err);
+      console.log("Error executing SQL query:", err);
       res.status(500).json({ error: "Internal server error" });
       return;
     }
