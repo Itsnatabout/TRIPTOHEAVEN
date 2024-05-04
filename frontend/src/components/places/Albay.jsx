@@ -10,8 +10,6 @@ import explore3 from "/img/albay3.jpg"
 import explore4 from "/img/albay4.jpg"
 
 
-
-
 const Albay = () => {
 
  // Define an array of place details
