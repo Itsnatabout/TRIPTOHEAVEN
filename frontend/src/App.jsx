@@ -1,4 +1,4 @@
-import './App.css';
+/*import './App.css';
 import Login from './component/Login/Login'; 
 import Signup from './components/Signup';
 import ErrorPage from './components/ErrorPage';
@@ -58,6 +58,19 @@ function App() {
     <>
        <RouterProvider router={router} />
     </>
+  )
+}
+
+export default App;*/
+import './App.css';
+import Login from './component/Passenger-Info/Passengers'; 
+
+function App() {
+  return(
+    <div>
+      <Login />
+    </div>
+
   )
 }
 
