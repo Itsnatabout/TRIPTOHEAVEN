@@ -1,9 +1,15 @@
-import React from "react";
+import {useEffect} from "react";
 import "../styles/PlaceViewLayout.css";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom"
-const PlaceViewLayout = ({props}) => {
+const PlaceViewLayout = ({ props }) => {
   
+  useEffect(() => {
+    // Scroll to the top of the page when the component unmounts
+    return () => {
+      window.scrollTo(0, 0);
+    };
+  }, []);
 
   return (
     <>
