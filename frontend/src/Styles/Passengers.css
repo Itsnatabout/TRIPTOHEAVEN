@@ -49,14 +49,12 @@ label{
 input{
     border-radius: 100px;
     border-color: gold;
-    border-width: 2px;
-    width: 20vh;
-    height: 5vh;
-
+    border-width: 2px; 
 }
 .container{
     margin-top: -10vh;
 }
+
 #submit{
     background-color: goldenrod;
     border-color: gold;

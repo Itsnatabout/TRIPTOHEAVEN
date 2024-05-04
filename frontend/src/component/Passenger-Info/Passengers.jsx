@@ -13,7 +13,7 @@ const Passengers = () => {
             <div className='PictureContainer'>
                 <div className="Title text-center"><p id='Title1'><span id='span1'>P</span>assenger Informations</p></div>     
             </div>
-            <div className="container">
+            <div className="container" id='container'>
                 <div className="row">
                     <div className="col-12 col-sm-8 col-md-6 m-auto">
                       <div className="card p-4" id='cardBody'>
@@ -37,6 +37,12 @@ const Passengers = () => {
 
                                     <label htmlFor="nationality" className="form-label my-2">Nationality</label>
                                     <input type="text" name="nationality" className="form-control  py-2" id="nationality"  placeholder='e.g American'/>
+                                    <div className="ClassType">
+                                        <label className="form-label my-2" style={{marginRight:'1vh'}}>Class Type:</label>
+                                        <input type="radio"  name='radio' id='option1'/><label htmlFor="option1" style={{marginRight:'1vh'}}>Economy</label>
+                                        <input type="radio"  name='radio' id='option2'/><label htmlFor="option2" style={{marginRight:'1vh'}}>Bussiness</label>
+                                        <input type="radio"  name='radio' id='option3' /><label htmlFor="option3" style={{marginRight:'1vh'}}>First Class</label>             
+                                    </div>
 
                                     <input type="checkbox" className="form-check-input" id="check"/>
                                     <label className="form-check-label" htmlFor="exampleCheck1">Auto fill</label>
