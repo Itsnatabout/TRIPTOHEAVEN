@@ -12,15 +12,39 @@ function App() {
             flightDate: '11/15/2024',
             status: 'Cancelled'
         },
-        // Other orders...
+
+        {
+          destinationName: 'Cebu City',
+          flightNumber: '97245',
+          flightDate: '6/10/2024',
+          status: 'Delayed'
+      },
+      {
+          destinationName: 'Japan',
+          flightNumber: '36452',
+          flightDate: '4/11/2024',
+          status: 'Departed'
+      },
+   
     ]);
 
     const toggleSidebar = () => {
-        // Implement sidebar toggle logic here
+      menuBtn.addEventListener('click', () => {
+        sideMenu.style.display = 'block';
+    });
+    
+    closeBtn.addEventListener('click', () => {
+        sideMenu.style.display = 'none';
+    });
+    
     };
 
     const toggleDarkMode = () => {
-        // Implement dark mode toggle logic here
+      darkMode.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode-variables');
+        darkMode.querySelector('span:nth-child(1)').classList.toggle('active');
+        darkMode.querySelector('span:nth-child(2)').classList.toggle('active');
+    })
     };
 
     return (

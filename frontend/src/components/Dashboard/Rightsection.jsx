@@ -29,7 +29,7 @@ function RightSection() {
                 </div>
 
             </div>
-            {/* End of Nav */}
+           
 
             <div className="user-profile">
                 <div className="logo">

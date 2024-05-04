@@ -4,7 +4,6 @@ function MainContent() {
     return (
         <main>
             <h1>Dashboard</h1>
-            {/* Analyses */}
             <div className="analyse">
                 <div className="sales">
                     <div className="status">
@@ -55,7 +54,6 @@ function MainContent() {
                     </div>
                 </div>
             </div>
-            {/* End of Analyses */}
 
             {/* New Users Section */}
             <div className="new-users">
