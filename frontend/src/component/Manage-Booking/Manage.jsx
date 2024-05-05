@@ -1,7 +1,11 @@
 import React from 'react'
-import '../../Styles/Manage.css' 
+import '../../styles/Manage.css' 
 const Login = () => {
   return (
+  <>
+  <div className="nav">
+        <h1>Pa insert na lang ng Navbar</h1>
+    </div>
     <div className="container mt-5 pt-5">
       <div className="row">
         <div className="col-12 col-sm-8 col-md-6 m-auto">
@@ -26,6 +30,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

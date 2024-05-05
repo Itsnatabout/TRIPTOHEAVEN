@@ -1,11 +1,11 @@
 import React from 'react'
-import '../../Styles/Login.css' 
+import './Login.css' 
 const Login = () => {
   return (
     <div className="container mt-5 pt-5">
       <div className="row">
         <div className="col-12 col-sm-8 col-md-6 m-auto">
-          <div className="card p-4">
+          <div className="card p-4" id='card'>
             <div className="card-body" id='cardBody'>
               <div className="Title text-center">
               <h1><span>T</span>RIP TO HEAVEN</h1>

@@ -1,0 +1,48 @@
+.PictureContainer{
+    height: 40vh;
+    background-image: url("/images/bg2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:  center;
+    padding-top: 10vh;
+}
+#Title1{
+    color: gainsboro;
+    font-size: 70px;
+    text-shadow: 2px 2px 2px #000000;
+    margin-top: -5vh;
+}
+#span1{
+    color: goldenrod;
+    text-shadow: 2px 2px 2px #000000;
+}
+#span2{
+    color: goldenrod;
+    text-shadow: 1px 1px 1px #000000;
+}
+label{
+    color: goldenrod;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px #000000;
+}
+input{
+    border-radius: 100px;
+    border-color: gold;
+    border-width: 2px;
+    width: 20vh;
+    height: 5vh;
+
+}
+.container{
+    margin-top: -10vh;
+}
+#submit{
+    background-color: goldenrod;
+    border-color: gold;
+    border-radius: 20px;
+    width: 20vh;
+    color: rgb(246, 255, 190)
+}
+.subContainer{
+    margin-top: 1vh;
+}

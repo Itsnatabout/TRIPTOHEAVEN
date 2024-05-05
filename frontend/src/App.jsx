@@ -62,8 +62,12 @@ function App() {
 }
 
 export default App;*/
+//Manage-Booking/EditBooking
+//Passenger-Info/Passengers
+//Login/Login
+//Signup-2/Signup
 import './App.css';
-import Login from './component/Passenger-Info/Passengers'; 
+import Login from './component/Manage-Booking/EditPassenger'; 
 
 function App() {
   return(

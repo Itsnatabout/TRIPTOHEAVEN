@@ -1,0 +1,71 @@
+.PictureContainer{
+    height: 40vh;
+    background-image: url("/images/bg1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:  center;
+    padding-top: 10vh;
+}
+#card{
+    border: 2px solid rgb(21, 21, 21, 0.5);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 10px rgba(11, 11, 10, 0.8);
+    border-radius: 20px;
+}
+#cardBody{
+    background-color: white;
+}
+#Title1{
+    color: gainsboro;
+    font-size: 70px;
+    text-shadow: 2px 2px 2px #000000;
+}
+#context{
+    color: white;
+    font-size: 20px;
+    font-style: bold;
+    text-shadow: 2px 2px 1px #000000;
+}
+#Title2{
+    color: rgb(233, 233, 233);
+    font-size: 40px;
+    font-weight: 600;
+    text-shadow: 3px 2px 4px #000000;
+    text-decoration: underline;
+}
+#span1{
+    color: goldenrod;
+    text-shadow: 2px 2px 2px #000000;
+}
+#span2{
+    color: goldenrod;
+    text-shadow: 1px 1px 1px #000000;
+}
+label{
+    color: goldenrod;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px #000000;
+}
+input{
+    border-radius: 100px;
+    border-color: gold;
+    border-width: 2px;
+    width: 20vh;
+    height: 5vh;
+
+}
+.container{
+    margin-top: -8vh;
+}
+#submit{
+    background-color: goldenrod;
+    border-color: gold;
+    border-radius: 15px;
+    width: 20vh;
+    color: rgb(246, 255, 190);
+    font-size: 20px;
+    margin-right: 1vh;
+}
+.subContainer{
+    margin-top: 1vh;
+}
