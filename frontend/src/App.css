@@ -1,0 +1,270 @@
+:root {
+  --orange: #ffa500;
+}
+
+* {
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: all 0.2s linear;
+}
+*::selection {
+  background: var(--orange);
+  color: #fff;
+}
+.Link-no-decoration{
+  text-decoration: none;
+}
+section {
+  padding: 2rem 9%;
+}
+.heading {
+  text-align: center;
+  padding: 2.5rem 0;
+}
+.heading span {
+  font-size: 3.5rem;
+  background: rgba(255, 155, 0, 0.2);
+  color: var(--orange);
+  border-radius: 0.5rem;
+  padding: 0.2rem 1rem;
+}
+.heading span.space {
+  background: none;
+}
+.bookbtn {
+  display: inline-block;
+  margin-top: 1rem;
+  background: var(--orange);
+  color: #fff;
+  padding: 0.8rem 3rem;
+  border: 0.2rem solid var(--orange);
+  cursor: pointer;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+.bookbtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--orange);
+  
+}
+header {
+  position: sticky;
+  width: 100%;
+  background: #333;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+header .logo {
+  display: flex;
+  margin-left: 1rem;
+}
+header .logo a {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+header .logo span {
+  color: var(--orange);
+}
+
+header .navbar {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.2rem;
+  margin: 0.8rem;
+}
+header .navbar a {
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  margin-inline: .8rem;
+}
+header .navbar a:hover {
+  color: var(--orange);
+}
+header .icons {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 4rem;
+}
+header .icons p {
+  font-size: 1.2rem;
+  margin: 1rem;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+.user-info{
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+.user-info p {
+  display: inline; /* Display as inline elements */
+
+}
+
+header .icons i:hover {
+  color: var(--orange);
+}
+header .search-bar-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 2rem;
+  background: #333;
+  border-top: 0.1rem solid rgba(255, 255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  z-index: 1001;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+header .search-bar-container.active {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+header .search-bar-container #search-bar {
+  width: 100%;
+  padding: 1rem;
+  text-transform: none;
+  color: #333;
+  font-size: 1.7rem;
+  border-radius: 0.5rem;
+}
+header .search-bar-container label {
+  color: #fff;
+  cursor: pointer;
+  font-size: 3rem;
+  margin-left: 1.5rem;
+}
+header .search-bar-container label:hover {
+  color: var(--orange);
+}
+/* landingpage.*/
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-flow: column;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.home .content {
+  transform: translate(-0%, -25%);
+  text-align:center;
+  z-index: 1;
+}
+.home .content h3 {
+  font-size: 3.5rem;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.home .content p {
+  font-size: 2.5rem;
+  color: #fff;
+  padding: 0.5rem 0;
+}
+
+.home .video-container video {
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* bookflight.*/
+
+.book {
+ 
+}
+
+/* malacardshit na ewan.*/
+.custom-card {
+  margin: auto;
+  border: solid 1px #ffff;
+  width: 60%;
+  padding-left: 10px !important;
+  padding-bottom: 10px !important;
+  padding-right: 10px !important;
+  padding-top: 0px !important;
+}
+
+.custom-card-title {
+  margin: auto;
+  font-size: 15px;
+  padding: 15px;
+  background-color: #d3a121;
+  color: #ffff;
+  width: 80%;
+}
+
+.card-body {
+  padding: 0px;
+}
+.overlay {
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.overlay:hover {
+  opacity: 1;
+}
+
+.greatDeals {
+  font-size: 50px;
+  color: #ffa500;
+  
+}
+
+.fa {
+  border-radius: 25px;
+  width: 10%;
+  margin-left: 5%;
+  border: solid 2px #dbdad7;
+  margin-top: 5%;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    margin: auto;
+    border: solid 1px #ffff;
+    width: 90%;
+    padding-left: 10px !important;
+    padding-bottom: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 0px !important;
+  }
+
+  .fa {
+    border-radius: 25px;
+    width: 15%;
+    margin-left: 5%;
+    border: solid 2px #ffff;
+    margin-top: 5%;
+    text-align: center;
+  }
+}

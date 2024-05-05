@@ -1,5 +1,5 @@
 import React from 'react'
-import '../Styles/Login.css' 
+import '../../Styles/Login.css' 
 const Login = () => {
   return (
     <div className="container mt-5 pt-5">
