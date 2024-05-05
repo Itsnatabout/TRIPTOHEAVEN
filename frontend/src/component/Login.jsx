@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../Styles/Login.css' 
+import '../Styles/Login.css' 
 const Login = () => {
   return (
     <div className="container mt-5 pt-5">
@@ -17,7 +17,7 @@ const Login = () => {
                 <input type="password" name="password" id="password" className="form-control  py-2" placeholder='' />
                 <div className="subContainer text-center">
                   <button className="btn btn-primary mt-3 my-2" name='submit' id='submit'>Login</button>            
-                  <p>Don't have an account yet?<a href="../Signup-2/Signup.jsx" className='m-1'>Register here</a></p>                 
+                  <p>Don't have an account yet?<a href="./Signup.jsx" className='m-1'>Register here</a></p>                 
                 </div>
               </form>
             </div>

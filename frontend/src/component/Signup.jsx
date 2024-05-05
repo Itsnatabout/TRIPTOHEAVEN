@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../Styles/Signup.css' 
+import '../Styles/Signup.css' 
 const Login = () => {
   return (
     <div className="container mt-5 pt-5">
@@ -37,7 +37,7 @@ const Login = () => {
 
                 <div className="subContainer text-center">
                   <button className="btn btn-primary mt-2 my-2" name='submit' id='submit'>Submit</button>            
-                  <p><span>Already have an account?</span><a href="../Login/Login.jsx" className='m-1'>Login here</a></p>                 
+                  <p><span>Already have an account?</span><a href="./Login.jsx" className='m-1'>Login here</a></p>                 
                 </div>
               </form>
             </div>
