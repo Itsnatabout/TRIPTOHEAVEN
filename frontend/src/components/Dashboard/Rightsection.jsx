@@ -1,4 +1,5 @@
 import React from 'react';
+import './admindash.css';
 
 function RightSection() {
     return (
@@ -24,7 +25,7 @@ function RightSection() {
                         <small className="text-muted">Admin</small>
                     </div>
                     <div className="profile-photo">
-                        <img src="img/file.png" alt="profile" />
+                        <img src="src/img/file.png" alt="profile" />
                     </div>
                 </div>
 
@@ -33,7 +34,7 @@ function RightSection() {
 
             <div className="user-profile">
                 <div className="logo">
-                    <img src="img/file.png" alt="logo" />
+                    <img src="src/img/file.png" alt="logo" />
                     <h2>Trip to Heaven</h2>
                     <p>Fly High Butterfly</p>
                 </div>

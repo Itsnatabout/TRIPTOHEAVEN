@@ -1,6 +1,21 @@
 import React from 'react';
+import './admindash.css';
+import LineChart from './LineChart';
 
-function MainContent() {
+function MainContent({ orders }) {
+    const getStatusColor = (status) => {
+        switch (status) {
+            case 'Cancelled':
+                return 'danger';
+            case 'Delayed':
+                return 'warning';
+            case 'Departed':
+                return 'success';
+            default:
+                return '';
+        }
+    };
+    
     return (
         <main>
             <h1>Dashboard</h1>
@@ -55,36 +70,11 @@ function MainContent() {
                 </div>
             </div>
 
-            {/* New Users Section */}
-            <div className="new-users">
-                <h2>New Users</h2>
-                <div className="user-list">
-                    <div className="user">
-                        <img src="img/hasbullah.jpg" alt="user" />
-                        <h2>Jack</h2>
-                        <p>54 Min Ago</p>
-                    </div>
-                    <div className="user">
-                        <img src="img/hasbullah.jpg" alt="user" />
-                        <h2>Amir</h2>
-                        <p>3 Hours Ago</p>
-                    </div>
-                    <div className="user">
-                        <img src="img/hasbullah.jpg" alt="user" />
-                        <h2>Ember</h2>
-                        <p>6 Hours Ago</p>
-                    </div>
-                    <div className="user">
-                        <img src="img/plus.png" alt="more" />
-                        <h2>More</h2>
-                        <p>New User</p>
-                    </div>
-                </div>
-            </div>
-            {/* End of New Users Section */}
+            <LineChart /> 
+            
 
             {/* Today's Flight */}
-            <div className="recent-orders">
+             <div className="recent-orders">
                 <h2>Today's Flight</h2>
                 <table>
                     <thead>
@@ -96,7 +86,17 @@ function MainContent() {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        {orders.map((order, index) => (
+                           <tr key={index}>
+                           <td>{order.destinationName}</td>
+                           <td>{order.flightNumber}</td>
+                           <td>{order.flightDate}</td>
+                           <td className={getStatusColor(order.status)}>{order.status}</td>
+                           <td className="primary">Details</td>
+                       </tr>
+                        ))}
+                    </tbody>
                 </table>
                 <a href="#">Show All</a>
             </div>
@@ -106,3 +106,4 @@ function MainContent() {
 }
 
 export default MainContent;
+

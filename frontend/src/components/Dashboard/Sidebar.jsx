@@ -1,11 +1,12 @@
 import React from 'react';
+import './admindash.css';
 
 function Sidebar() {
     return (
         <aside>
             <div className="toggle">
                 <div className="logo">
-                    <img src="img/file.png" alt="logo" />
+                    <img src="src/img/file.png" alt="logo" />
                     <h2>Trip to<span className="danger">Heaven</span></h2>
                 </div>
                 <div className="close" id="close-btn">

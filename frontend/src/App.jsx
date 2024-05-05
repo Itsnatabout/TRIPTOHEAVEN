@@ -1,58 +1,51 @@
-// App.js
-import React, { useState } from 'react';
-import Sidebar from './Sidebar';
-import MainContent from './MainContent';
-import RightSection from './RightSection';
+import React, { useState, useEffect } from 'react';
+import Sidebar from './Components/Dashboard/Sidebar';
+import MainContent from './Components/Dashboard/Maincontent';
+import RightSection from './Components/Dashboard/Rightsection';
 
 function App() {
-    const [orders, setOrders] = useState([
-        {
-            destinationName: 'Singapore',
-            flightNumber: '85743',
-            flightDate: '11/15/2024',
-            status: 'Cancelled'
-        },
+    const [orders, setOrders] = useState([]);
 
-        {
-          destinationName: 'Cebu City',
-          flightNumber: '97245',
-          flightDate: '6/10/2024',
-          status: 'Delayed'
-      },
-      {
-          destinationName: 'Japan',
-          flightNumber: '36452',
-          flightDate: '4/11/2024',
-          status: 'Departed'
-      },
-   
-    ]);
+    useEffect(() => {
+        setOrders([
+            {
+                destinationName: 'Singapore',
+                flightNumber: '85743',
+                flightDate: '11/15/2024',
+                status: 'Cancelled'
+            },
+            {
+                destinationName: 'Cebu City',
+                flightNumber: '97245',
+                flightDate: '6/10/2024',
+                status: 'Delayed'
+            },
+            {
+                destinationName: 'Japan',
+                flightNumber: '36452',
+                flightDate: '4/11/2024',
+                status: 'Departed'
+            },
+        ]);
+    }, []);
+
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     const toggleSidebar = () => {
-      menuBtn.addEventListener('click', () => {
-        sideMenu.style.display = 'block';
-    });
-    
-    closeBtn.addEventListener('click', () => {
-        sideMenu.style.display = 'none';
-    });
-    
+        setIsSidebarOpen(!isSidebarOpen);
     };
 
     const toggleDarkMode = () => {
-      darkMode.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode-variables');
-        darkMode.querySelector('span:nth-child(1)').classList.toggle('active');
-        darkMode.querySelector('span:nth-child(2)').classList.toggle('active');
-    })
+        setIsDarkMode(!isDarkMode);
     };
 
     return (
-        <div className="container">
-            <Sidebar toggleSidebar={toggleSidebar} />
+        <div className={`container ${isDarkMode ? 'dark-mode-variables' : ''}`}>
+            <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             <MainContent orders={orders} />
-            <RightSection toggleDarkMode={toggleDarkMode} />
-        </div>
+            <RightSection isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+        </div> 
     );
 }
 
