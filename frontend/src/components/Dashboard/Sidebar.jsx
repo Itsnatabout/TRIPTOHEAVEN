@@ -47,7 +47,7 @@ function Sidebar() {
                     <span className="material-icons-sharp">
                         report_gmailerrorred
                     </span>
-                    <h3>Reports</h3>
+                    <h3>Manage Flights</h3>
                 </a>
                 
                 <a href="#">
