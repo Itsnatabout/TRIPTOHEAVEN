@@ -10,7 +10,7 @@ import Palawan from './components/places/Palawan';
 import Siargao from './components/places/Siargao';
 import Bohol from './components/places/Bohol';
 import Albay from './components/places/Albay';
-
+import Admin from './components/admin/Dashboard';
 
 import './App.css'
 import {
@@ -74,6 +74,12 @@ const router = createBrowserRouter([
     element: <Albay/>,
     errorElement: <ErrorPage />
   },
+  {
+    path: "/dashboard",
+    element: <Admin/>,
+    errorElement: <ErrorPage />
+  },
+
 ])
 function App() {
 
