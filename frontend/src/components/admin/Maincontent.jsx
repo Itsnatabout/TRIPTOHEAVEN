@@ -23,14 +23,14 @@ function MainContent({ orders }) {
                     <div className="status">
                         <div className="info">
                             <h3>Total Sales</h3>
-                            <h1>PHP65,024</h1>
+                            <h4>65,024</h4>
                         </div>
                         <div className="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div className="percentage">
-                                <p>+81%</p>
+                                <p className='mb-0'>+81%</p>
                             </div>
                         </div>
                     </div>
@@ -39,14 +39,14 @@ function MainContent({ orders }) {
                     <div className="status">
                         <div className="info">
                             <h3>Waiting List</h3>
-                            <h1>900</h1>
+                            <h4>900</h4>
                         </div>
                         <div className="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div className="percentage">
-                                <p>+9%</p>
+                                <p className='mb-0'>+9%</p>
                             </div>
                         </div>
                     </div>
@@ -55,14 +55,14 @@ function MainContent({ orders }) {
                     <div className="status">
                         <div className="info">
                             <h3>Completed Flights</h3>
-                            <h1>1,923</h1>
+                            <h4>1,923</h4>
                         </div>
                         <div className="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div className="percentage">
-                                <p>+11.8%</p>
+                                <p className='mb-0'>+11.8%</p>
                             </div>
                         </div>
                     </div>

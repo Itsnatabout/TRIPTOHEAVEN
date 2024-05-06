@@ -45,7 +45,7 @@ function RightSection() {
                 <span className="material-icons-sharp">
                         notifications_none
                     </span>
-                    <h2 className='fs-3'>Reminders</h2>
+                    <h3 className='fs-3'>Reminders</h3>
                   
                 </div>
 
@@ -57,7 +57,7 @@ function RightSection() {
                     </div>
                     <div className="content">
                         <div className="info">
-                            <h3>System Maintenance</h3>
+                            <h5>System Maintenance</h5>
                             <small className="text-muted">
                                 08:00 AM - 12:00 PM
                             </small>
@@ -76,7 +76,7 @@ function RightSection() {
                     </div>
                     <div className="content">
                         <div className="info">
-                            <h3>Add Upcoming Promos</h3>
+                            <h5>Add Upcoming Promos</h5>
                             <small className="text-muted">
                                 08:00 AM - 12:00 PM
                             </small>
@@ -95,7 +95,7 @@ function RightSection() {
                     </div>
                     <div className="content">
                         <div className="info">
-                            <h3>Add Upcoming Promos</h3>
+                            <h5>Add Upcoming Promos</h5>
                             <small className="text-muted">
                                 08:00 AM - 12:00 PM
                             </small>
@@ -111,7 +111,7 @@ function RightSection() {
                         <span className="material-icons-sharp">
                             add
                         </span>
-                        <h3>Add Reminder</h3>
+                        <h5>Add Reminder</h5>
                     </div>
                 </div>  
             </div>

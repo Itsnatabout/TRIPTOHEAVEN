@@ -96,13 +96,13 @@ function LineChart() {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div className='d-flex justify-content-center align-items-center' >
       <div
         style={{
-          width: "900px",
-          height: "400px",
-          padding: "20px",
+          width: "100%",
+          padding: "10px",
           cursor: "pointer",
+          textAlign: "center",
         }}
       >
         <Line data={data} options={options}></Line>
