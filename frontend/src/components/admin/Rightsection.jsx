@@ -21,7 +21,7 @@ function RightSection() {
 
                 <div className="profile">
                     <div className="info">
-                        <p>Hey, <b>Nath</b></p>
+                        <p className='mb-0'>Hey, <b>Nath</b></p>
                         <small className="text-muted">Admin</small>
                     </div>
                     <div className="profile-photo">
@@ -32,20 +32,21 @@ function RightSection() {
             </div>
            
 
-            <div className="user-profile">
+            {/* <div className="user-profile">
                 <div className="logo">
                     <img src="/img/file.png" alt="logo" />
                     <h2>Trip to Heaven</h2>
                     <p>Fly High Butterfly</p>
                 </div>
-            </div>
+            </div> */}
 
             <div className="reminders">
                 <div className="header">
-                    <h2>Reminders</h2>
-                    <span className="material-icons-sharp">
+                <span className="material-icons-sharp">
                         notifications_none
                     </span>
+                    <h2 className='fs-3'>Reminders</h2>
+                  
                 </div>
 
                 <div className="notification">

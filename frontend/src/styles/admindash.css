@@ -34,9 +34,9 @@
 } */
 
 
-small {
-  font-size: 0.76rem;
-}
+/* small {
+  font-size: 1rem;
+} */
 
 /* #custom-p {
   color: var(--color-dark-variant);
@@ -337,13 +337,14 @@ main .recent-orders a {
 }
 
 .right-section {
-  margin-top: 1.4rem;
+  margin-top: 15px;
 }
 
 .right-section .nav {
   display: flex;
   justify-content: end;
-  gap: 2rem;
+  gap: 3rem;
+  margin-right: 1.5rem;
 }
 
 .right-section .nav button {
@@ -378,7 +379,7 @@ main .recent-orders a {
 
 .right-section .nav .profile {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   text-align: right;
 }
 
@@ -387,6 +388,14 @@ main .recent-orders a {
   height: 2.8rem;
   border-radius: 50%;
   overflow: hidden;
+}
+.right-section .nav .profile .info{
+  font-size: 18px;
+}
+.right-section .nav .profile .profile-photo img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
 }
 
 .right-section .user-profile {
@@ -424,15 +433,17 @@ main .recent-orders a {
 .right-section .reminders .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 0.8rem;
+  justify-content: center;
 }
 
 .right-section .reminders .header span {
-  padding: 10px;
+  /* padding: 10px;
   box-shadow: var(--box-shadow);
-  background-color: var(--color-white);
-  border-radius: 50%;
+  border-radius: 50%; */
+  background-color: transparent;
+  font-size: 30px;
+  margin: 0 .5rem .4rem 0;
 }
 
 .right-section .reminders .notification {
