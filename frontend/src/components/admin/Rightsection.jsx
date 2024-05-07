@@ -1,7 +1,16 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import Calendar from 'react-calendar';
+import '../../styles/Calendar.css';
 
 function RightSection() {
+    const [date, setDate] = useState(new Date());
+
+    const onChange = (date) => {
+        setDate(date);
+    };
+
+
+
     return (
         <div className="right-section">
             <div className="nav">
@@ -32,13 +41,9 @@ function RightSection() {
             </div>
            
 
-            {/* <div className="user-profile">
-                <div className="logo">
-                    <img src="/img/file.png" alt="logo" />
-                    <h2>Trip to Heaven</h2>
-                    <p>Fly High Butterfly</p>
-                </div>
-            </div> */}
+            <div className="calendar-container">
+                <Calendar onChange={onChange} value={date} />
+            </div>
 
             <div className="reminders">
                 <div className="header">
