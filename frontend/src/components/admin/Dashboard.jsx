@@ -40,6 +40,7 @@ const Dashboard = () => {
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
   }
+  
   return (
     <div className={`customcontainer admin ${isDarkMode ? "dark-mode-variables" : ""}`}>
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />

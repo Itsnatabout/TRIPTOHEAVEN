@@ -1,5 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect  } from "react";
+import { Link, useLocation } from "react-router-dom";
+
+
+
 function Sidebar() {
+
+    const [selectedItem, setSelectedItem] = useState("Dashboard");
+    const location = useLocation();
+    
+    useEffect(() => {
+        const pathname = location.pathname;
+        const selectedItemFromPath = pathname.substring(1);
+        setSelectedItem(selectedItemFromPath.charAt(0).toUpperCase() + selectedItemFromPath.slice(1));
+    }, [location]);
+
+    const handleItemClick = (item) => {
+      setSelectedItem(item);
+    };
+
+
     return (
         <aside>
             <div className="toggle">
@@ -15,52 +34,52 @@ function Sidebar() {
             </div>
 
             <div className="sidebar" >
-                <a href="#" className="active">
+                <Link to="/dashboard" className={selectedItem === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>
                     <span className="material-icons-sharp">
                         dashboard
                     </span>
                     <h6>Dashboard</h6>
-                </a>
-                <a href="#" >
+                </Link>
+                <Link to="/users" className={selectedItem === "Users" ? "active" : ""} onClick={() => handleItemClick("Users")}>
                     <span className="material-icons-sharp">
                         person_outline
                     </span>
                     <h6>Users</h6>
-                </a>
-                <a href="#" >
+                </Link>
+                <Link to="/promo" className={selectedItem === "Promo" ? "active" : ""} onClick={() => handleItemClick("Promo")}>
                     <span className="material-icons-sharp">
                         token
                     </span>
                     <h6>Promo</h6>
-                </a>
+                </Link>
                
-                <a href="#" >
+                <Link to="/sales" className={selectedItem === "Sales" ? "active" : ""} onClick={() => handleItemClick("Sales")}>
                     <span className="material-icons-sharp">
                         inventory
                     </span>
                     <h6>Sales</h6>
-                </a>
+                </Link>
 
-                <a href="#">
+                <Link to="/flights" className={selectedItem === "Flights" ? "active" : ""} onClick={() => handleItemClick("Flights")}>
                     <span className="material-icons-sharp">
                         report_gmailerrorred
                     </span>
                     <h6>Flights</h6>
-                </a>
+                </Link>
                 
-                <a href="#">
+                <Link to="/settings" className={selectedItem === "Settings" ? "active" : ""} onClick={() => handleItemClick("Settings")}>
                     <span className="material-icons-sharp">
                         settings
                     </span>
                     <h6>Settings</h6>
-                </a>
+                </Link>
               
-                <a href="#">
+                <Link to="/" >
                     <span className="material-icons-sharp">
                         logout
                     </span>
                     <h6>Logout</h6>
-                </a>
+                </Link>
             </div>
         </aside>
     );

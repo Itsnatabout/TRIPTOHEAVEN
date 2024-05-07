@@ -14,7 +14,7 @@ function RightSection() {
     return (
         <div className="right-section">
             <div className="nav">
-                <button id="menu-btn">
+                {/* <button id="menu-btn">
                     <span className="material-icons-sharp">
                         menu
                     </span>
@@ -26,7 +26,7 @@ function RightSection() {
                     <span className="material-icons-sharp">
                         dark_mode
                     </span>
-                </div>
+                </div> */} {/*hidden dark mode temporarily */}
 
                 <div className="profile">
                     <div className="info">

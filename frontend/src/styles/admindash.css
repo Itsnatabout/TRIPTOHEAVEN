@@ -31,7 +31,6 @@
   color: var(--color-dark);
 } */
 
-
 /* small {
   font-size: 1rem;
 } */
@@ -67,7 +66,7 @@
 .customcontainer {
   display: grid;
   width: 100%;
-  padding:10px;
+  padding: 10px;
   margin: 0 auto;
   gap: 1.5rem;
   grid-template-columns: 12rem auto 23rem;
@@ -76,7 +75,7 @@
 aside {
   height: 100%;
   min-width: 200px;
-  width:200px;
+  width: 200px;
 }
 
 aside .toggle {
@@ -95,7 +94,6 @@ aside .toggle .logo {
 aside .toggle .logo img {
   width: 5rem;
   height: 5rem;
-
 }
 
 aside .toggle .close {
@@ -339,7 +337,7 @@ main .recent-orders a {
 
 .right-section {
   margin-top: 15px;
- margin-left: auto;
+  margin-left: auto;
 }
 
 .right-section .nav {
@@ -391,7 +389,7 @@ main .recent-orders a {
   border-radius: 50%;
   overflow: hidden;
 }
-.right-section .nav .profile .info{
+.right-section .nav .profile .info {
   font-size: 18px;
 }
 .right-section .nav .profile .profile-photo img {
@@ -445,7 +443,7 @@ main .recent-orders a {
   border-radius: 50%; */
   background-color: transparent;
   font-size: 30px;
-  margin: 0 .5rem .4rem 0;
+  margin: 0 0.5rem 0.4rem 0;
 }
 
 .right-section .reminders .notification {
