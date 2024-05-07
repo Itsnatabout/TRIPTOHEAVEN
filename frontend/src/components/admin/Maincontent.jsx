@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import LineChart from './LineChart';
 
 function MainContent({ orders }) {
@@ -97,7 +98,7 @@ function MainContent({ orders }) {
                         ))}
                     </tbody>
                 </table>
-                <a href="#">Show All</a>
+                <Link to="/flights" href="#">Show All</Link>
             </div>
             {/* End of Today's Flight */}
         </main>

@@ -12,6 +12,7 @@ import Bohol from './components/places/Bohol';
 import Albay from './components/places/Albay';
 import Admin from './components/admin/Dashboard';
 import Promo from './components/admin/Promos'
+import Flights from './components/admin/Flights';
 import './App.css'
 import {
   createBrowserRouter,
@@ -82,6 +83,11 @@ const router = createBrowserRouter([
   {
     path: "/Promo",
     element: <Promo/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/flights",
+    element: <Flights/>,
     errorElement: <ErrorPage />
   },
 ])

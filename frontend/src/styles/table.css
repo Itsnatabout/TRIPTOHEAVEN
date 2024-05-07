@@ -4,10 +4,10 @@
 }
 .table-wrapper {
   width: 100%;
+  overflow-x: auto;
 }
 
 .table {
-  display: block;
   overflow: hidden;
   table-layout: fixed;
   border-collapse: collapse;
@@ -15,19 +15,19 @@
   border-radius: 10px;
   white-space: nowrap;
   width: 100%;
-  margin: auto;
-  table-layout: auto;
-  overflow: hidden;
 }
 
 .table thead {
   background-color: #ccc;
   color: #222;
+  width: 100%;
 }
 
 .table th,
 .table td {
   padding: 0.8rem;
+  overflow: hidden;
+  text-align: center;
 }
 
 .table td {
@@ -50,7 +50,8 @@
   color: white;
   width: 80px;
   display: block;
-  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .label-soon {
@@ -74,7 +75,7 @@
 
 .actions {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .actions svg {

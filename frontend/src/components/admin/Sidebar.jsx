@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
 
-    const [selectedItem, setSelectedItem] = useState("Dashboard");
+    const [selectedItem, setSelectedItem] = useState("");
     const location = useLocation();
     
     useEffect(() => {
@@ -40,12 +40,12 @@ function Sidebar() {
                     </span>
                     <h6>Dashboard</h6>
                 </Link>
-                <Link to="/users" className={selectedItem === "Users" ? "active" : ""} onClick={() => handleItemClick("Users")}>
+                {/* <Link to="/users" className={selectedItem === "Users" ? "active" : ""} onClick={() => handleItemClick("Users")}>
                     <span className="material-icons-sharp">
                         person_outline
                     </span>
                     <h6>Users</h6>
-                </Link>
+                </Link> */}
                 <Link to="/promo" className={selectedItem === "Promo" ? "active" : ""} onClick={() => handleItemClick("Promo")}>
                     <span className="material-icons-sharp">
                         token
@@ -53,12 +53,12 @@ function Sidebar() {
                     <h6>Promo</h6>
                 </Link>
                
-                <Link to="/sales" className={selectedItem === "Sales" ? "active" : ""} onClick={() => handleItemClick("Sales")}>
+                {/* <Link to="/sales" className={selectedItem === "Sales" ? "active" : ""} onClick={() => handleItemClick("Sales")}>
                     <span className="material-icons-sharp">
                         inventory
                     </span>
                     <h6>Sales</h6>
-                </Link>
+                </Link> */}
 
                 <Link to="/flights" className={selectedItem === "Flights" ? "active" : ""} onClick={() => handleItemClick("Flights")}>
                     <span className="material-icons-sharp">
@@ -67,12 +67,12 @@ function Sidebar() {
                     <h6>Flights</h6>
                 </Link>
                 
-                <Link to="/settings" className={selectedItem === "Settings" ? "active" : ""} onClick={() => handleItemClick("Settings")}>
+                {/* <Link to="/settings" className={selectedItem === "Settings" ? "active" : ""} onClick={() => handleItemClick("Settings")}>
                     <span className="material-icons-sharp">
                         settings
                     </span>
                     <h6>Settings</h6>
-                </Link>
+                </Link> */}
               
                 <Link to="/" >
                     <span className="material-icons-sharp">

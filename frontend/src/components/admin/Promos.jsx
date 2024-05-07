@@ -50,7 +50,7 @@ const Promos = () => {
 
   return (
       <>
-      <div className="d-flex p-2">
+      <div className="d-flex p-2" style={{ backgroundColor: "var(--color-background)" }}>
         <Sidebar />
               <div className="d-flex flex-column table-container justify-content-start align-items-end">
           <Table
