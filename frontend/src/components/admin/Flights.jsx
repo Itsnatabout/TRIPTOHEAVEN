@@ -1,19 +1,26 @@
-import React from "react"
+import {useState} from "react"
 import Sidebar from "./Sidebar"
 import RightSection from "./Rightsection"
 import "../../styles/table.css"
-
+import Modal from './modal'
 const Flights = () => {
+    const [modalOpen, setModalOpen] = useState(false)
+
+
+
+
   return (
     <>
-      <div className="d-flex p-2" style={{ backgroundColor: "var(--color-background)" }}>
+      <div
+        className="d-flex p-2"
+        style={{ backgroundColor: "var(--color-background)" }}
+      >
         <Sidebar />
 
         <div className="d-flex flex-column table-container">
-                  <div className="d-flex justify-content-center align-items-start h-50">
-                  
-                      <div className="table-wrapper">
-                      <h2>Flight Details</h2>
+          <div className="d-flex justify-content-center align-items-start h-50">
+            <div className="table-wrapper">
+              <h2>Flight Details</h2>
               <table className="table">
                 <thead>
                   <tr>
@@ -33,8 +40,8 @@ const Flights = () => {
 
           {/* for time table */}
           <div className="d-flex justify-content-center align-items-start h-50">
-                      <div className="table-wrapper">
-                          <h2>Timetable</h2>
+            <div className="table-wrapper">
+              <h2>Timetable</h2>
               <table className="table">
                 <thead>
                   <tr>
@@ -48,9 +55,28 @@ const Flights = () => {
                 <tbody>{/* data from database */}</tbody>
               </table>
             </div>
-                  </div>
-                  <button type="button" className="btn btn-primary mx-auto " style={{ position: "fixed", bottom: "3rem", right: "25rem",zIndex: "9999" }}>New Flight</button>
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary mx-auto "
+            onClick={() => setModalOpen(true)}
+            style={{
+              position: "fixed",
+              bottom: "3rem",
+              right: "25rem",
+            }}
+          >
+            New Flight
+          </button>
         </div>
+        
+              {modalOpen && (
+                  <Modal
+                      isModalOpen={() => {
+                          setModalOpen(false);
+                  }}
+                  />
+        )}
 
         <RightSection />
       </div>
