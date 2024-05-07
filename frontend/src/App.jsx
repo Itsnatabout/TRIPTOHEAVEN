@@ -11,7 +11,7 @@ import Siargao from './components/places/Siargao';
 import Bohol from './components/places/Bohol';
 import Albay from './components/places/Albay';
 import Admin from './components/admin/Dashboard';
-
+import Promo from './components/admin/Promos'
 import './App.css'
 import {
   createBrowserRouter,
@@ -79,7 +79,11 @@ const router = createBrowserRouter([
     element: <Admin/>,
     errorElement: <ErrorPage />
   },
-
+  {
+    path: "/Promo",
+    element: <Promo/>,
+    errorElement: <ErrorPage />
+  },
 ])
 function App() {
 

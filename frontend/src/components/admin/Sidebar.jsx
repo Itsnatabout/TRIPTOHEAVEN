@@ -5,7 +5,7 @@ function Sidebar() {
             <div className="toggle">
                 <div className="logo">
                     {/* <img src="img/file.png" alt="logo" /> */}
-                    <h3>Trip to<span className="danger"> Heaven</span></h3>
+                    <h3><b>Trip To<span className="danger"> Heaven</span></b></h3>
                 </div>
                 <div className="close" id="close-btn">
                     <span className="material-icons-sharp">
@@ -14,7 +14,7 @@ function Sidebar() {
                 </div>
             </div>
 
-            <div className="sidebar">
+            <div className="sidebar" >
                 <a href="#" className="active">
                     <span className="material-icons-sharp">
                         dashboard

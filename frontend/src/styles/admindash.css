@@ -75,6 +75,8 @@
 
 aside {
   height: 100%;
+  min-width: 200px;
+  width:200px;
 }
 
 aside .toggle {
@@ -257,6 +259,7 @@ main .analyse .progresss .percentage {
   justify-content: center;
   height: 100%;
   width: 100%;
+  font-size: 13px;
 }
 
 main .new-users {
@@ -336,6 +339,7 @@ main .recent-orders a {
 
 .right-section {
   margin-top: 15px;
+ margin-left: auto;
 }
 
 .right-section .nav {

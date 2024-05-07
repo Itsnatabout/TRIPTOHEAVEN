@@ -156,7 +156,7 @@ const Book = ({ airport }) => {
                 <div className="col-sm-6">
                   <div className="input-group mb-4">
                     <span className="input-group-text">Return</span>
-                    <input
+                    <input 
                       type="date"
                       className="form-control"
                       min={new Date().toISOString().split("T")[0]}
