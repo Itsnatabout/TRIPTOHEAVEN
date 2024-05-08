@@ -87,7 +87,7 @@ app.post("/signup", (req, res) => {
 })
 
 app.get("/login", isAuth, (req, res) => {
-  res.send({ loggedIn: true, user: req.session.user })
+  res.send({ loggedIn: true, user: req.session.user }) //temp test using isAuth 
 })
 
 app.post("/login", (req, res) => {
@@ -110,7 +110,7 @@ app.post("/login", (req, res) => {
           if (response) {
             req.session.user = result // Set user session
             req.session.isAuth = true // Set session
-            return res.send({ loggedIn: true }) // Successful login
+            return res.send({ loggedIn: true, role: req.session.user[0].role}) // Successful login NOTE: temp test for auth
           } else {
             return res.send({ message: "Incorrect Password" }) // Incorrect password
           }
