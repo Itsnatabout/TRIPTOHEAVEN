@@ -1,11 +1,16 @@
-body{
+#background-Manage{
     background-image: url("/images/bg1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden; 
     font-family: Arial, Helvetica, sans-serif;
-}
-.card{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+  }
+#card-manage{
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(30px);
@@ -13,20 +18,21 @@ body{
     margin-top: 10vh;
     border-radius: 20px;
 }
-.Title{
+#Title-manage{
     margin-bottom: 3vh;
 }
 
-label{
+#label-manage{
     color: black;
     font-size: 20px;
 }
-#cardBody{
+#cardBody-manage{
     width: 50vh;
     margin: 0 auto;
 }
-span{
+#span1-manage{
     color: goldenrod;
+    text-shadow: 2px 2px 2px #000000;
 }
 #email{
     background: rgba(255, 255, 255, .3);
@@ -38,17 +44,12 @@ span{
     border: 2px solid rgba(255, 255, 255, .2);
     box-shadow: 0 0 10px rgba(11, 10, 10, 0.2);
 }
-#submit{
+#submit-manage{
     background-color: goldenrod;
     border-color: gold;
     border-radius: 20px;
     width: 20vh;
     color: rgb(246, 255, 190)
 }
-.subContainer{
-    margin-top: 1vh;
-}
-a{
-    color: gold;
-}
+
 

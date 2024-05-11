@@ -6,6 +6,9 @@
     background-position:  center;
     padding-top: 10vh;
 }
+.container{
+    margin-top: -8vh;
+}
 #card{
     border: 2px solid rgb(21, 21, 21, 0.5);
     backdrop-filter: blur(30px);
@@ -15,12 +18,12 @@
 #cardBody{
     background-color: white;
 }
-#Title1{
+#Title1-editBook{
     color: gainsboro;
     font-size: 70px;
     text-shadow: 2px 2px 2px #000000;
 }
-#context{
+#context-editBook{
     color: white;
     font-size: 20px;
     font-style: bold;
@@ -33,30 +36,15 @@
     text-shadow: 3px 2px 4px #000000;
     text-decoration: underline;
 }
-#span1{
+#span1-editBook{
     color: goldenrod;
     text-shadow: 2px 2px 2px #000000;
 }
-#span2{
+#span2-editBook{
     color: goldenrod;
     text-shadow: 1px 1px 1px #000000;
 }
-label{
-    color: goldenrod;
-    font-size: 20px;
-    text-shadow: 1px 1px 1px #000000;
-}
-input{
-    border-radius: 100px;
-    border-color: gold;
-    border-width: 2px;
-    width: 20vh;
-    height: 5vh;
 
-}
-.container{
-    margin-top: -8vh;
-}
 #submit{
     background-color: goldenrod;
     border-color: gold;

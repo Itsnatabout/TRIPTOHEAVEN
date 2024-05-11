@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Validation from "./Validation"
 import { Link, useNavigate } from "react-router-dom"
-import '../styles/Login.css'
+import '../Style1/Signup.css'
 import Header from './Header'
 
 

@@ -1,8 +1,8 @@
-.nav{
+#nav-passenger{
     margin: 0;
     padding: 0;
 }
-.navContainer{
+#navContainer-passenger{
     color: gainsboro;
     background-color: rgb(31, 29, 29);
     display: flex;
@@ -12,7 +12,7 @@
     width: 100%;
     text-shadow: 2px 2px 2px #000000;
 }
-.PictureContainer{
+#PictureContainer-passenger{
     height: 40vh;
     background-image: url("/images/bg2.jpg");
     background-repeat: no-repeat;
@@ -20,39 +20,34 @@
     background-position:  center;
     padding-top: 10vh;
 }
-#Title1{
+#Title1-passenger{
     color: gainsboro;
     font-size: 70px;
     text-shadow: 2px 2px 2px #000000;
 }
-#span1{
+#span-passenger{
     color: goldenrod;
     text-shadow: 2px 2px 2px #000000;
 }
-#span2{
+#span2-passenger{
     color: goldenrod;
     text-shadow: 1px 1px 1px #000000;
 }
-#span3{
+#span3-passenger{
     color: goldenrod;
     text-shadow: 1px 1px 1px #000000;
 }
-#span4{
+#span4-passenger{
     color: goldenrod;
     text-shadow: 1px 1px 1px #000000;
 }
-label{
+#label-passenger{
     color: goldenrod;
     font-size: 20px;
     text-shadow: 1px 1px 1px #000000;
 }
-input{
-    border-radius: 100px;
-    border-color: gold;
-    border-width: 2px; 
-}
-.container{
-    margin-top: -10vh;
+#container-passenger{
+    margin-top: -15vh;
 }
 
 #submit{
@@ -70,7 +65,11 @@ input{
     margin-top: 8px;
     margin-right: 10px;
 }
-#cardBody{
-    background-color:rgb(235, 235, 235) ;
-    
+#card-passenger{
+    background-color:rgb(248, 248, 248);
+    border: 2px solid rgb(21, 21, 21, 0.5);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 10px rgb(232, 174, 0);
+    border-radius: 20px;
+    margin-bottom: 2vh;
 }
