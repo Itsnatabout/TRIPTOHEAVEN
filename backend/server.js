@@ -145,6 +145,24 @@ app.get("/airports", (req, res) => {
   })
 })
 
+app.get("/users", (req, res) => { 
+
+  const sql = "SELECT userID, username, firstname, lastname, email, role, status  FROM user"
+
+  db.query(sql, (err, result) => { 
+    if (err) {
+      console.log("Error executing SQL query:", err);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+    }
+    return res.json(result);
+
+  })
+})
+
+
+
+
 // listen for requests
 app.listen(5000, () => {
   console.log("server listening on port 5000")

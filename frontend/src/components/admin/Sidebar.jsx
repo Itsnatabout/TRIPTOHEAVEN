@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import { useState, useEffect  } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 
@@ -40,12 +40,12 @@ function Sidebar() {
                     </span>
                     <h6>Dashboard</h6>
                 </Link>
-                {/* <Link to="/users" className={selectedItem === "Users" ? "active" : ""} onClick={() => handleItemClick("Users")}>
+                <Link to="/users" className={selectedItem === "Users" ? "active" : ""} onClick={() => handleItemClick("Users")}>
                     <span className="material-icons-sharp">
                         person_outline
                     </span>
                     <h6>Users</h6>
-                </Link> */}
+                </Link>
                 <Link to="/promo" className={selectedItem === "Promo" ? "active" : ""} onClick={() => handleItemClick("Promo")}>
                     <span className="material-icons-sharp">
                         token

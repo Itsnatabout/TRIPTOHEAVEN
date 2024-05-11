@@ -44,6 +44,12 @@
   width: 100%;
 }
 
+.disabled-row {
+  /* Define styles for disabled rows */
+  opacity: 0.5; /* For example, reduce opacity */
+  pointer-events: none; /* Disable pointer events */
+}
+
 .label {
   border-radius: 3px;
   padding: 0.3rem;
@@ -62,6 +68,12 @@
   background-color: #42a942;
 }
 
+.label-active {
+  background-color: #42a942;
+}
+.label-disabled {
+  background-color:#777 ;
+}
 .label-low {
   background-color: #ffa500;
 }

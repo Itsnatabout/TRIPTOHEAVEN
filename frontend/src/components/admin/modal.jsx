@@ -84,7 +84,7 @@ const modal = ({isModalOpen, title}) => {
                   Close
                 </button>
                 <button type="button" className="btn btn-primary">
-                  Understood
+                  Save
                 </button>
               </div>
             </div>
