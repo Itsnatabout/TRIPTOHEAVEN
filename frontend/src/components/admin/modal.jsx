@@ -1,4 +1,4 @@
-import {useState} from 'react'
+
 
 const modal = ({isModalOpen, title}) => {
 

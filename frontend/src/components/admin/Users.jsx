@@ -3,10 +3,14 @@ import Sidebar from "./Sidebar"
 import RightSection from "./Rightsection"
 import "../../styles/table.css"
 import axios from "axios"
-import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs"
+import { BsPersonFillLock , BsFillPencilFill, BsEyeFill } from "react-icons/bs"
+import Modal from "./userModal"
+
 
 const Users = () => {
   const [values, setValues] = useState([])
+    const [modalOpen, setModalOpen] = useState(false)
+    const [rowToEdit, setRowToEdit] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,9 +21,17 @@ const Users = () => {
         console.log(error)
       }
     }
-    fetchData()
+      fetchData()
   }, [])
 
+  const handleEditRow = (idx) => {
+    setRowToEdit(idx)
+
+    setModalOpen(true)
+  }
+
+    
+    
   return (
     <>
       <div
@@ -46,7 +58,7 @@ const Users = () => {
                 </thead>
                 <tbody>
                   {/* data from database */}
-                  {values.map((value) => (
+                  {values.map((value, idx) => (
                     <tr
                       key={value.userID}
                       className={
@@ -68,8 +80,9 @@ const Users = () => {
                       {/* status */}
                       <td className="fit">
                         <span className="actions">
-                          <BsFillTrashFill className="delete-btn" onClick="" />
-                          <BsFillPencilFill className="edit-btn" onClick="" />
+                          <BsPersonFillLock  className="delete-btn" onClick="" />
+                                  <BsFillPencilFill className="edit-btn" onClick={()=> handleEditRow(idx)} />
+                              <BsEyeFill onClick=""/>    
                         </span>
                       </td>
                     </tr>
@@ -79,7 +92,14 @@ const Users = () => {
             </div>
           </div>
         </div>
-
+              {modalOpen && (
+                  <Modal
+                  closeModal={() => {
+                    setModalOpen(false)
+                  }}
+                 
+                  />
+        )}
         <RightSection />
       </div>
     </>
