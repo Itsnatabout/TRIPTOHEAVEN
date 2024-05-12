@@ -52,7 +52,7 @@ const isAuth = (req, res, next) => {
 
 app.post("/signup", (req, res) => {
   const sql =
-    "INSERT INTO user (`username`,`firstname`,`middlename`,`lastname`, `email`, `dateofbirth`, `Age`,`gender`, `mobilenum`, `role`, `password` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    "INSERT INTO user (`username`,`firstname`,`middlename`,`lastname`, `email`, `dateofbirth`, `Age`,`gender`, `mobilenum`, `role`, `password`, `status` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
   const password = req.body.password.toString()
   bcrypt.hash(password, saltRounds, (err, hash) => {
@@ -72,6 +72,7 @@ app.post("/signup", (req, res) => {
       req.body.mobilenumber,
       req.body.role,
       hash,
+      req.body.status,
     ]
 
     db.query(sql, values, (err, result) => {
@@ -87,7 +88,7 @@ app.post("/signup", (req, res) => {
 })
 
 app.get("/login", isAuth, (req, res) => {
-  res.send({ loggedIn: true, user: req.session.user }) //temp test using isAuth 
+  res.send({ loggedIn: true, user: req.session.user }) //temp test using isAuth
 })
 
 app.post("/login", (req, res) => {
@@ -110,7 +111,7 @@ app.post("/login", (req, res) => {
           if (response) {
             req.session.user = result // Set user session
             req.session.isAuth = true // Set session
-            return res.send({ loggedIn: true, role: req.session.user[0].role}) // Successful login NOTE: temp test for auth
+            return res.send({ loggedIn: true, role: req.session.user[0].role }) // Successful login NOTE: temp test for auth
           } else {
             return res.send({ message: "Incorrect Password" }) // Incorrect password
           }
@@ -136,33 +137,56 @@ app.get("/airports", (req, res) => {
 
   db.query(sql, (err, result) => {
     if (err) {
-      console.log("Error executing SQL query:", err);
-      res.status(500).json({ error: "Internal server error" });
-      return;
+      console.log("Error executing SQL query:", err)
+      res.status(500).json({ error: "Internal server error" })
+      return
     }
     // Send the result as a JSON response
-    return res.json(result);
+    return res.json(result)
   })
 })
 
-app.get("/users", (req, res) => { 
+app.get("/users", (req, res) => {
+  const sql =
+    "SELECT userID, username, firstname, middlename, lastname, email, gender, dateofbirth, Age, mobilenum, role, status  FROM user"
 
-  const sql = "SELECT userID, username, firstname, lastname, email, role, status  FROM user"
-
-  db.query(sql, (err, result) => { 
+  db.query(sql, (err, result) => {
     if (err) {
-      console.log("Error executing SQL query:", err);
-      res.status(500).json({ error: "Internal server error" });
-      return;
+      console.log("Error executing SQL query:", err)
+      res.status(500).json({ error: "Internal server error" })
+      return
     }
-    return res.json(result);
-
+    return res.json(result)
   })
 })
 
+app.post("/updateUsers", (req, res) => { 
+const sql = "UPDATE user SET `username` = ?, `firstname` = ?,`middlename` = ?,`lastname` = ?,`email` = ?,`gender` = ?,`mobilenum` = ?,`role` = ?,`status` = ? WHERE userID = ?;"  
 
+const values = [
+  req.body.username,
+  req.body.firstname,
+  req.body.middlename,
+  req.body.lastname,
+  req.body.email,
+  req.body.gender, //sex
+  req.body.mobilenumber,
+  req.body.role,
+  req.body.status,
+  req.body.userID
+]
 
-
+db.query(sql, values, (err, result) => {
+  if (err) {
+    console.error("Error occurred while updating user:", err)
+    return res.status(500).json({ error: "Internal server error" })
+  }
+  return res
+    .status(201)
+    .json({ message: "User created successfully", userId: result.insertId }) // make modal that shows user created successfully
+})
+  
+})
 // listen for requests
 app.listen(5000, () => {
   console.log("server listening on port 5000")

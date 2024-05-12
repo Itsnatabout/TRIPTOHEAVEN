@@ -4,7 +4,7 @@ import RightSection from "./Rightsection"
 import "../../styles/table.css"
 import axios from "axios"
 import { BsPersonFillLock , BsFillPencilFill, BsEyeFill } from "react-icons/bs"
-import Modal from "./userModal"
+import Modal from "./UserModal"
 
 
 const Users = () => {
@@ -30,7 +30,6 @@ const Users = () => {
     setModalOpen(true)
   }
 
-    
     
   return (
     <>
@@ -71,7 +70,10 @@ const Users = () => {
                         {value.firstname} {value.lastname}
                       </td>
                       <td>{value.email}</td>
-                      <td>{value.role}</td>
+                      <td>{
+                        value.role == 1 ? ("User") : ("Admin")
+                      
+                      }</td>
                       <td>
                         <span className={`label label-${value.status}`}>
                           {value.status}
@@ -82,7 +84,7 @@ const Users = () => {
                         <span className="actions">
                           <BsPersonFillLock  className="delete-btn" onClick="" />
                                   <BsFillPencilFill className="edit-btn" onClick={()=> handleEditRow(idx)} />
-                              <BsEyeFill onClick=""/>    
+                              {/* <BsEyeFill onClick=""/>     */}
                         </span>
                       </td>
                     </tr>
@@ -96,8 +98,8 @@ const Users = () => {
                   <Modal
                   closeModal={() => {
                     setModalOpen(false)
-                  }}
-                 
+            }}
+                  userData={values[rowToEdit]}
                   />
         )}
         <RightSection />

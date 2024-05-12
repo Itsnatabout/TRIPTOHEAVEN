@@ -45,7 +45,7 @@ function RightSection() {
                 <Calendar onChange={onChange} value={date} />
             </div>
 
-            <div className="reminders">
+            {/* <div className="reminders">
                 <div className="header">
                 <span className="material-icons-sharp">
                         notifications_none
@@ -119,7 +119,7 @@ function RightSection() {
                         <h5>Add Reminder</h5>
                     </div>
                 </div>  
-            </div>
+            </div> */}
         </div>
     );
 }
