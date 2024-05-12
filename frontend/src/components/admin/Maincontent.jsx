@@ -1,8 +1,8 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LineChart from './LineChart';
 
-function MainContent({ orders }) {
+function MainContent({ orders, userCount, userPercent}) {
     const getStatusColor = (status) => {
         switch (status) {
             case 'Cancelled':
@@ -24,7 +24,7 @@ function MainContent({ orders }) {
                     <div className="status">
                         <div className="info">
                             <h3>Total Sales</h3>
-                            <h4>65,024</h4>
+                            <h4></h4>
                         </div>
                         <div className="progresss">
                             <svg>
@@ -39,15 +39,15 @@ function MainContent({ orders }) {
                 <div className="visits">
                     <div className="status">
                         <div className="info">
-                            <h3>Waiting List</h3>
-                            <h4>900</h4>
+                            <h3>Users</h3>
+                            <h4>{userCount}</h4>
                         </div>
                         <div className="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div className="percentage">
-                                <p className='mb-0'>+9%</p>
+                                <p className='mb-0'>{userPercent}%</p>
                             </div>
                         </div>
                     </div>
@@ -55,8 +55,8 @@ function MainContent({ orders }) {
                 <div className="searches">
                     <div className="status">
                         <div className="info">
-                            <h3>Completed Flights</h3>
-                            <h4>1,923</h4>
+                            <h3>Flights Delayed</h3>
+                            <h4></h4>
                         </div>
                         <div className="progresss">
                             <svg>
