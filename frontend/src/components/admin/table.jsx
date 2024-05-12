@@ -30,10 +30,6 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                 </td>
                 <td className="fit">
                   <span className="actions">
-                    {/* <BsFillTrashFill
-                      className="delete-btn"
-                      onClick={() => deleteRow(idx)}
-                    /> */}
                     <BsFillPencilFill
                       className="edit-btn"
                       onClick={() => editRow(idx)}

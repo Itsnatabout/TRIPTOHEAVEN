@@ -244,7 +244,57 @@ app.post('/updatePromos', (req, res) => {
   })
 })
 
+app.get('/getFlights', (req, res) => { 
+  const sql = "SELECT FlightID, aircraftID, availableSeats, Departure, Destination, FROM flight"
 
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("Error executing SQL query:", err)
+      res.status(500).json({ error: "Internal server error" })
+      return
+    }
+    return res.json(result)
+  })
+
+})
+app.get('/getFlightTime', (req, res) => { 
+  const sql = ""
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("Error executing SQL query:", err)
+      res.status(500).json({ error: "Internal server error" })
+      return
+    }
+    return res.json(result)
+  })
+
+})
+app.get('/flightstatus', (req, res) => { 
+const sql = "SELECT * FROM status WHERE statusID BETWEEN 3 AND 7;"
+
+db.query(sql, (err, result) => {
+  if (err) {
+    console.log("Error executing SQL query:", err)
+    res.status(500).json({ error: "Internal server error" })
+    return
+  }
+  return res.json(result)
+})
+  
+})
+app.get('/aircrafts', (req, res) => { 
+  const sql = "SELECT * FROM aircraft"
+
+db.query(sql, (err, result) => {
+  if (err) {
+    console.log("Error executing SQL query:", err)
+    res.status(500).json({ error: "Internal server error" })
+    return
+  }
+  return res.json(result)
+})
+})
 
 // listen for requests
 app.listen(5000, () => {
