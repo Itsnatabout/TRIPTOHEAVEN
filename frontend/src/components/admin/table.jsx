@@ -18,24 +18,22 @@ export const Table = ({ rows, deleteRow, editRow }) => {
         </thead>
         <tbody>
           {rows.map((row, idx) => {
-            const statusText =
-              row.status.charAt(0).toUpperCase() + row.status.slice(1);
 
             return (
               <tr key={idx}>
-                <td>{row.promocode}</td>
+                <td>{row.PromoCode}</td>
                 <td className="">{row.description}</td>
                 <td>
-                  <span className={`label label-${row.status}`}>
-                    {statusText}
+                  <span className={`label label-${row.statusID == '1' ? 'available': 'expired'}`}>
+                    {row.statusID == '1' ? 'available' : 'expired'}
                   </span>
                 </td>
                 <td className="fit">
                   <span className="actions">
-                    <BsFillTrashFill
+                    {/* <BsFillTrashFill
                       className="delete-btn"
                       onClick={() => deleteRow(idx)}
-                    />
+                    /> */}
                     <BsFillPencilFill
                       className="edit-btn"
                       onClick={() => editRow(idx)}

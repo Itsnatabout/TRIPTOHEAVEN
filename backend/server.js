@@ -111,7 +111,7 @@ app.post("/login", (req, res) => {
           if (response) {
             req.session.user = result // Set user session
             req.session.isAuth = true // Set session
-            return res.send({ loggedIn: true, role: req.session.user[0].role }) // Successful login NOTE: temp test for auth
+            return res.send({ loggedIn: true, role: req.session.user[0].role }) // Successful login NOTE: temp test for auth also add here where if the account is active or disabled.
           } else {
             return res.send({ message: "Incorrect Password" }) // Incorrect password
           }
@@ -187,6 +187,65 @@ db.query(sql, values, (err, result) => {
 })
   
 })
+
+app.get("/promos", (req, res) => {
+  const sql =
+    "SELECT * FROM promos"
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("Error executing SQL query:", err)
+      res.status(500).json({ error: "Internal server error" })
+      return
+    }
+    return res.json(result)
+  })
+})
+
+app.post("/addPromos", (req, res) => {
+  const sql = "INSERT INTO promos (`PromoCode`,`description`,`statusID`) VALUES (?,?,?)"
+
+  const values = [
+    req.body.PromoCode,
+    req.body.description,
+    req.body.statusID
+  ]
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error occurred while updating user:", err)
+      return res.status(500).json({ error: "Internal server error" })
+    }
+    return res
+      .status(201)
+      .json({ message: "User created successfully", userId: result.insertId }) // make modal that shows user created successfully
+  })
+
+})
+app.post('/updatePromos', (req, res) => { 
+  const sql = "UPDATE promos SET `PromoCode` = ?, `description` = ?, `statusID` = ? WHERE PromoID = ?"
+
+  const values = [
+    req.body.PromoCode,
+    req.body.description,
+    req.body.statusID,
+    req.body.PromoID,
+  ]
+
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error occurred while updating user:", err)
+      return res.status(500).json({ error: "Internal server error" })
+    }
+    return res
+      .status(201)
+      .json({ message: "User created successfully", userId: result.insertId }) // make modal that shows user created successfully
+  })
+})
+
+
+
 // listen for requests
 app.listen(5000, () => {
   console.log("server listening on port 5000")

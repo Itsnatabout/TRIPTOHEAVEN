@@ -4,15 +4,14 @@ import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs"
 export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
   const [formState, setFormState] = useState(
     defaultValue || {
-      promocode: "",
+      PromoCode: "",
       description: "",
-      status: "available",
+      statusID: "1",
     }
   )
   const [errors, setErrors] = useState("")
-
   const validateForm = () => {
-    if (formState.promocode && formState.description && formState.status) {
+    if (formState.PromoCode && formState.description && formState.statusID) {
       setErrors("")
       return true
     } else {
@@ -41,6 +40,12 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
     closeModal()
   }
 
+
+
+
+
+
+
   return (
     <>
       <div
@@ -67,11 +72,11 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
               {/* Add your modal content here */}
               <form>
                 <div className="form-group">
-                  <label htmlFor="promocode"></label>
+                  <label htmlFor="promocode">Promo Code</label>
                   <input
-                    name="promocode"
+                    name="PromoCode"
                     onChange={handleChange}
-                    value={formState.promocode}
+                    value={formState.PromoCode}
                   />
                 </div>
                 <div className="form-group">
@@ -85,14 +90,12 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
                 <div className="form-group">
                   <label htmlFor="status">Status</label>
                   <select
-                    name="status"
+                    name="statusID"
                     onChange={handleChange}
-                    value={formState.status}
+                    value={formState.statusID}
                   >
-                    <option value="available">Available</option>
-                    <option value="soon">Soon</option>
-                    <option value="cancelled">Cancelled</option>
-                    <option value="expired">Expired</option>
+                    <option value="1">Available</option>
+                    <option value="2">Expired</option>
                   </select>
                 </div>
                 {errors && (

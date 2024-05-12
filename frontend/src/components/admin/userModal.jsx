@@ -29,7 +29,6 @@ const UserModal = ({ closeModal, userData }) => {
     event.preventDefault();
     // validation here if needed
     setFormSubmitted(true)
-    console.log(values);
   }
 
   useEffect(() => {
