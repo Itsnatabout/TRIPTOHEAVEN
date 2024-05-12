@@ -45,7 +45,7 @@ const UserModal = ({ closeModal, userData }) => {
       setFormSubmitted(false)
   }
 
-}, [formSubmitted, values])
+}, [formSubmitted, values, closeModal]);
 
 
 

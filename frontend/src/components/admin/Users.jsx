@@ -22,7 +22,7 @@ const Users = () => {
       }
     }
       fetchData()
-  }, [])
+  }, [modalOpen])
 
   const handleEditRow = (idx) => {
     setRowToEdit(idx)
@@ -82,8 +82,8 @@ const Users = () => {
                       {/* status */}
                       <td className="fit">
                         <span className="actions">
-                          <BsPersonFillLock  className="delete-btn" onClick="" />
-                                  <BsFillPencilFill className="edit-btn" onClick={()=> handleEditRow(idx)} />
+                          {/* <BsPersonFillLock  className="delete-btn" onClick="" /> */}
+                                  <BsFillPencilFill className="edit-btn" style={{ pointerEvents: 'auto' }} onClick={()=> handleEditRow(idx)} />
                               {/* <BsEyeFill onClick=""/>     */}
                         </span>
                       </td>
