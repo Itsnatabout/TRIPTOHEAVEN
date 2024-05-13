@@ -73,8 +73,8 @@ const Flights = () => {
                       <td>{flight.FlightID}</td>
                       <td>{flight.Model}</td>
                       <td>{flight.availableSeats}</td>
-                      <td>{flight.Departure}</td>
-                      <td>{flight.Destination}</td>
+                      <td>{flight.departureName}</td>
+                      <td>{flight.destinationName}</td>
                       <td>{flight.status}</td>
                       <td className="fit">
                         <span className="actions">

@@ -245,7 +245,7 @@ app.post('/updatePromos', (req, res) => {
 })
 
 app.get('/getFlights', (req, res) => { 
-  const sql = "SELECT f.FlightID, f.aircraftID, a.Model, f.availableSeats, f.Departure, f.Destination, s.status FROM flight f JOIN aircraft a ON f.aircraftID = a.aircraftID JOIN status s ON f.status = s.statusID;"
+  const sql = "SELECT f.FlightID, f.aircraftID, a.Model, f.availableSeats, d.airportID AS departureID, d.airportName AS departureName,dst.airportID AS destinationID, dst.airportName AS destinationName, s.status FROM flight f JOIN aircraft a ON f.aircraftID = a.aircraftID JOIN status s ON f.status = s.statusID JOIN airport d ON f.departureID = d.airportID JOIN airport dst ON f.destinationID = dst.airportID;"
 
   db.query(sql, (err, result) => {
     if (err) {
