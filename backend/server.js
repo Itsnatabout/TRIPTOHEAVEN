@@ -245,20 +245,19 @@ app.post('/updatePromos', (req, res) => {
 })
 
 app.get('/getFlights', (req, res) => { 
-  const sql = "SELECT FlightID, aircraftID, availableSeats, Departure, Destination, FROM flight"
+  const sql = "SELECT f.FlightID, f.aircraftID, a.Model, f.availableSeats, f.Departure, f.Destination, s.status FROM flight f JOIN aircraft a ON f.aircraftID = a.aircraftID JOIN status s ON f.status = s.statusID;"
 
   db.query(sql, (err, result) => {
     if (err) {
-      console.log("Error executing SQL query:", err)
-      res.status(500).json({ error: "Internal server error" })
-      return
+      console.log("Error executing SQL query:", err);
+      return res.status(500).json({ error: "Internal server error" });
     }
-    return res.json(result)
-  })
+    return res.json(result);
+  });
+});
 
-})
 app.get('/getFlightTime', (req, res) => { 
-  const sql = ""
+  const sql = "SELECT FlightID, departDateTime, arrivalDateTime, returnDateTime from flight"
 
   db.query(sql, (err, result) => {
     if (err) {
@@ -271,7 +270,7 @@ app.get('/getFlightTime', (req, res) => {
 
 })
 app.get('/flightstatus', (req, res) => { 
-const sql = "SELECT * FROM status WHERE statusID BETWEEN 3 AND 7;"
+const sql = "SELECT * FROM status WHERE statusID BETWEEN 3 AND 8;"
 
 db.query(sql, (err, result) => {
   if (err) {
@@ -295,7 +294,35 @@ db.query(sql, (err, result) => {
   return res.json(result)
 })
 })
+app.post('/addflight', (req, res) => { 
+  const sql = "INSERT INTO flight (`Departure`,`Destination`, `departDateTime`,`returnDateTime`,`arrivalDateTime`,`aircraftID`,`availableSeats`,`status`,`departureterminal`,`departuregate`,`arrivalTerminal`,`arrivalGate`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
 
+  const values = [
+    req.body.from,
+    req.body.to,
+    req.body.departureDateTime,
+    req.body.returnDateTime,
+    req.body.arrivalDateTime,
+    req.body.aircraft,
+    req.body.seat,
+    req.body.status,
+    req.body.depterminal,
+    req.body.depgate,
+    req.body.arrterminal,
+    req.body.arrgate
+  ]
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error occurred while creating flight:", err)
+      return res.status(500).json({ error: "Internal server error" })
+    }
+    return res
+      .status(201)
+      .json({ message: "flight created successfully", userId: result.insertId }) // make modal that shows user created successfully
+  })
+
+})
 // listen for requests
 app.listen(5000, () => {
   console.log("server listening on port 5000")
