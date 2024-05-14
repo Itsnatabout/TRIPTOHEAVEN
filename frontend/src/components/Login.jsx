@@ -58,7 +58,7 @@ const Login = () => {
       }, [values, errors, formSubmitted, navigate]); // This effect depends on errors and values
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         setErrors(Validation(values));
         setFormSubmitted(true);

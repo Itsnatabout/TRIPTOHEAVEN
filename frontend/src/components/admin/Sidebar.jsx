@@ -67,12 +67,12 @@ function Sidebar() {
                     <h6>Flights</h6>
                 </Link>
                 
-                {/* <Link to="/settings" className={selectedItem === "Settings" ? "active" : ""} onClick={() => handleItemClick("Settings")}>
+                <Link to="/listbooking" className={selectedItem === "Listbooking" ? "active" : ""} onClick={() => handleItemClick("ListBooking")}>
                     <span className="material-icons-sharp">
-                        settings
+                        book
                     </span>
-                    <h6>Settings</h6>
-                </Link> */}
+                    <h6>Bookings</h6>
+                </Link>
               
                 <Link to="/" >
                     <span className="material-icons-sharp">

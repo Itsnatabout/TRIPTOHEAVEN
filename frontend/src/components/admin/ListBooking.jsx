@@ -4,12 +4,9 @@ import Sidebar from "./Sidebar"
 import RightSection from "./Rightsection"
 import "../../styles/table.css"
 
-const Sales = () => {
-
-
-  //KELANGAN PA TO AYUSIN PLACEHOLDER LANG MUNA 
+const ListBooking = () => {
+  //KELANGAN PA TO AYUSIN PLACEHOLDER LANG MUNA
   const [values, setValues] = useState([])
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +17,7 @@ const Sales = () => {
         console.log(error)
       }
     }
-      fetchData()
+    fetchData()
   }, [])
 
   return (
@@ -34,47 +31,24 @@ const Sales = () => {
         <div className="d-flex flex-column table-container">
           <div className="d-flex justify-content-center align-items-start h-50">
             <div className="table-wrapper">
-              <h2>Sales</h2>
+              <h2>Bookings</h2>
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Sales ID</th>
+                    <th>Booking ID</th>
+                    <th>Flight ID</th>
                     <th>Name</th>
-                    <th>Amount</th>
-                    <th>Mode of Payment</th>
-                    <th>Date and Time</th>
+                    <th>ClassType</th>
+                    <th>Seat No.</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody>
-                
-                </tbody>
+                <tbody></tbody>
               </table>
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <RightSection />
       </div>
@@ -82,4 +56,4 @@ const Sales = () => {
   )
 }
 
-export default Sales
+export default ListBooking
