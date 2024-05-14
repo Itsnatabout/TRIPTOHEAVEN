@@ -350,7 +350,19 @@ app.post('/updateflight', (req, res) => {
   })
 })
 
+app.get('/sales', (req, res) => { 
+  const sql = "" //KELANGAN PA TO AYUSIN
 
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("Error executing SQL query:", err)
+      res.status(500).json({ error: "Internal server error" })
+      return
+    }
+    return res.json(result)
+  })
+})
 
 // listen for requests
 app.listen(5000, () => {
