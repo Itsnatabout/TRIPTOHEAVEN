@@ -183,15 +183,7 @@ app.post("/searchflight", (req, res) => {
   }
 
   res.send(formData)
-  // // Construct SQL query based on form data
-  // let sql = `SELECT * FROM flight WHERE departure_airport = '${selectedFromAirport}' AND destination_airport = '${selectedToAirport}'`;
-
-  // // If trip type is 'return', include return date in the query
-  // if (tripType === 'return') {
-  //   sql += ` AND departure_date >= '${departureDate}' AND return_date <= '${returnDate}'`;
-  // } else {
-  //   sql += ` AND departure_date >= '${departureDate}'`;
-  // }
+  
 })
 
 // API endpoint to clear passengers data
@@ -203,6 +195,21 @@ app.post("/clearpassengers", (req, res) => {
   }
   res.json({ message: "Passengers data cleared" })
 })
+
+
+app.get('/getFlights', (req, res) => { 
+  const sql = "SELECT departDateTime, arrivalDateTime, returnDateTime, f.FlightID, f.aircraftID, a.Model, f.availableSeats, d.airportID AS departureID, d.airportName AS departureName,dst.airportID AS destinationID, dst.airportName AS destinationName, s.status, s.statusID FROM flight f JOIN aircraft a ON f.aircraftID = a.aircraftID JOIN status s ON f.status = s.statusID JOIN airport d ON f.departureID = d.airportID JOIN airport dst ON f.destinationID = dst.airportID;"
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("Error executing SQL query:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    return res.json(result);
+  });
+});
+
+
 
 // listen for requests
 app.listen(5000, () => {
