@@ -74,74 +74,77 @@ const Modal = ({
 
     }
   }
+// Function to generate a random terminal number and gate code for departure
+const generateDepartureGate = () => {
+  const terminalNumber = Math.floor(Math.random() * 10) + 1
+  const gateCode =
+    String.fromCharCode(65 + Math.floor(Math.random() * 26)) +
+    (Math.floor(Math.random() * 50) + 1)
+  return { terminalNumber, gateCode }
+}
 
-  useEffect(() => {
+// Function to generate a random terminal number and gate code for arrival
+const generateArrivalGate = () => {
+  const terminalNumber = Math.floor(Math.random() * 10) + 1
+  const gateCode =
+    String.fromCharCode(65 + Math.floor(Math.random() * 26)) +
+    (Math.floor(Math.random() * 50) + 1)
+  return { terminalNumber, gateCode }
+}
+
+const addRandomTime = (departureDateTime) => {
+  // Convert departureDateTime to a Date object
+  const departureDate = new Date(departureDateTime)
+
+  // Generate a random number between 1 to 3 for the hours
+  const randomHours = Math.floor(Math.random() * 3) + 1
+
+  // Calculate the total hours including random hours
+  const totalHours = departureDate.getHours() + randomHours
+
+  // Adjust date if total hours exceed 24
+  if (totalHours >= 24) {
+    // Add an extra day
+    departureDate.setDate(departureDate.getDate() + 1)
+  }
+
+  // Add randomHours to departureDate
+  departureDate.setHours(totalHours % 24)
+
+  // Format the datetime string in 'YYYY-MM-DD HH:MM:SS' format
+  const year = departureDate.getFullYear()
+  const month = ("0" + (departureDate.getMonth() + 1)).slice(-2)
+  const day = ("0" + departureDate.getDate()).slice(-2)
+  const hours = ("0" + departureDate.getHours()).slice(-2)
+  const minutes = ("0" + departureDate.getMinutes()).slice(-2)
+  const seconds = ("0" + departureDate.getSeconds()).slice(-2)
+
+  // Construct formatted datetime string
+  const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+
+  // Return the formatted datetime string
+  return formattedDateTime
+  }
+  
+  useEffect(() => { 
     isEdit()
-    // Function to generate a random terminal number and gate code for departure
-    const generateDepartureGate = () => {
-      const terminalNumber = Math.floor(Math.random() * 10) + 1
-      const gateCode =
-        String.fromCharCode(65 + Math.floor(Math.random() * 26)) +
-        (Math.floor(Math.random() * 50) + 1)
-      return { terminalNumber, gateCode }
-    }
-
-    // Function to generate a random terminal number and gate code for arrival
-    const generateArrivalGate = () => {
-      const terminalNumber = Math.floor(Math.random() * 10) + 1
-      const gateCode =
-        String.fromCharCode(65 + Math.floor(Math.random() * 26)) +
-        (Math.floor(Math.random() * 50) + 1)
-      return { terminalNumber, gateCode }
-    }
-
-    const addRandomTime = (departureDateTime) => {
-      // Convert departureDateTime to a Date object
-      const departureDate = new Date(departureDateTime)
-
-      // Generate a random number between 1 to 3 for the hours
-      const randomHours = Math.floor(Math.random() * 3) + 1
-
-      // Calculate the total hours including random hours
-      const totalHours = departureDate.getHours() + randomHours
-
-      // Adjust date if total hours exceed 24
-      if (totalHours >= 24) {
-        // Add an extra day
-        departureDate.setDate(departureDate.getDate() + 1)
-      }
-
-      // Add randomHours to departureDate
-      departureDate.setHours(totalHours % 24)
-
-      // Format the datetime string in 'YYYY-MM-DD HH:MM:SS' format
-      const year = departureDate.getFullYear()
-      const month = ("0" + (departureDate.getMonth() + 1)).slice(-2)
-      const day = ("0" + departureDate.getDate()).slice(-2)
-      const hours = ("0" + departureDate.getHours()).slice(-2)
-      const minutes = ("0" + departureDate.getMinutes()).slice(-2)
-      const seconds = ("0" + departureDate.getSeconds()).slice(-2)
-
-      // Construct formatted datetime string
-      const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
-
-      // Return the formatted datetime string
-      return formattedDateTime
-    }
-
-    if (isModalOpen) {
-      // Example usage
-      const newTime = addRandomTime(departureDateTime)
-      const departure = generateDepartureGate()
-      const arrival = generateArrivalGate()
-      setArrTime(newTime)
+  }, [isModalOpen])
+  
+  useEffect(() => {
+    const newTime = addRandomTime(departureDateTime)
+    setArrTime(newTime)
+    const departure = generateDepartureGate()
+    const arrival = generateArrivalGate()
       setDepartureGate(departure)
       setArrivalGate(arrival)
-    }
-  }, [isModalOpen])
+    
+    
+  }, [isModalOpen, departureDateTime])
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+
 
     const selectedAircraftObj = aircraft.find(
       (aircraft) => aircraft.aircraftID == selectedAircraft
@@ -161,6 +164,7 @@ const Modal = ({
       // Send data to backend
 
       if (title === "edit") {    
+       
       axios
       .post("http://localhost:5000/updateflight", {
         from: selectedFromAirport,
