@@ -11,6 +11,7 @@ const EditBooking = () => {
         <div className="Title1 text-center">
             <p id='Title1-editBook'><span id='span1-editBook'>Manage</span> Booking</p>
             <p id='context-editBook'>Access your booking information, where permitted, change seats, cancel booking and refund<br/> up to two (2) hours before your flight!</p>
+          
         </div>     
     </div>
     <div className="container" id='container-editbooking'>
@@ -22,7 +23,9 @@ const EditBooking = () => {
             <div className="Destination text-center">
               <h1><span id='span2-editBook'>From:</span> Manila | <span id='span2-editBook'>To:</span> Cebu</h1>{/* From and To */}
             </div>
-
+            <div className="FlightStatus text-center">
+              <p><span id='span3-editBook'>Status: </span>on-boarding</p>
+            </div>
             <div className="Title3 text-center">
             <p id='Title2'>Passengers</p>
             </div>
@@ -70,6 +73,7 @@ const EditBooking = () => {
             
             </div>          
             <div className="subContainer text-center">               
+              <button className="btn btn-primary mt-3 my-2" name='submit' id='submit'>Pay Now</button> 
               <button className="btn btn-primary mt-3 my-2" name='submit' id='submit'>Change Seats</button> 
               <button className="btn btn-primary mt-3 my-2" name='submit' id='submit'>Cancel Booking</button>    
             </div>

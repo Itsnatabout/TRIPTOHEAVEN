@@ -110,7 +110,7 @@ const Payment = () => {
     </div>
     <div className="text-center mt-4">
       <button className="btn btn-primary" id='submit-payment' onClick={handleSubmit}>Submit</button>
-      <button className="btn btn-primary" id='skip-payment' onClick={handleSubmit}>Skip</button>
+      <button className="btn btn-primary" id='skip-payment' onClick={handleSubmit}>Skip For Now</button>
     </div>
   </div>
   </div>

@@ -44,7 +44,11 @@
     color: goldenrod;
     text-shadow: 1px 1px 1px #000000;
 }
-
+#span3-editBook{
+    color: goldenrod;
+    text-shadow: 1px 1px 1px #000000;
+    font-size: 20px;
+}
 #submit{
     background-color: goldenrod;
     border-color: gold;

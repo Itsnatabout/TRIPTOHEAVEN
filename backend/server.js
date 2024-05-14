@@ -128,6 +128,22 @@ app.post("/logout", (req, res) => {
     res.send({ loggedIn: false })
   })
 })
+//end of login
+
+app.get("/airports", (req, res) => {
+  const sql =
+    "SELECT airportID, municipality, iata_code, airportName, keywords FROM airport"
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("Error executing SQL query:", err);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+    }
+    // Send the result as a JSON response
+    return res.json(result);
+  })
+})
 
 // listen for requests
 app.listen(5000, () => {

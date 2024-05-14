@@ -17,7 +17,7 @@ const home = () => {
           <div className="content">
             <h3>Providing you with the best and safest travel experience!</h3>
           <p>Discover new Places with us!</p>
-          <Link to="/book">
+          <Link to="/booking">
             <a href="#" className="bookbtn" id="bookNowBtn">Book Now</a>
           </Link>       
         </div>
@@ -40,7 +40,7 @@ const home = () => {
           />
           <Card
             imageUrl="./img/palawan.jpg"
-            title="El Nido, Palawan"
+            title="Palawan"
             description="Renowned for its breathtaking limestone cliffs, crystal-clear waters, and hidden lagoons, El Nido offers unparalleled beauty and tranquility. "
             price="9500"
         />

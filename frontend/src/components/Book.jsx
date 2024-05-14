@@ -1,12 +1,34 @@
-import React from "react"
-import axios from "axios"
-import Header from "./Header"
-import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
 
-const Book = () => {
+const Book = ({ airport }) => {
+  const [tripType, setTripType] = useState("return")
+  const [selectedFromAirport, setSelectedFromAirport] = useState("")
+  const [selectedToAirport, setSelectedToAirport] = useState("")
+
+  const handleTripTypeChange = (e) => {
+    setTripType(e.target.value)
+  }
+  const handleFromAirportChange = (e) => {
+    const selectedAirport = e.target.value;
+    setSelectedFromAirport(selectedAirport);
+    
+    // Disable the corresponding option in the "To" selection field if it's selected in the "From" selection field
+    if (selectedToAirport === selectedAirport) {
+      setSelectedToAirport("");
+    }
+  };
+
+  const handleToAirportChange = (e) => {
+    const selectedAirport = e.target.value;
+    setSelectedToAirport(selectedAirport);
+    
+    // Disable the corresponding option in the "From" selection field if it's selected in the "To" selection field
+    if (selectedFromAirport === selectedAirport) {
+      setSelectedFromAirport("");
+    }
+  };
   return (
     <>
-      <Header />
       <section className="book" id="book">
         <h1 className="heading ">
           <span>B</span>
@@ -21,7 +43,7 @@ const Book = () => {
           <span>h</span>
           <span>t</span>
         </h1>
-        <div className="custom-card shadow mb-5 bg-white rounded ">
+        <div className="custom-card shadow mb-5 bg-white rounded">
           <form className="card-body">
             <p className="custom-card-title text-center shadow mb-5 rounded">
               Travel Booking Form
@@ -48,7 +70,9 @@ const Book = () => {
                     type="radio"
                     name="inlineRadioOptions"
                     id="inlineRadio1"
-                    value="option1"
+                    value="return"
+                    checked={tripType === "return"}
+                    onChange={handleTripTypeChange}
                   />
                   <label className="form-check-label" htmlFor="inlineRadio1">
                     Return
@@ -60,7 +84,9 @@ const Book = () => {
                     type="radio"
                     name="inlineRadioOptions"
                     id="inlineRadio2"
-                    value="option2"
+                    value="oneWay"
+                    checked={tripType === "oneWay"}
+                    onChange={handleTripTypeChange}
                   />
                   <label className="form-check-label" htmlFor="inlineRadio2">
                     One-Way
@@ -71,24 +97,47 @@ const Book = () => {
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
-                  <select className="form-select mb-4" id="fromSelect">
+                  <select
+                    className="form-select mb-4"
+                    id="fromSelect"
+                    value={selectedFromAirport}
+                    onChange={handleFromAirportChange}
+                  >
                     <option value="" disabled selected>
                       From
                     </option>
-                    <option value="1">Manila</option>
-                    <option value="2">Mumbai</option>
-                    <option value="3">Bangalore</option>
+                    {airport.map((airport) => (
+                      <option
+                        key={airport.airportID}
+                        value={airport.airportID}
+                        disabled={selectedToAirport == airport.airportID}
+                      >
+                        {airport.municipality} ({airport.iata_code})
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 <div className="col-sm-6">
-                  <select className="form-select mb-4" id="toSelect">
+                  <select
+                    className="form-select mb-4"
+                    id="toSelect"
+                    value={selectedToAirport}
+                    onChange={handleToAirportChange}
+                  >
                     <option value="" disabled selected>
                       To
                     </option>
-                    <option value="1">Japan</option>
-                    <option value="2">China</option>
-                    <option value="3">Singapore</option>
+                    {/* Map through the airports array to render options */}
+                    {airport.map((airport) => (
+                      <option
+                        key={airport.airportID}
+                        value={airport.airportID}
+                        disabled={selectedFromAirport == airport.airportID}
+                      >
+                        {airport.municipality} ({airport.iata_code})
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -97,13 +146,22 @@ const Book = () => {
                 <div className="col-sm-6">
                   <div className="input-group mb-4">
                     <span className="input-group-text">Depart</span>
-                    <input type="date" className="form-control" />
+                    <input
+                      type="date"
+                      className="form-control"
+                      min={new Date().toISOString().split("T")[0]}
+                    />
                   </div>
                 </div>
                 <div className="col-sm-6">
                   <div className="input-group mb-4">
                     <span className="input-group-text">Return</span>
-                    <input type="date" className="form-control" />
+                    <input
+                      type="date"
+                      className="form-control"
+                      min={new Date().toISOString().split("T")[0]}
+                      disabled={tripType === "oneWay"}
+                    />
                   </div>
                 </div>
               </div>

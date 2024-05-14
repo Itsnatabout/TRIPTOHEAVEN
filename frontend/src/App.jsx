@@ -9,10 +9,17 @@ import Seat from './components/Seat/Seat';
 import Payment from './components/Payment/Payment';
 import ErrorPage from './components/ErrorPage';
 import Home from './components/Home';
-import Book from './components/Book';
+import Booking from './components/Booking';
 import Packages from './components/Packages';
 import Cebu from './components/places/Cebu';
 import Boracay from './components/places/Boracay';
+import Palawan from './components/places/Palawan';
+import Siargao from './components/places/Siargao';
+import Bohol from './components/places/Bohol';
+import Albay from './components/places/Albay';
+
+
+import './App.css'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -35,8 +42,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/book",
-    element: <Book />,
+    path: "/booking",
+    element: <Booking />,
     errorElement: <ErrorPage />
   },
   {
@@ -82,6 +89,26 @@ const router = createBrowserRouter([
   {
     path: "/Book/AvailableFlights/Passenger/Seat/Payment",
     element: <Payment />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/packages/Palawan",
+    element: <Palawan/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/packages/Siargao",
+    element: <Siargao/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/packages/Bohol",
+    element: <Bohol/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/packages/Albay",
+    element: <Albay/>,
     errorElement: <ErrorPage />
   },
 ])

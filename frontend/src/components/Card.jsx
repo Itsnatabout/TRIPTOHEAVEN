@@ -27,7 +27,7 @@ const Card = ({ imageUrl, title, description, price }) => {
     </div>
     <div>
           <h4 className="card-title ms-1">{price} PHP</h4>
-          <Link to="/book">
+          <Link to="/booking">
           <a href="#" className="btn btn-primary mt-2" style={{ backgroundColor: "#ffa500", borderColor: "#ffa500" }}>
         Book Now
       </a>
