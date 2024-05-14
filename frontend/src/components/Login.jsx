@@ -2,9 +2,9 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import Validation from "./LoginValidation"
-import '../styles/Login.css'
-import Header from './Header'
 
+import Header from './Header'
+import '../styles/Login.css'
 
 const Login = () => {
 

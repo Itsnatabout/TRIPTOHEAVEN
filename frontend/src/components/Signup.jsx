@@ -2,9 +2,9 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Validation from "./Validation"
 import { Link, useNavigate } from "react-router-dom"
-import '../Style1/Signup.css'
-import Header from './Header'
 
+import Header from './Header'
+import '../Style1/Signup.css'
 
 
 const Signup = () => {

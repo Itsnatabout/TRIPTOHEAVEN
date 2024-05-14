@@ -51,12 +51,6 @@ const Header = () => {
         <Link to="/Manage">
           <a href="#manage">Manage</a>
         </Link>
-        <Link to="">
-          <a href="#travel">Travel Info</a>
-        </Link>
-        <Link to="">
-          <a href="#explore">Explore</a>
-        </Link>
       </nav>
 
       <div className="icons">
