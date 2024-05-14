@@ -1,16 +1,16 @@
 import React from 'react'
 import '../../styles/AvailableFlights.css' 
 import Header from '../../components/Header'
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom"
 
 const AvailableFlights = () => {
-   // Dummy data for available flights
-  const flights = [
-    { id: 1, from: 'MANILA', to: 'CEBU', departureTime: '6:00 AM', arrivalTime: '8:30 PM', price: '₱5000' },
-    { id: 2, from: 'MANILA', to: 'CEBU', departureTime: '11:30 AM', arrivalTime: '2:00 PM', price: '₱8000' },
-    { id: 3, from: 'MANILA', to: 'CEBU', departureTime: '1:00 PM', arrivalTime: '3:30 PM', price: '₱6000' },
-    // Add more flights as needed
-      ];
+ 
+
+
+
+
   return (
     <>
     <Header/>

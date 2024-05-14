@@ -136,13 +136,72 @@ app.get("/airports", (req, res) => {
 
   db.query(sql, (err, result) => {
     if (err) {
-      console.log("Error executing SQL query:", err);
-      res.status(500).json({ error: "Internal server error" });
-      return;
+      console.log("Error executing SQL query:", err)
+      res.status(500).json({ error: "Internal server error" })
+      return
     }
     // Send the result as a JSON response
-    return res.json(result);
+    return res.json(result)
   })
+})
+
+// Temporary storage for form data
+let formData = {
+  tripType: "",
+  selectedFromAirport: "",
+  selectedToAirport: "",
+  departureDate: "",
+  returnDate: "",
+  children: 0,
+  adults: 0,
+  seniors: 0,
+}
+
+// API endpoint for searching flights
+app.post("/searchflight", (req, res) => {
+  const {
+    tripType,
+    selectedFromAirport,
+    selectedToAirport,
+    departureDate,
+    returnDate,
+    children,
+    adults,
+    seniors,
+  } = req.body
+
+  // Store all form data temporarily
+  formData = {
+    tripType,
+    selectedFromAirport,
+    selectedToAirport,
+    departureDate,
+    returnDate,
+    children: parseInt(children),
+    adults: parseInt(adults),
+    seniors: parseInt(seniors),
+  }
+
+  res.send(formData)
+  // // Construct SQL query based on form data
+  // let sql = `SELECT * FROM flight WHERE departure_airport = '${selectedFromAirport}' AND destination_airport = '${selectedToAirport}'`;
+
+  // // If trip type is 'return', include return date in the query
+  // if (tripType === 'return') {
+  //   sql += ` AND departure_date >= '${departureDate}' AND return_date <= '${returnDate}'`;
+  // } else {
+  //   sql += ` AND departure_date >= '${departureDate}'`;
+  // }
+})
+
+// API endpoint to clear passengers data
+app.post("/clearpassengers", (req, res) => {
+  passengersData = {
+    children: 0,
+    adults: 0,
+    seniors: 0,
+  }
+  res.json({ message: "Passengers data cleared" })
 })
 
 // listen for requests
