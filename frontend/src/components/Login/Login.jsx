@@ -10,13 +10,13 @@ const Login = () => {
         <div className="col-12 col-sm-8 col-md-6 m-auto">
           <div className="card p-4" id='card-Login'>
             <div className="card-body" id='cardBody-Login'>
-              <div className="Title text-center">
-              <h1><span>T</span>RIP TO HEAVEN</h1>
+              <div className="Title text-center"id='Title-login'>
+              <h1><span id='span-login'>T</span>RIP TO HEAVEN</h1>
               </div>
               <form action="">
-                <label htmlFor="email" className="form-label">Email address</label>
+                <label id='label-login' htmlFor="email" className="form-label">Email address</label>
                 <input type="email" name="email" className="form-control" id="email" aria-describedby="emailHelp" />
-                <label htmlFor="password" className="form-label my-2">Password</label>
+                <label id='label-login' htmlFor="password" className="form-label my-2">Password</label>
                 <input type="password" name="password" id="password" className="form-control  py-2" placeholder='' />
                 <div className="subContainer text-center">
                   <button className="btn btn-primary mt-3 my-2" name='submit' id='submit-Login'>Login</button> 

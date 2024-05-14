@@ -5,6 +5,8 @@ import ManageBooking from './components/Manage-Booking/Manage';
 import EditBooking from './components/Manage-Booking/EditBooking';
 import Passengers from './components/Passenger-Info/PassengersViewer';
 import Available from './components/AvailableFlights/AvailableFlights';
+import Seat from './components/Seat/Seat';
+import Payment from './components/Payment/Payment';
 import ErrorPage from './components/ErrorPage';
 import Home from './components/Home';
 import Book from './components/Book';
@@ -70,6 +72,16 @@ const router = createBrowserRouter([
   {
     path: "/Book/AvailableFlights/Passenger",
     element: <Passengers />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/Book/AvailableFlights/Passenger/Seat",
+    element: <Seat />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/Book/AvailableFlights/Passenger/Seat/Payment",
+    element: <Payment />,
     errorElement: <ErrorPage />
   },
 ])

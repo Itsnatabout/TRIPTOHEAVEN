@@ -1,4 +1,4 @@
-.PictureContainer{
+.PictureContainer-editbook{
     height: 40vh;
     background-image: url("/images/bg1.jpg");
     background-repeat: no-repeat;
@@ -6,16 +6,16 @@
     background-position:  center;
     padding-top: 10vh;
 }
-.container{
+#container-editbooking{
     margin-top: -8vh;
 }
-#card{
+#card-editbooking{
     border: 2px solid rgb(21, 21, 21, 0.5);
     backdrop-filter: blur(30px);
     box-shadow: 0 0 10px rgba(11, 11, 10, 0.8);
     border-radius: 20px;
 }
-#cardBody{
+#cardBody-editbooking{
     background-color: white;
 }
 #Title1-editBook{

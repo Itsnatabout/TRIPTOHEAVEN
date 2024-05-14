@@ -7,17 +7,17 @@ const EditBooking = () => {
     <>
     <Header/>
 
-    <div className='PictureContainer'>
+    <div className='PictureContainer-editbook'>
         <div className="Title1 text-center">
             <p id='Title1-editBook'><span id='span1-editBook'>Manage</span> Booking</p>
             <p id='context-editBook'>Access your booking information, where permitted, change seats, cancel booking and refund<br/> up to two (2) hours before your flight!</p>
         </div>     
     </div>
-    <div className="container">
+    <div className="container" id='container-editbooking'>
     <div className="row" id='row'>
       <div className="col-12 col-sm-8 col-md-10 m-auto">
-        <div className="card p-4" id='card'>
-          <div className="card-body" id='cardBody'>
+        <div className="card p-4" id='card-editbooking'>
+          <div className="card-body" id='cardBody-editbooking'>
             <div className="flightInfo">
             <div className="Destination text-center">
               <h1><span id='span2-editBook'>From:</span> Manila | <span id='span2-editBook'>To:</span> Cebu</h1>{/* From and To */}
