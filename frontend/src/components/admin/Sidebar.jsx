@@ -53,12 +53,12 @@ function Sidebar() {
                     <h6>Promo</h6>
                 </Link>
                
-                {/* <Link to="/sales" className={selectedItem === "Sales" ? "active" : ""} onClick={() => handleItemClick("Sales")}>
+                <Link to="/sales" className={selectedItem === "Sales" ? "active" : ""} onClick={() => handleItemClick("Sales")}>
                     <span className="material-icons-sharp">
                         inventory
                     </span>
                     <h6>Sales</h6>
-                </Link> */}
+                </Link>
 
                 <Link to="/flights" className={selectedItem === "Flights" ? "active" : ""} onClick={() => handleItemClick("Flights")}>
                     <span className="material-icons-sharp">
