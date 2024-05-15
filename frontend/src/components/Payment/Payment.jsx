@@ -1,25 +1,17 @@
 import React, { useState } from 'react';
 import '../../styles/Payment.css' 
-
+import Header from "../../components/Header";
+import axios from "axios";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Payment = () => {
     const [promoCode, setPromoCode] = useState('');
     const [paymentProof, setPaymentProof] = useState(null);
-    const [bookingDetails, setBookingDetails] = useState({
-      origin: 'Manila',
-      destination: 'Cebu',
-      referenceNumber: 'ABC123',
-      passengers: [
-        { name: 'Mark TahimikLang', SeatNum:'A1', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-15', expense: '₱5000' },
-        { name: 'Boar Ring', SeatNum:'A2', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-16', expense: '₱5000' },
-        { name: 'Diwata Pares', SeatNum:'A3', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-16', expense: '₱5000' },
-      ],
-      farePerPassenger: '₱5000',
-      PassengerQty:'3',
-      discountPercentage: 0, // Example discount percentage
-      total: '₱15000',
-    });
+    const location = useLocation();
+    const { addedData } = location.state || {};
+    const navigate = useNavigate();
   
+  console.log(addedData);
     const handlePromoCodeChange = (e) => {
       setPromoCode(e.target.value);
     };
@@ -35,12 +27,7 @@ const Payment = () => {
 
   return (
     <>
-    <div className="nav" id='nav-payment'>
-            <div className='navContainer' id='navContainer-payment'>
-                <h1><span id='span3-passenger'>T</span>RIP TO HEAVEN</h1>
-                <h3 style={{float:'right'}}><span id='span4-passenger'>₱</span> 15,000.00</h3>
-            </div>
-    </div>
+  <Header/>
     <div className="pictureContainer">
         <div className="Title1 text-center">
             <h1 id='Title1-payment'><span id='span1-payments'>Payment</span></h1>
@@ -54,9 +41,9 @@ const Payment = () => {
           <div className="card-body" id='cardBody-payment'>
       <div className="booking-details">
         <h2 className="text-center"><span id='span2-payment'>Booking</span> Details</h2>
-        <p><span id='span1-payment'><strong>From: </strong></span>{bookingDetails.origin}</p>
-        <p><span id='span1-payment'><strong>To: </strong></span>{bookingDetails.destination}</p>
-        <table className="table">
+        <p><span id='span1-payment'><strong>From: </strong></span>{addedData.flight.departureName}</p>
+        <p><span id='span1-payment'><strong>To: </strong></span>{addedData.flight.destinationName}</p>
+        {/* <table className="table">
           <thead>
             <tr>
               <th>Reference Number</th>
@@ -69,7 +56,7 @@ const Payment = () => {
             </tr>
           </thead>
           <tbody>
-            {bookingDetails.passengers.map((passenger, index) => (
+            {/* {bookingDetails.passengers.map((passenger, index) => (
               <tr key={index}>
                 <td>{bookingDetails.referenceNumber}</td>
                 <td>{passenger.name}</td>
@@ -79,9 +66,9 @@ const Payment = () => {
                 <td>{passenger.date}</td>
                 <td>{passenger.expense}</td>
               </tr>
-            ))}
+            ))} 
           </tbody>
-        </table>
+        </table> */}
         <br />
         <div className="promo-code">
           <label htmlFor="promoCode">Promo Code:</label>
@@ -91,10 +78,10 @@ const Payment = () => {
         <br />
         <div className="transaction-summary">
           <h3 className='text-center'><span id='span2-payment'>Summary</span> of Transaction</h3>
-          <p><strong>Fare per Passenger:</strong> {bookingDetails.farePerPassenger}</p>
+          {/* <p><strong>Fare per Passenger:</strong> {bookingDetails.farePerPassenger}</p>
           <p><strong>Passenger Quantity:</strong> {bookingDetails.PassengerQty}</p>
           <p><strong>Discount Percentage:</strong> {bookingDetails.discountPercentage}%</p>
-          <p><strong>Total:</strong> {bookingDetails.total}</p>
+          <p><strong>Total:</strong> {bookingDetails.total}</p> */}
         </div>
       </div>
     </div>

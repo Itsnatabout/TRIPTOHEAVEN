@@ -1,60 +1,125 @@
-import React from 'react'
+import React, { useState } from 'react';
 import '../../styles/Passengers.css' 
 
-const Passengers = () => {
+
+const Passengers = ({numAdults, onSubmit}) => {
+
+    const [passengerData, setPassengerData] = useState(
+        Array.from({ length: numAdults }, () => ({
+          Fname: '',
+          Lname: '',
+          bday: '',
+          nationality: '',
+          classType: '',
+        }))
+      );
+      const handleChange = (index, event) => {
+        const { name, value } = event.target;
+        const updatedData = passengerData.map((data, i) =>
+          i === index ? { ...data, [name]: value } : data
+        );
+        setPassengerData(updatedData);
+      };
+    
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        onSubmit(passengerData);
+      };
+
+
   return (
-       <>
-        <div className="nav" id='nav-passenger'>
-            <div className='navContainer' id='navContainer-passenger'>
-                <h1><span id='span3-passenger'>T</span>RIP TO HEAVEN</h1>
-                <h3 style={{float:'right'}}><span id='span4-passenger'>₱</span> 15,000.00</h3>
-            </div>
-        </div>
-            <div className='PictureContainer' id='PictureContainer-passenger'>
-                <div className="Title text-center"><p id='Title1-passenger'><span id='span1-passenger'>P</span>assenger Informations</p></div>     
-            </div>
-            <div className="container" id='container-passenger'>
-                <div className="row">
-                    <div className="col-12 col-sm-8 col-md-6 m-auto">
-                      <div className="card p-4" id='card-passenger'>
-                         <div className="card-body" id='cardBody-passenger'>
-                                <div className="Title text-center">
-                                    <h1>PASSENGER <span id='span2-passenger'>#1</span></h1>
-                                    
-                                    </div>
-                                    <form action="">
-                                    <label id='label-passenger' htmlFor="title" className="form-label my-2">Title</label>
-                                    <input type='text' name="title" id="RefNum" className="form-control  py-2" placeholder='e.g Mr./Ms./Mrs.' />  
-
-                                    <label id='label-passenger' htmlFor="Fname" className="form-label my-2">First Name</label>
-                                    <input type='text' name="Fname" id="Fname" className="form-control  py-2" placeholder='e.g John' />  
-
-                                    <label id='label-passenger' htmlFor="Lname" className="form-label my-2">Last Name</label>
-                                    <input type='text' name="Lname" id="Lname" className="form-control  py-2" placeholder='e.g Cena' />  
-
-                                    <label id='label-passenger' htmlFor="bday" className="form-label my-2">Birth Date</label>
-                                    <input type='date' name="bday" id="bday" className="form-control  py-2" /> 
-
-                                    <label id='label-passenger' htmlFor="nationality" className="form-label my-2">Nationality</label>
-                                    <input type="text" name="nationality" className="form-control  py-2" id="nationality"  placeholder='e.g American'/>
-                                    <div className="ClassType">
-                                        <label id='label-passenger' className="form-label my-2" style={{marginRight:'1vh'}}>Class Type:</label>
-                                        <input type="radio"  name='radio' id='option1'/><label htmlFor="option1" style={{marginRight:'1vh'}}>Economy</label>
-                                        <input type="radio"  name='radio' id='option2'/><label htmlFor="option2" style={{marginRight:'1vh'}}>Bussiness</label>
-                                        <input type="radio"  name='radio' id='option3' /><label htmlFor="option3" style={{marginRight:'1vh'}}>First Class</label>             
-                                    </div>
-
-                                    <input type="checkbox" className="form-check-input" id="check"/>
-                                    <label id='label-passenger' className="form-check-label" htmlFor="exampleCheck1">Auto fill</label>
-                                <div className="subContainer text-center">               
-                                    <button className="btn btn-primary mt-3 my-2" name='submit' id='submit'>Proceed</button>            
-                                </div>
-                                </form>
-                        </div>
+      <><div className='PictureContainer' id='PictureContainer-passenger'>
+      <div className="Title text-center">
+        <p id='Title1-passenger'><span id='span1-passenger'>P</span>assenger Informations</p>
+      </div>
+    </div>
+    <div className="container" id='container-passenger'>
+      <div className="row">
+        <div className="col-12 col-sm-8 col-md-6 m-auto">
+          <div className="card p-4" id='card-passenger'>
+            <div className="card-body" id='cardBody-passenger'>
+              <form onSubmit={handleSubmit}>
+                {Array.from({ length: numAdults }, (_, index) => (
+                  <div key={index} className="form-group">
+                    <div className="Title text-center">
+                      <h1>PASSENGER <span id='span2-passenger'>#{index + 1}</span></h1>
                     </div>
+                    <label id='label-passenger' htmlFor="Fname" className="form-label my-2">First Name</label>
+                    <input
+                      type='text'
+                      name="Fname"
+                      className="form-control py-2"
+                      placeholder='e.g John'
+                      value={passengerData[index].Fname}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <label id='label-passenger' htmlFor="Lname" className="form-label my-2">Last Name</label>
+                    <input
+                      type='text'
+                      name="Lname"
+                      className="form-control py-2"
+                      placeholder='e.g Cena'
+                      value={passengerData[index].Lname}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <label id='label-passenger' htmlFor="bday" className="form-label my-2">Birth Date</label>
+                    <input
+                      type='date'
+                      name="bday"
+                      className="form-control py-2"
+                      value={passengerData[index].bday}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <label id='label-passenger' htmlFor="nationality" className="form-label my-2">Nationality</label>
+                    <input
+                      type="text"
+                      name="nationality"
+                      className="form-control py-2"
+                      placeholder='e.g American'
+                      value={passengerData[index].nationality}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <div className="ClassType">
+                      <label id='label-passenger' className="form-label my-2" style={{ marginRight: '1vh' }}>Class Type:</label>
+                      <input
+                        type="radio"
+                        name={`classType-${index}`}
+                        id={`option1-${index}`}
+                        value="Economy"
+                        checked={passengerData[index].classType === 'Economy'}
+                        onChange={(e) => handleChange(index, { target: { name: 'classType', value: 'Economy' } })}
+                      />
+                      <label htmlFor={`option1-${index}`} style={{ marginRight: '1vh' }}>Economy</label>
+                      <input
+                        type="radio"
+                        name={`classType-${index}`}
+                        id={`option2-${index}`}
+                        value="Business"
+                        checked={passengerData[index].classType === 'Business'}
+                        onChange={(e) => handleChange(index, { target: { name: 'classType', value: 'Business' } })}
+                      />
+                      <label htmlFor={`option2-${index}`} style={{ marginRight: '1vh' }}>Business</label>
+                      <input
+                        type="radio"
+                        name={`classType-${index}`}
+                        id={`option3-${index}`}
+                        value="First Class"
+                        checked={passengerData[index].classType === 'First Class'}
+                        onChange={(e) => handleChange(index, { target: { name: 'classType', value: 'First Class' } })}
+                      />
+                      <label htmlFor={`option3-${index}`} style={{ marginRight: '1vh' }}>First Class</label>
+                    </div>
+                  </div>
+                ))}
+                <div className="subContainer text-center">
+                  <button className="btn btn-primary mt-3 my-2" type='submit'>Proceed</button>
                 </div>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
   </>
   
   )

@@ -30,17 +30,7 @@ const Book = ({ airport }) => {
       departureDate: new Date(formData.departureDate).toISOString().split("T")[0],
       returnDate: formData.tripType === "return" ? new Date(formData.returnDate).toISOString().split("T")[0] : null,
     };
-    // Here you can send the formattedData to your backend using Axios
-    axios.post("http://localhost:5000/searchflight", formattedData)
-      .then((response) => {
-        console.log("Form submitted successfully", response.data);
-        navigate("/book/AvailableFlights")
-        // Add any further actions after successful submission
-      })
-      .catch((error) => {
-        console.error("Error submitting form", error);
-        // Handle errors if any
-      });
+    navigate("/book/Availableflights", { state: { formData: formattedData } });
   };
 
   return (

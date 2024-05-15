@@ -3,26 +3,33 @@ import '../../styles/AvailableFlights.css'
 import Header from '../../components/Header'
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
+
 
 const AvailableFlights = () => {
     const [flights, setFlights] = useState([]);
-
+    const location = useLocation();
+  const { formData } = location.state || {};
+  const navigate = useNavigate();
     useEffect(() => {
         const fetchData = async () => {
             try {
               const response = await axios.get("http://localhost:5000/getFlights")
                 setFlights(response.data) // Store the fetched data in state
-                console.log(response.data)
             } catch (error) {
               console.error("Error fetching data:", error)
               // Handle the error appropriately, e.g., show a message to the user
             }
           }
-      
           fetchData()
     }, []);
-  
+
+    const handleBookFlight = (flight) => {
+        const combinedData = { ...formData, flight };
+        // console.log(combinedData);
+        navigate('/Book/AvailableFlights/Passenger', { state: { addedData: combinedData} });
+    };
+
  
     const generateRandomNumber = (min, max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -54,7 +61,7 @@ const AvailableFlights = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {flights.map((flight, idx) => (
+                            {flights.map((flight) => (
                             <tr key={flight.FlightID}>
                                 <td>{flight.FlightID}</td>
                                 <td>{flight.departureName}</td>
@@ -63,7 +70,7 @@ const AvailableFlights = () => {
                                 <td>{flight.arrivalDateTime }</td>
                                 <td>{generateRandomNumber(2000, 6000)}</td>
                                 <td>
-                                    <button className="btn btn-primary" id='bookbtn' onClick={() => handleBookFlight(idx)}>Book</button>
+                                    <button className="btn btn-primary" id='bookbtn' onClick={() => handleBookFlight(flight)}>Book</button>
                                 </td>
                             </tr>
                             ))}

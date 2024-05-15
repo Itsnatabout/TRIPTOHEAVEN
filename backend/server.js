@@ -145,56 +145,45 @@ app.get("/airports", (req, res) => {
   })
 })
 
-// Temporary storage for form data
-let formData = {
-  tripType: "",
-  selectedFromAirport: "",
-  selectedToAirport: "",
-  departureDate: "",
-  returnDate: "",
-  children: 0,
-  adults: 0,
-  seniors: 0,
-}
 
-// API endpoint for searching flights
-app.post("/searchflight", (req, res) => {
-  const {
-    tripType,
-    selectedFromAirport,
-    selectedToAirport,
-    departureDate,
-    returnDate,
-    children,
-    adults,
-    seniors,
-  } = req.body
+// // API endpoint for searching flights
+// app.post("/searchflight", (req, res) => {
+//   const {
+//     tripType,
+//     selectedFromAirport,
+//     selectedToAirport,
+//     departureDate,
+//     returnDate,
+//     children,
+//     adults,
+//     seniors,
+//   } = req.body
 
-  // Store all form data temporarily
-  formData = {
-    tripType,
-    selectedFromAirport,
-    selectedToAirport,
-    departureDate,
-    returnDate,
-    children: parseInt(children),
-    adults: parseInt(adults),
-    seniors: parseInt(seniors),
-  }
+//   // Store all form data temporarily
+//   formData = {
+//     tripType,
+//     selectedFromAirport,
+//     selectedToAirport,
+//     departureDate,
+//     returnDate,
+//     children: parseInt(children),
+//     adults: parseInt(adults),
+//     seniors: parseInt(seniors),
+//   }
 
-  res.send(formData)
+//   res.send(formData)
   
-})
+// })
 
-// API endpoint to clear passengers data
-app.post("/clearpassengers", (req, res) => {
-  passengersData = {
-    children: 0,
-    adults: 0,
-    seniors: 0,
-  }
-  res.json({ message: "Passengers data cleared" })
-})
+// // API endpoint to clear passengers data
+// app.post("/clearpassengers", (req, res) => {
+//   passengersData = {
+//     children: 0,
+//     adults: 0,
+//     seniors: 0,
+//   }
+//   res.json({ message: "Passengers data cleared" })
+// })
 
 
 app.get('/getFlights', (req, res) => { 
@@ -209,7 +198,16 @@ app.get('/getFlights', (req, res) => {
   });
 });
 
-
+app.get("/getseats", (req, res) => { 
+  const sql = "SELECT * FROM seat"
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("Error executing SQL query:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    return res.json(result);
+  });
+})
 
 // listen for requests
 app.listen(5000, () => {
