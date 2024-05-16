@@ -7,6 +7,7 @@ import Passengers from './components/Passenger-Info/PassengersViewer';
 import Available from './components/AvailableFlights/AvailableFlights';
 import Seat from './components/Seat/Seat';
 import Payment from './components/Payment/Payment';
+import Ticket from './components/Ticket';
 import ErrorPage from './components/ErrorPage';
 import Home from './components/Home';
 import Booking from './components/Booking';
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/book/AvailableFlights",
+    path: "/Booking/AvailableFlights",
     element: <Available/>,
     errorElement: <ErrorPage />
   },
@@ -77,18 +78,23 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/Book/AvailableFlights/Passenger",
+    path: "/Booking/AvailableFlights/Passenger",
     element: <Passengers />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/Book/AvailableFlights/Passenger/Seat",
+    path: "/Booking/AvailableFlights/Passenger/Seat",
     element: <Seat />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/Book/AvailableFlights/Passenger/Seat/Payment",
+    path: "/Booking/AvailableFlights/Passenger/Seat/Payment",
     element: <Payment />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/Booking/AvailableFlights/Passenger/Seat/Payment/Ticket",
+    element: <Ticket />,
     errorElement: <ErrorPage />
   },
   {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../styles/Payment.css' 
+import Ticket from '../Ticket'; // Assuming Ticket component is in a separate file
 
 
 const Payment = () => {
@@ -8,11 +9,10 @@ const Payment = () => {
     const [bookingDetails, setBookingDetails] = useState({
       origin: 'Manila',
       destination: 'Cebu',
-      referenceNumber: 'ABC123',
       passengers: [
-        { name: 'Mark TahimikLang', SeatNum:'A1', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-15', expense: '₱5000' },
-        { name: 'Boar Ring', SeatNum:'A2', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-16', expense: '₱5000' },
-        { name: 'Diwata Pares', SeatNum:'A3', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-16', expense: '₱5000' },
+        {referenceNumber: 'ABC1',name: 'Mark TahimikLang', SeatNum:'A1', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-15', expense: '₱5000' },
+        { referenceNumber: 'ABC2',name: 'Boar Ring', SeatNum:'A2', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-16', expense: '₱5000' },
+        { referenceNumber: 'ABC3',name: 'Diwata Pares', SeatNum:'A3', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-16', expense: '₱5000' },
       ],
       farePerPassenger: '₱5000',
       PassengerQty:'3',
@@ -24,17 +24,23 @@ const Payment = () => {
       setPromoCode(e.target.value);
     };
   
+    const [paymentCompleted, setPaymentCompleted] = useState(false); // State to track payment completion
+
     const handleSubmit = (e) => {
       e.preventDefault();
       // Add your payment submission logic here
+      setPaymentCompleted(true);
+
     };
     const handleFileChange = (e) => {
       const file = e.target.files[0];
       setPaymentProof(file);
     };
 
+  
   return (
     <>
+
     <div className="nav" id='nav-payment'>
             <div className='navContainer' id='navContainer-payment'>
                 <h1><span id='span3-passenger'>T</span>RIP TO HEAVEN</h1>
@@ -71,7 +77,7 @@ const Payment = () => {
           <tbody>
             {bookingDetails.passengers.map((passenger, index) => (
               <tr key={index}>
-                <td>{bookingDetails.referenceNumber}</td>
+                <td>{passenger.referenceNumber}</td>
                 <td>{passenger.name}</td>
                 <td>{passenger.SeatNum}</td>
                 <td>{passenger.departureTime}</td>
@@ -112,6 +118,8 @@ const Payment = () => {
       <button className="btn btn-primary" id='submit-payment' onClick={handleSubmit}>Submit</button>
       <button className="btn btn-primary" id='skip-payment' onClick={handleSubmit}>Skip For Now</button>
     </div>
+    {/* Your existing JSX */}
+    {paymentCompleted && <Ticket bookingDetails={bookingDetails} />}
   </div>
   </div>
   </div>
