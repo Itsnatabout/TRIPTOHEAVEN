@@ -57,9 +57,8 @@ const EditBooking = () => {
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Birth of Date</th>
-                    <th scope="col">Seat No.</th>
                     <th scope="col">Nationality</th>
-                    
+                    <th scope="col">Status</th>             
                   </tr>
                 </thead>
                 <tbody>
@@ -68,24 +67,24 @@ const EditBooking = () => {
                     <td>Mark</td>
                     <td>Tahimik Lang</td>
                     <td>01/02/2001</td>
-                    <td>A1</td>
-                    <td>Filipino</td>
+                    <td>Filipino</td>                    
+                    <td>Paid</td>
                   </tr>
                   <tr>
                     <th scope="row">2</th>
                     <td>Boar</td>
                     <td>Rat</td>
                     <td>01/02/2001</td>
-                    <td>A2</td>
                     <td>Filipino</td>
+                    <td>Paid</td>
                   </tr>
                   <tr>
                     <th scope="row">3</th>
                     <td >Diwata</td>
                     <td >Pares</td>
                     <td>01/02/2001</td>
-                    <td>A3</td>
                     <td>Filipino</td>
+                    <td>Paid</td>
                   </tr>
                 </tbody>
               </table>
