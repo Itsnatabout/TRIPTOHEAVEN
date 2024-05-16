@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../styles/EditBooking.css' 
 import Header from "../Header"
+import Ticket from '../Ticket'; // Assuming Ticket component is in a separate file
 
 const EditBooking = () => {
+  const [paymentProof, setPaymentProof] = useState(null);
+  const [bookingDetails, setBookingDetails] = useState({
+    origin: 'Manila',
+    destination: 'Cebu',
+    passengers: [
+      {referenceNumber: 'ABC1',name: 'Mark TahimikLang', SeatNum:'A1', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-15', expense: '₱5000' },
+      { referenceNumber: 'ABC2',name: 'Boar Ring', SeatNum:'A2', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-16', expense: '₱5000' },
+      { referenceNumber: 'ABC3',name: 'Diwata Pares', SeatNum:'A3', departureTime: '10:00 AM', arrivalTime: '12:00 PM', date: '2024-05-16', expense: '₱5000' },
+    ],
+  });
+  const [paymentCompleted, setPaymentCompleted] = useState(false); // State to track payment completion
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your payment submission logic here
+    setPaymentCompleted(true);
+
+  };
+  
   return (
     <>
     <Header/>
@@ -10,7 +30,7 @@ const EditBooking = () => {
     <div className='PictureContainer-editbook'>
         <div className="Title1 text-center">
             <p id='Title1-editBook'><span id='span1-editBook'>Manage</span> Booking</p>
-            <p id='context-editBook'>Access your booking information, where permitted, change seats, cancel booking and refund<br/> up to two (2) hours before your flight!</p>
+            <p id='context-editBook'>Access your booking information, where permitted, view your ticket, pay booking, change seats,<br/> cancel booking and refund up to two (2) hours before your flight!</p>
           
         </div>     
     </div>
@@ -73,10 +93,13 @@ const EditBooking = () => {
             
             </div>          
             <div className="subContainer text-center">               
+              <button className="btn btn-primary mt-3 my-2" name='submit' id='submit' onClick={handleSubmit}>View Ticket</button> 
               <button className="btn btn-primary mt-3 my-2" name='submit' id='submit'>Pay Now</button> 
               <button className="btn btn-primary mt-3 my-2" name='submit' id='submit'>Change Seats</button> 
               <button className="btn btn-primary mt-3 my-2" name='submit' id='submit'>Cancel Booking</button>    
             </div>
+            {/* Your existing JSX */}
+            {paymentCompleted && <Ticket bookingDetails={bookingDetails} />}
           </div>
         </div>
       </div>

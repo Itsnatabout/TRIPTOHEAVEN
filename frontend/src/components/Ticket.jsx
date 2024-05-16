@@ -15,10 +15,16 @@ const styles = StyleSheet.create({
 
 const Ticket = ({ bookingDetails }) => {
   return (
+    <>
+    <div className="text-center mt-4">
+      <p ><span id='span1-payments'>Here's your Ticket!</span></p>
+    </div>
     <PDFViewer style={{ width: '100%', height: '100vh' }}>
       <Document>
         <Page size="A4" style={styles.page}>
           <View style={styles.section}>
+            <Text>TRIP TO HEAVEN TICKET</Text>
+            <Text> </Text>
             <Text>From: {bookingDetails.origin}</Text>
             <Text>To: {bookingDetails.destination}</Text>
             <Text>--------------------------</Text>
@@ -38,6 +44,8 @@ const Ticket = ({ bookingDetails }) => {
         </Page>
       </Document>
     </PDFViewer>
+    
+    </>
   );
 };
 
