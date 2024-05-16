@@ -1,0 +1,25 @@
+
+.toast-notification {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .toast-button {
+    background-color: #EE9F27; /* sa button to */ 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .toast-button:hover {
+    background-color: #D24E01; /* sa button to */ 
+  }
+  
