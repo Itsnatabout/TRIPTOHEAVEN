@@ -48,9 +48,9 @@ const Header = () => {
         <Link to="/packages">
           <a href="#packages">Packages</a>
         </Link>
-        <Link to="/Manage">
+        {/* <Link to="/Manage">
           <a href="#manage">Manage</a>
-        </Link>
+        </Link> */}
       </nav>
 
       <div className="icons">

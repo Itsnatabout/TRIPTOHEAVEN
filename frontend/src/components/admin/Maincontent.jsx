@@ -74,7 +74,7 @@ function MainContent({ orders, userCount, userPercent}) {
             
 
             {/* Today's Flight */}
-             <div className="recent-orders">
+             {/* <div className="recent-orders">
                 <h2>Today's Flight</h2>
                 <table>
                     <thead>
@@ -99,7 +99,7 @@ function MainContent({ orders, userCount, userPercent}) {
                     </tbody>
                 </table>
                 <Link to="/flights" href="#">Show All</Link>
-            </div>
+            </div> */}
             {/* End of Today's Flight */}
         </main>
     );

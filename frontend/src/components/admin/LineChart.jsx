@@ -13,12 +13,12 @@ ChartJS.register(
 );
 
 const salesData = [
-  { month: "January", sales: 112 },
-  { month: "February", sales: 150 },
-  { month: "March", sales: 200 },
-  { month: "April", sales: 120 },
-  { month: "May", sales: 180 },
-  { month: "June", sales: 250 },
+  { month: "May 16", sales: 112 },
+  { month: "May 17", sales: 150 },
+  { month: "May 18", sales: 200 },
+  { month: "May 19", sales: 120 },
+  { month: "May 20", sales: 180 },
+  { month: "May 21", sales: 250 },
 ];
 
 function LineChart() {
