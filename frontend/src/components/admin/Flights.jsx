@@ -13,37 +13,46 @@ const Flights = () => {
   const [airports, setAirports] = useState([])
   const [status, setStatus] = useState([])
   const [aircrafts, setAircrafts] = useState([])
+  const [rowToEdit, setRowToEdit] = useState(null)
+  const [mode, setMode] = useState("add"); 
+
+
+  const handleEditRow = (idx) => {
+    setRowToEdit(idx)
+    setMode("edit"); // Set mode to "edit" when editing a row
+    setModalOpen(true)
+  }
+  const fetchData = async () => {
+    try {
+      const [
+        airportsResponse,
+        aircraftsResponse,
+        statusResponse,
+        flightDetailsResponse,
+        timetableResponse,
+      ] = await Promise.all([
+        axios.get("http://localhost:5000/airports"),
+        axios.get("http://localhost:5000/aircrafts"),
+        axios.get("http://localhost:5000/flightstatus"),
+        axios.get("http://localhost:5000/getFlights"),
+        axios.get("http://localhost:5000/getFlightTime"),
+      ])
+      setAirports(airportsResponse.data)
+      setAircrafts(aircraftsResponse.data)
+      setStatus(statusResponse.data)
+      setFlightDetails(flightDetailsResponse.data)
+      setTimetable(timetableResponse.data)
+    } catch (error) {
+      console.error("Error fetching data:", error)
+      // Handle the error appropriately, e.g., show a message to the user
+    }
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [
-          airportsResponse,
-          aircraftsResponse,
-          statusResponse,
-          flightDetailsResponse,
-          timetableResponse,
-        ] = await Promise.all([
-          axios.get("http://localhost:5000/airports"),
-          axios.get("http://localhost:5000/aircrafts"),
-          axios.get("http://localhost:5000/flightstatus"),
-          axios.get("http://localhost:5000/getFlights"),
-          axios.get("http://localhost:5000/getFlightTime"),
-        ])
-        setAirports(airportsResponse.data)
-        setAircrafts(aircraftsResponse.data)
-        setStatus(statusResponse.data)
-        setFlightDetails(flightDetailsResponse.data)
-        setTimetable(timetableResponse.data)
-      } catch (error) {
-        console.error("Error fetching data:", error)
-        // Handle the error appropriately, e.g., show a message to the user
-      }
-    }
-
+    
     fetchData()
   }, [modalOpen])
-  console.log(flightDetails)
+
   return (
     <>
       <div
@@ -68,7 +77,7 @@ const Flights = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {flightDetails.map((flight) => (
+                  {flightDetails.map((flight, idx) => (
                     <tr key={flight.FlightID}>
                       <td>{flight.FlightID}</td>
                       <td>{flight.Model}</td>
@@ -78,7 +87,7 @@ const Flights = () => {
                       <td>{flight.status}</td>
                       <td className="fit">
                         <span className="actions">
-                          <BsFillPencilFill className="edit-btn" onClick="" />
+                          <BsFillPencilFill className="edit-btn" onClick={() => handleEditRow(idx)} />
                         </span>
                       </td>
                     </tr>
@@ -123,7 +132,7 @@ const Flights = () => {
           <button
             type="button"
             className="btn btn-primary mx-auto "
-            onClick={() => setModalOpen(true)}
+            onClick={() => { setModalOpen(true), setMode("add")}}
             style={{ position: "fixed", bottom: "3rem", right: "25rem" }}
           >
             New Flight
@@ -135,6 +144,8 @@ const Flights = () => {
             airports={airports}
             status={status}
             aircraft={aircrafts}
+            title={mode}
+            selectedRow={[flightDetails[rowToEdit], timetable[rowToEdit]]}
           />
         )}
         <RightSection />

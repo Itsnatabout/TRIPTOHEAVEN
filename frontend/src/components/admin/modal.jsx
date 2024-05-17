@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 
-const Modal = ({ isModalOpen, title, airports, aircraft, status }) => {
+const Modal = ({
+  isModalOpen,
+  title,
+  airports,
+  aircraft,
+  status,
+  selectedRow,
+}) => {
   const [flightType, setFlightType] = useState("oneWay")
   const [selectedFromAirport, setSelectedFromAirport] = useState("")
   const [selectedToAirport, setSelectedToAirport] = useState("")
@@ -32,73 +39,112 @@ const Modal = ({ isModalOpen, title, airports, aircraft, status }) => {
     }
   }
 
-  useEffect(() => {
-    // Function to generate a random terminal number and gate code for departure
-    const generateDepartureGate = () => {
-      const terminalNumber = Math.floor(Math.random() * 10) + 1
-      const gateCode =
-        String.fromCharCode(65 + Math.floor(Math.random() * 26)) +
-        (Math.floor(Math.random() * 50) + 1)
-      return { terminalNumber, gateCode }
-    }
+  const formatDate = (dateTimeString) => {
+    // Check if dateTimeString is valid
+    if (!dateTimeString) return ""; // Handle null or undefined values
+  
+    // Convert the dateTimeString to a Date object
+    const dateObject = new Date(dateTimeString);
+  
+    // Get the components of the date object
+    const year = dateObject.getFullYear();
+    const month = ('0' + (dateObject.getMonth() + 1)).slice(-2); // Months are zero-based
+    const day = ('0' + dateObject.getDate()).slice(-2);
+    const hours = ('0' + dateObject.getHours()).slice(-2);
+    const minutes = ('0' + dateObject.getMinutes()).slice(-2);
+  
+    // Construct the formatted date-time string
+    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+  
+    return formattedDateTime;
+  };
 
-    // Function to generate a random terminal number and gate code for arrival
-    const generateArrivalGate = () => {
-      const terminalNumber = Math.floor(Math.random() * 10) + 1
-      const gateCode =
-        String.fromCharCode(65 + Math.floor(Math.random() * 26)) +
-        (Math.floor(Math.random() * 50) + 1)
-      return { terminalNumber, gateCode }
-    }
-
-    const addRandomTime = (departureDateTime) => {
-      // Convert departureDateTime to a Date object
-      const departureDate = new Date(departureDateTime);
-    
-      // Generate a random number between 1 to 3 for the hours
-      const randomHours = Math.floor(Math.random() * 3) + 1;
-    
-      // Calculate the total hours including random hours
-      const totalHours = departureDate.getHours() + randomHours;
-    
-      // Adjust date if total hours exceed 24
-      if (totalHours >= 24) {
-        // Add an extra day
-        departureDate.setDate(departureDate.getDate() + 1);
+  const isEdit = () => {
+    //if mode is edit this will run
+    if (title === "edit") {
+      if (selectedRow[1].returnDateTime !== null) {
+        setFlightType("roundTrip");
+        setReturnDateTime(formatDate(selectedRow[1].returnDateTime));
       }
-    
-      // Add randomHours to departureDate
-      departureDate.setHours(totalHours % 24);
-    
-      // Format the datetime string in 'YYYY-MM-DD HH:MM:SS' format
-      const year = departureDate.getFullYear();
-      const month = ('0' + (departureDate.getMonth() + 1)).slice(-2);
-      const day = ('0' + departureDate.getDate()).slice(-2);
-      const hours = ('0' + departureDate.getHours()).slice(-2);
-      const minutes = ('0' + departureDate.getMinutes()).slice(-2);
-      const seconds = ('0' + departureDate.getSeconds()).slice(-2);
-    
-      // Construct formatted datetime string
-      const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    
-      // Return the formatted datetime string
-      return formattedDateTime;
-    };
-    
+      setSelectedFromAirport(selectedRow[0].departureID);
+      setSelectedToAirport(selectedRow[0].destinationID);
+      setDepartureDateTime(formatDate(selectedRow[1].departDateTime));
+      setSelectedAircraft(selectedRow[0].aircraftID);
+      setSelectedStatus(selectedRow[0].statusID);
 
-    if (isModalOpen) {
-      // Example usage
-      const newTime = addRandomTime(departureDateTime)
-      const departure = generateDepartureGate()
-      const arrival = generateArrivalGate()
-      setArrTime(newTime)
+    }
+  }
+// Function to generate a random terminal number and gate code for departure
+const generateDepartureGate = () => {
+  const terminalNumber = Math.floor(Math.random() * 10) + 1
+  const gateCode =
+    String.fromCharCode(65 + Math.floor(Math.random() * 26)) +
+    (Math.floor(Math.random() * 50) + 1)
+  return { terminalNumber, gateCode }
+}
+
+// Function to generate a random terminal number and gate code for arrival
+const generateArrivalGate = () => {
+  const terminalNumber = Math.floor(Math.random() * 10) + 1
+  const gateCode =
+    String.fromCharCode(65 + Math.floor(Math.random() * 26)) +
+    (Math.floor(Math.random() * 50) + 1)
+  return { terminalNumber, gateCode }
+}
+
+const addRandomTime = (departureDateTime) => {
+  // Convert departureDateTime to a Date object
+  const departureDate = new Date(departureDateTime)
+
+  // Generate a random number between 1 to 3 for the hours
+  const randomHours = Math.floor(Math.random() * 3) + 1
+
+  // Calculate the total hours including random hours
+  const totalHours = departureDate.getHours() + randomHours
+
+  // Adjust date if total hours exceed 24
+  if (totalHours >= 24) {
+    // Add an extra day
+    departureDate.setDate(departureDate.getDate() + 1)
+  }
+
+  // Add randomHours to departureDate
+  departureDate.setHours(totalHours % 24)
+
+  // Format the datetime string in 'YYYY-MM-DD HH:MM:SS' format
+  const year = departureDate.getFullYear()
+  const month = ("0" + (departureDate.getMonth() + 1)).slice(-2)
+  const day = ("0" + departureDate.getDate()).slice(-2)
+  const hours = ("0" + departureDate.getHours()).slice(-2)
+  const minutes = ("0" + departureDate.getMinutes()).slice(-2)
+  const seconds = ("0" + departureDate.getSeconds()).slice(-2)
+
+  // Construct formatted datetime string
+  const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+
+  // Return the formatted datetime string
+  return formattedDateTime
+  }
+  
+  useEffect(() => { 
+    isEdit()
+  }, [isModalOpen])
+  
+  useEffect(() => {
+    const newTime = addRandomTime(departureDateTime)
+    setArrTime(newTime)
+    const departure = generateDepartureGate()
+    const arrival = generateArrivalGate()
       setDepartureGate(departure)
       setArrivalGate(arrival)
-    }
+    
+    
   }, [isModalOpen, departureDateTime])
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+
 
     const selectedAircraftObj = aircraft.find(
       (aircraft) => aircraft.aircraftID == selectedAircraft
@@ -116,7 +162,33 @@ const Modal = ({ isModalOpen, title, airports, aircraft, status }) => {
     ) {
       // All required fields are filled
       // Send data to backend
+
+      if (title === "edit") {    
+       
       axios
+      .post("http://localhost:5000/updateflight", {
+        from: selectedFromAirport,
+        to: selectedToAirport,
+        departureDateTime,
+        returnDateTime: flightType === "roundTrip" ? returnDateTime : null,
+        arrivalDateTime: arrTime,
+        aircraft: selectedAircraft,
+        seat: seatCapacity,
+        status: selectedStatus,
+        flightID: selectedRow[0].FlightID
+      })
+      .then((response) => {
+        // Handle success
+        isModalOpen()
+        alert("Flight Updated Successfully")
+        console.log("Flight data updated successfully:", response.data)
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error updating flight data:", error)
+      })
+      } else if (title === "add") {
+        axios
         .post("http://localhost:5000/addflight", {
           from: selectedFromAirport,
           to: selectedToAirport,
@@ -140,10 +212,15 @@ const Modal = ({ isModalOpen, title, airports, aircraft, status }) => {
           // Handle error
           console.error("Error submitting flight data:", error)
         })
-    } else {
-      // Validation failed
-      alert("Please fill in all required fields.")
-    }
+      }     
+      else {
+    // Validation failed
+    alert("Please fill in all required fields.")
+  }
+    } 
+    
+
+
   }
 
   return (
@@ -163,8 +240,12 @@ const Modal = ({ isModalOpen, title, airports, aircraft, status }) => {
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                  {title}
+                  {title} flight{" "}
+                  {title === "edit" && selectedRow[0]
+                    ? `#${selectedRow[0].FlightID}`
+                    : ""}
                 </h1>
+
                 <button
                   type="button"
                   className="btn-close"

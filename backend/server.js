@@ -441,7 +441,7 @@ app.post('/updatePromos', (req, res) => {
 })
 
 app.get('/getFlights', (req, res) => { 
-  const sql = "SELECT f.FlightID, f.aircraftID, a.Model, f.availableSeats, f.Departure, f.Destination, s.status FROM flight f JOIN aircraft a ON f.aircraftID = a.aircraftID JOIN status s ON f.status = s.statusID;"
+  const sql = "SELECT f.FlightID, f.aircraftID, a.Model, f.availableSeats, d.airportID AS departureID, d.airportName AS departureName,dst.airportID AS destinationID, dst.airportName AS destinationName, s.status, s.statusID FROM flight f JOIN aircraft a ON f.aircraftID = a.aircraftID JOIN status s ON f.status = s.statusID JOIN airport d ON f.departureID = d.airportID JOIN airport dst ON f.destinationID = dst.airportID;"
 
   db.query(sql, (err, result) => {
     if (err) {
@@ -491,7 +491,7 @@ db.query(sql, (err, result) => {
 })
 })
 app.post('/addflight', (req, res) => { 
-  const sql = "INSERT INTO flight (`Departure`,`Destination`, `departDateTime`,`returnDateTime`,`arrivalDateTime`,`aircraftID`,`availableSeats`,`status`,`departureterminal`,`departuregate`,`arrivalTerminal`,`arrivalGate`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
+  const sql = "INSERT INTO flight (`departureID`,`destinationID`, `departDateTime`,`returnDateTime`,`arrivalDateTime`,`aircraftID`,`availableSeats`,`status`,`departureterminal`,`departuregate`,`arrivalTerminal`,`arrivalGate`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
 
   const values = [
     req.body.from,
@@ -519,6 +519,47 @@ app.post('/addflight', (req, res) => {
   })
 
 })
+app.post('/updateflight', (req, res) => { 
+  const sql = "UPDATE flight SET departureID=?, destinationID=?, departDateTime=?, returnDateTime=?, arrivalDateTime=?, aircraftID=?, availableSeats=?, status=? WHERE FlightID=?" 
+  
+  const values = [
+    req.body.from,
+    req.body.to,
+    req.body.departureDateTime,
+    req.body.returnDateTime,
+    req.body.arrivalDateTime,
+    req.body.aircraft,
+    req.body.seat,
+    req.body.status,
+    req.body.flightID 
+  ]
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error occurred while updating flight:", err)
+      return res.status(500).json({ error: "Internal server error" })
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Flight not found" }) // Handle case where no rows are affected (flightID not found)
+    }
+    return res.status(200).json({ message: "Flight updated successfully" })
+  })
+})
+
+app.get('/sales', (req, res) => { 
+  const sql = "" //KELANGAN PA TO AYUSIN
+
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("Error executing SQL query:", err)
+      res.status(500).json({ error: "Internal server error" })
+      return
+    }
+    return res.json(result)
+  })
+})
+
 // listen for requests
 app.listen(5000, () => {
   console.log("server listening on port 5000")

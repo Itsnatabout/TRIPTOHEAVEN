@@ -21,6 +21,8 @@ import Admin from './components/admin/Dashboard';
 import Promo from './components/admin/Promos'
 import Flights from './components/admin/Flights';
 import Users from './components/admin/Users'
+import Sales from './components/admin/Sales'
+import ListBooking from './components/admin/ListBooking'
 import './App.css'
 import {
   createBrowserRouter,
@@ -131,6 +133,16 @@ const router = createBrowserRouter([
   {
     path: "/users",
     element: <Users/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/sales",
+    element: <Sales/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/listbooking",
+    element: <ListBooking/>,
     errorElement: <ErrorPage />
   },
 ])
