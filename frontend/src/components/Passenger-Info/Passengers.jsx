@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import '../../styles/Passengers.css' 
-
+import axios from "axios";
 
 const Passengers = ({numAdults, onSubmit}) => {
 
     const [passengerData, setPassengerData] = useState(
-        Array.from({ length: numAdults }, () => ({
+      Array.from({ length: numAdults }, () => ({         
           Fname: '',
           Lname: '',
           bday: '',
@@ -21,9 +21,21 @@ const Passengers = ({numAdults, onSubmit}) => {
         setPassengerData(updatedData);
       };
     
-      const handleSubmit = (event) => {
+      const handleSubmit = async (event) => {
         event.preventDefault();
-        onSubmit(passengerData);
+
+        try {
+          // Make an Axios POST request
+          const response = await axios.post('http://localhost:5000/setpassenger', passengerData);
+          console.log('passenger response:', response.data);
+          onSubmit(passengerData);
+      } catch (error) {
+          console.error("Error booking flight:", error);
+          // Handle the error appropriately, e.g., show a message to the user
+      }
+
+        
+
       };
 
 

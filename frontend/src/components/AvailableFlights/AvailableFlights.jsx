@@ -22,18 +22,19 @@ const AvailableFlights = () => {
             }
           }
           fetchData()
-    }, []);
+    }, []); 
+
+    const generateRandomNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
 
     const handleBookFlight = (flight) => {
-        const combinedData = { ...formData, flight };
+        const price = generateRandomNumber(2000, 6000);
+        const combinedData = { ...formData, ...flight, price };
         // console.log(combinedData);
         navigate('/Book/AvailableFlights/Passenger', { state: { addedData: combinedData} });
     };
 
- 
-    const generateRandomNumber = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-      };
 
   return (
     <>

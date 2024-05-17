@@ -6,18 +6,21 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Seat = () => {
   const location = useLocation();
-  const { addedData } = location.state || {};
+  const { addedData, fetchedPassengers } = location.state || {};
   const navigate = useNavigate();
 
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState({});
-
+  
+  console.log(fetchedPassengers)
+  
   const handleSeatChange = (passenger, seat) => {
     setSelectedSeats({
       ...selectedSeats,
       [passenger]: seat,
     });
   };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,18 +37,48 @@ const Seat = () => {
     fetchData();
   }, []);
 
-  const allSeatsSelected = addedData.data.every(
-    (passenger) => selectedSeats[passenger.Fname]
+  const allSeatsSelected = fetchedPassengers.every(
+    (passenger) => selectedSeats[passenger.passengerID]
     
   );
+  function getFormattedDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Adding 1 because January is 0-indexed
+    const day = String(today.getDate()).padStart(2, '0');
+  
+    // Format: YYYY-MM-DD
+    const formattedDate = `${year}-${month}-${day}`;
+    
+    return formattedDate;
+  }
+
+  const handleSubmit = async () => {
+
+    const bookdate = getFormattedDate();
 
 
-  const handleSubmit = () => {
     if (allSeatsSelected) {
       // Here you can add further handling logic
-      const combinedData = { ...addedData, selectedSeats };
-        console.log(combinedData);
-        navigate('/Book/AvailableFlights/Passenger/Seat/Payment', { state: { addedData: combinedData} });
+      const combinedData = { ...addedData, ...selectedSeats, bookdate };
+        // console.log(combinedData);
+      try {
+        // Make an Axios POST request
+        const requestData = { combinedData, fetchedPassengers };
+        console.log(requestData);
+        const response = await axios.post('http://localhost:5000/bookFlight', requestData);
+        console.log('Booking response:', response.data);
+
+        // Navigate to the next page with state
+        navigate('/Book/AvailableFlights/Passenger/Seat/Payment', { state: { addedData: combinedData, fetchedPassengers } });
+
+    } catch (error) {
+        console.error("Error booking flight:", error);
+        // Handle the error appropriately, e.g., show a message to the user
+    }
+
+
+
     } else {
       alert("Please select seats for all passengers.");
     }
@@ -62,14 +95,14 @@ const Seat = () => {
           <div className="row justify-content-center">
             <div className="col-md-6">
               {addedData &&
-                addedData.data.map((passenger, index) => (
+                fetchedPassengers.map((passenger, index) => (
                   <div key={index} className="mb-4">
-                    <h5 id="title2-seat">{passenger.Fname}</h5>
+                    <h5 id="title2-seat">{passenger.firstName}</h5>
                     <select
                       className="form-select mb-2"
-                      value={selectedSeats[passenger.Fname] || ""}
+                      value={selectedSeats[passenger.passengerID] || ""}
                       onChange={(e) =>
-                        handleSeatChange(passenger.Fname, e.target.value)
+                        handleSeatChange(passenger.passengerID, e.target.value)
                       }
                     >
                       <option value="" disabled>

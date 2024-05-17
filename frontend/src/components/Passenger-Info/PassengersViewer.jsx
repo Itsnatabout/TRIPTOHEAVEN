@@ -11,17 +11,29 @@ const PassengersViewer = () => {
   const { addedData } = location.state || {};
   const navigate = useNavigate();
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = async (data) => {
     // console.log("Received form data from child:", data);
     // You can now navigate or process the data as needed
-    const combinedData = { ...addedData, data };
-        console.log(combinedData);
-        navigate('/Book/AvailableFlights/Passenger/Seat', { state: { addedData: combinedData} });
+    const combinedData = { ...addedData };
+    console.log(combinedData);
+
+    try {
+      // Make an Axios POST request
+      const response = await axios.post('http://localhost:5000/getpassenger', data);
+      const fetchedPassengers = response.data; // Save fetched passengers
+      console.log('Booking response:', fetchedPassengers);
+      
+  
+
+  
+      // Navigate to the next page with state after updating state
+      navigate('/Book/AvailableFlights/Passenger/Seat', { state: { addedData: combinedData, fetchedPassengers } });
+  
+  } catch (error) {
+      console.error("Error booking flight:", error);
+      // Handle the error appropriately, e.g., show a message to the user
+  }
   };
-
-console.log(addedData)
-
-
   
   
 
