@@ -11,9 +11,10 @@ const Payment = () => {
   const location = useLocation()
   const { addedData, fetchedPassengers } = location.state || {}
   const navigate = useNavigate()
-
-  console.log(addedData)
-  console.log(fetchedPassengers)
+  const [currentTime, setCurrentTime] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
+  // console.log(addedData)
+  // console.log(fetchedPassengers)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +44,6 @@ const Payment = () => {
         // Handle the error appropriately, e.g., show a message to the user
       }
     }
-
     fetchData()
   }, [fetchedPassengers])
 
@@ -51,10 +51,42 @@ const Payment = () => {
     setPromoCode(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Add your payment submission logic here
+    const currentDate = new Date();
+    setCurrentTime(currentDate.toLocaleTimeString());
+    setCurrentDate(currentDate.toLocaleDateString());
+
+    try {
+      // Make an Axios POST request
+      const data = {
+        farePerPassenger: addedData.price,
+        passengerQuantity: fetchedPassengers.length,
+        statusID: booking[0].statusID,       
+        total: addedData.price * fetchedPassengers.length,
+        currentTime: currentDate.toISOString(), // Convert current time to ISO 8601 format
+        currentDate: currentDate.toISOString().split('T')[0] // Convert current date to ISO 8601 format and extract date part
+      };
+
+      const response = await axios.post('http://localhost:5000/postPayment', data);
+      console.log('Success:', response.data);
+  
+      // Navigateto the next page with state after updating state
+      navigate('/');
+  
+  } catch (error) {
+      console.error("Error payment flight:", error);
+      // Handle the error appropriately, e.g., show a message to the user
   }
+
+
+  }
+
+
+
+
+
+
   const handleFileChange = (e) => {
     const file = e.target.files[0]
     setPaymentProof(file)
@@ -123,7 +155,7 @@ const Payment = () => {
                           <td>{data.seatno}</td>
                           <td>{data.departDateTime}</td>
                           <td>{data.arrivalDateTime}</td>
-                          <td>{}</td>
+                          <td>{addedData.returnDate}</td>
                           <td>{data.Bookingdate}</td>
                           <td>{addedData.price }</td>
                         </tr>
@@ -180,7 +212,7 @@ const Payment = () => {
                 <button
                   className="btn btn-primary"
                   id="skip-payment"
-                  onClick={handleSubmit}
+                  onClick=""
                 >
                   Skip For Now
                 </button>

@@ -271,7 +271,6 @@ app.post('/getpassBooking', (req, res) => {
     booking.paymentID,  
     flight.departDateTime, 
     flight.arrivalDateTime,
-    
     status.status,    
     seat.seatno      
   FROM booking
@@ -291,7 +290,32 @@ app.post('/getpassBooking', (req, res) => {
 })
 
 
+app.post('/postPayment', (req, res) => { 
 
+  const {data} = req.body
+
+  const sql = "INSERT INTO payment (`statusID`, `discountID`, `Amount`, `mop`, `paytime`, `paydate`) VALUES ?"
+
+  values = [
+   [ data.statusID,
+    null,
+    data.farePerPassenger,
+    data.total,
+    'gcash',
+    data.currentTime,
+    data.currentDate]
+  ]
+
+ // Execute the SQL query
+ db.query(sql, [values], (err, result) => {
+  if (err) {
+    console.error("Error occurred while inserting booking:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+  return res.status(201).json({ message: "Booking created successfully" });
+});
+
+})
 
 
 
