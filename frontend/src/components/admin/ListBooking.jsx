@@ -1,24 +1,23 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-import Sidebar from "./Sidebar"
-import RightSection from "./Rightsection"
-import "../../styles/table.css"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Sidebar from "./Sidebar";
+import RightSection from "./Rightsection";
+import "../../styles/table.css";
 
 const ListBooking = () => {
-  //KELANGAN PA TO AYUSIN PLACEHOLDER LANG MUNA
-  const [values, setValues] = useState([])
+  const [values, setValues] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/")
-        setValues(response.data)
+        const response = await axios.get("http://localhost:5000/getbookings");
+        setValues(response.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -38,13 +37,25 @@ const ListBooking = () => {
                     <th>Booking ID</th>
                     <th>Flight ID</th>
                     <th>Name</th>
-                    <th>ClassType</th>
+                    <th>Class Type</th>
                     <th>Seat No.</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    {/* <th>Actions</th> */}
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  {values.map((booking) => (
+                    <tr key={booking.BookingID}>
+                      <td>{booking.BookingID}</td>
+                      <td>{booking.flightID}</td>
+                      <td>{booking.firstName} {booking.lastName}</td>
+                      <td>{booking.ClassType}</td>
+                      <td>{booking.seatno}</td>
+                      <td>{booking.status}</td>
+                      
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             </div>
           </div>
@@ -53,7 +64,7 @@ const ListBooking = () => {
         <RightSection />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ListBooking
+export default ListBooking;

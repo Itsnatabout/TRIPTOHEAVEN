@@ -13,7 +13,7 @@ ChartJS.register(
 );
 
 const salesData = [
-  { month: "May 16", sales: 112 },
+  { month: "May 16", sales: 100},
   { month: "May 17", sales: 150 },
   { month: "May 18", sales: 200 },
   { month: "May 19", sales: 120 },

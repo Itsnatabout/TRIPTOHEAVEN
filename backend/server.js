@@ -290,6 +290,41 @@ app.post('/getpassBooking', (req, res) => {
   });
 })
 
+app.get('/getbookings', (req, res) => { 
+
+  const sql = `
+  SELECT 
+    booking.BookingID, 
+    booking.passengerID, 
+    booking.flightID, 
+    booking.statusID, 
+    booking.ClassType, 
+    booking.SeatID, 
+    booking.Bookingdate, 
+    booking.promoID, 
+    booking.paymentID,  
+    flight.departDateTime, 
+    flight.arrivalDateTime,
+    status.status,    
+    seat.seatno,
+    passenger.firstName, 
+    passenger.lastName     
+FROM booking
+JOIN flight ON booking.flightID = flight.flightID
+JOIN status ON booking.statusID = status.statusID
+JOIN seat ON booking.SeatID = seat.SeatID
+JOIN passenger ON booking.passengerID = passenger.passengerID; -- Join with passenger table
+`;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("Error executing SQL query:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    return res.json(result);
+  });
+})
+
 
 app.post('/postPayment', (req, res) => { 
 

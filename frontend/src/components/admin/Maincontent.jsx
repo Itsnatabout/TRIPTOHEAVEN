@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LineChart from './LineChart';
 
-function MainContent({ orders, userCount, userPercent}) {
+function MainContent({ orders, userCount, userPercent, bookingCount}) {
     const getStatusColor = (status) => {
         switch (status) {
             case 'Cancelled':
@@ -23,15 +23,15 @@ function MainContent({ orders, userCount, userPercent}) {
                 <div className="sales">
                     <div className="status">
                         <div className="info">
-                            <h3>Total Sales</h3>
-                            <h4></h4>
+                            <h3>Total Bookings</h3>
+                            <h4>{bookingCount}</h4>
                         </div>
                         <div className="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div className="percentage">
-                                <p className='mb-0'>+81%</p>
+                                <p className='mb-0'>--</p>
                             </div>
                         </div>
                     </div>
@@ -56,14 +56,14 @@ function MainContent({ orders, userCount, userPercent}) {
                     <div className="status">
                         <div className="info">
                             <h3>Flights Delayed</h3>
-                            <h4></h4>
+                            <h4>{orders}</h4>
                         </div>
                         <div className="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div className="percentage">
-                                <p className='mb-0'>+11.8%</p>
+                                <p className='mb-0'>--</p>
                             </div>
                         </div>
                     </div>

@@ -8,12 +8,48 @@ import axios from "axios";
 
 
 const Dashboard = () => {
-  const [flights, setFlights] = useState([])
+  const [flights, setFlights] = useState([]);
+  const [flightCount, setFlightCount] = useState();
   const [users, setUsers] = useState([])
   const [userCount, setUserCount] = useState(0);
   const [percentage, setPercentage] = useState(0);
+  const [bookings, setBookings] = useState([]);
+  const [bookingCount, setBookingCount] = useState(0);
 
- // Fetch data asynchronously using Axios
+
+  const fetchFlights = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/getFlights');
+      setFlights(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+     }
+  };
+
+  const countflights = () => {
+    // Filter flights to get only delayed flights
+  const delayedFlights = flights.filter(flight => flight.status === "delayed");
+  // Return the count of delayed flights
+  return delayedFlights.length;
+  };
+
+
+
+
+  const fetchBookings = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/getbookings');
+      setBookings(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+     }
+  };
+
+  const countBookings = () => {
+    return bookings.length;
+  };
+
+
  const fetchUsers = async () => {
   try {
     const response = await axios.get('http://localhost:5000/users');
@@ -22,7 +58,6 @@ const Dashboard = () => {
     console.error('Error fetching data:', error);
    }
 };
-
   // Function to count the number of users
   const countUsers = () => {
     return users.length;
@@ -41,13 +76,16 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchUsers();
+    fetchBookings();
+    fetchFlights();
   }, [])
 
   useEffect(() => {
     // Update user count whenever user data changes
     setUserCount(countUsers());
     setPercentage(calculatePercentage());
-
+    setBookingCount(countBookings());
+    setFlightCount(countflights());
       // Check for a new day every hour and reset the percentage
       const interval = setInterval(() => {
         const currentDate = new Date();
@@ -58,7 +96,7 @@ const Dashboard = () => {
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
 
-  }, [users]);
+  }, [users, bookings]);
 
 
 
@@ -80,7 +118,7 @@ const Dashboard = () => {
   return (
     <div className={`customcontainer admin ${isDarkMode ? "dark-mode-variables" : ""}`}>
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <MainContent orders={flights} userCount={userCount} userPercent={percentage} />
+      <MainContent orders={flightCount} userCount={userCount} userPercent={percentage} bookingCount={bookingCount} />
       <RightSection isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} /> 
     </div>
   )
