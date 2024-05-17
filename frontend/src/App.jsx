@@ -17,8 +17,10 @@ import Palawan from './components/places/Palawan';
 import Siargao from './components/places/Siargao';
 import Bohol from './components/places/Bohol';
 import Albay from './components/places/Albay';
-
-
+import Admin from './components/admin/Dashboard';
+import Promo from './components/admin/Promos'
+import Flights from './components/admin/Flights';
+import Users from './components/admin/Users'
 import './App.css'
 import {
   createBrowserRouter,
@@ -109,6 +111,26 @@ const router = createBrowserRouter([
   {
     path: "/packages/Albay",
     element: <Albay/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/dashboard",
+    element: <Admin/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/Promo",
+    element: <Promo/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/flights",
+    element: <Flights/>,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/users",
+    element: <Users/>,
     errorElement: <ErrorPage />
   },
 ])

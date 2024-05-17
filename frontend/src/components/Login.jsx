@@ -33,9 +33,15 @@ const Login = () => {
           // No errors and form has been submitted, proceed with form submission
           const response = await axios.post("http://localhost:5000/login", values);
           
+          //!!!!!!!!!! TEMPORARY TEST THE AUTH !!!!!!!!!!!!!!
           if (response.data.loggedIn) {
             alert('Successfully Logged in');
-            navigate('/');
+            
+            if (response.data.role === "1") {
+              navigate('/');
+            }
+            else if(response.data.role === "2")
+            navigate('/dashboard')
           } 
 
         } catch (error) {
