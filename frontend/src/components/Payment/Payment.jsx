@@ -1,101 +1,102 @@
-import React, { useState, useEffect } from "react"
-import "../../styles/Payment.css"
-import Header from "../../components/Header"
-import axios from "axios"
-import { Link, useNavigate, useLocation } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import "../../styles/Payment.css";
+import Header from "../../components/Header";
+import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Payment = () => {
-  const [promoCode, setPromoCode] = useState("")
-  const [paymentProof, setPaymentProof] = useState(null)
-  const [booking, setBooking] = useState([])
-  const location = useLocation()
-  const { addedData, fetchedPassengers } = location.state || {}
-  const navigate = useNavigate()
-  const [currentTime, setCurrentTime] = useState('');
-  const [currentDate, setCurrentDate] = useState('');
-  // console.log(addedData)
-  // console.log(fetchedPassengers)
+  const [promoCode, setPromoCode] = useState("");
+  const [paymentProof, setPaymentProof] = useState(null);
+  const [booking, setBooking] = useState([]);
+  const location = useLocation();
+  const { addedData, fetchedPassengers } = location.state || {};
+  const navigate = useNavigate();
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const passengerIDs =
-          fetchedPassengers?.map((passenger) => passenger.passengerID) || []
+          fetchedPassengers?.map((passenger) => passenger.passengerID) || [];
 
         if (passengerIDs.length === 0) {
-          console.error("No passenger IDs available")
-          return
+          console.error("No passenger IDs available");
+          return;
         }
 
         const response = await axios.post(
           "http://localhost:5000/getpassBooking",
           { passengerIDs }
-        )
-        const formattedData = response.data.map(item => ({
+        );
+        const formattedData = response.data.map((item) => ({
           ...item,
           Bookingdate: formatDateTime(item.Bookingdate),
           departDateTime: formatDateTime(item.departDateTime),
-          arrivalDateTime: formatDateTime(item.arrivalDateTime)
+          arrivalDateTime: formatDateTime(item.arrivalDateTime),
         }));
-        setBooking(formattedData); // Store the fetched and formatted data in state
-        console.log(formattedData);
+        setBooking(formattedData);
       } catch (error) {
-        console.error("Error fetching data:", error)
-        // Handle the error appropriately, e.g., show a message to the user
+        console.error("Error fetching data:", error);
       }
-    }
-    fetchData()
-  }, [fetchedPassengers])
+    };
+    fetchData();
+  }, [fetchedPassengers]);
 
   const handlePromoCodeChange = (e) => {
-    setPromoCode(e.target.value)
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const currentDate = new Date();
-    setCurrentTime(currentDate.toLocaleTimeString());
-    setCurrentDate(currentDate.toLocaleDateString());
-
-    try {
-      // Make an Axios POST request
-      const data = {
-        farePerPassenger: addedData.price,
-        passengerQuantity: fetchedPassengers.length,
-        statusID: booking[0].statusID,       
-        total: addedData.price * fetchedPassengers.length,
-        currentTime: currentDate.toISOString(), // Convert current time to ISO 8601 format
-        currentDate: currentDate.toISOString().split('T')[0] // Convert current date to ISO 8601 format and extract date part
-      };
-
-      const response = await axios.post('http://localhost:5000/postPayment', data);
-      console.log('Success:', response.data);
-  
-      // Navigateto the next page with state after updating state
-      navigate('/');
-  
-  } catch (error) {
-      console.error("Error payment flight:", error);
-      // Handle the error appropriately, e.g., show a message to the user
-  }
-
-
-  }
-
-
-
-
-
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0]
-    setPaymentProof(file)
-  }
-  const formatDateTime = (dateTimeString) => {
-    const date = new Date(dateTimeString);
-    return date.toISOString().replace('T', ' ').split('.')[0]; // "YYYY-MM-DD HH:mm:ss"
+    setPromoCode(e.target.value);
   };
 
+  const handleSubmit = async (e, skip) => {
+    e.preventDefault();
+    const currentDate = new Date();
+    const currentTime = getCurrentTime(currentDate) // Format time as ISO string
+    const currentDateFormatted = currentDate.toISOString().split('T')[0]; // Format date as ISO string and extract date part
+    let status = 10
+
+    if (!paymentProof && !skip) {
+      alert("Please upload proof of payment.");
+      return;
+    } else if (skip) {
+      status = booking[0].statusID
+    }
+
+
+    try {
+      const data = {
+        statusID: status,
+        total: addedData.price * fetchedPassengers.length,
+        currentTime: currentTime,
+        currentDate: currentDateFormatted,
+        payment: paymentProof
+      };
+
+      const response = await axios.post("http://localhost:5000/postPayment", { data });
+      console.log("Success:", response.data);
+
+      navigate("/");
+    } catch (error) {
+      console.error("Error payment flight:", error);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setPaymentProof(file);
+  };
+
+
+  const formatDateTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    return date.toISOString().replace("T", " ").split(".")[0];
+  };
+  const getCurrentTime = (date) => {
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+};
   return (
     <>
       <Header />
@@ -150,14 +151,15 @@ const Payment = () => {
                         <tr key={index}>
                           <td>{data.BookingID}</td>
                           <td>
-                            {fetchedPassengers[index].firstName}{" "}{fetchedPassengers[index].lastName}
+                            {fetchedPassengers[index].firstName}{" "}
+                            {fetchedPassengers[index].lastName}
                           </td>
                           <td>{data.seatno}</td>
                           <td>{data.departDateTime}</td>
                           <td>{data.arrivalDateTime}</td>
                           <td>{addedData.returnDate}</td>
                           <td>{data.Bookingdate}</td>
-                          <td>{addedData.price }</td>
+                          <td>{addedData.price}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -170,6 +172,7 @@ const Payment = () => {
                       id="promoCode"
                       value={promoCode}
                       onChange={handlePromoCodeChange}
+                      required
                     />
                   </div>
 
@@ -178,10 +181,20 @@ const Payment = () => {
                     <h3 className="text-center">
                       <span id="span2-payment">Summary</span> of Transaction
                     </h3>
-                    <p><strong>Fare per Passenger:</strong> {addedData.price}</p>
-          <p><strong>Passenger Quantity:</strong> { fetchedPassengers.length }</p>
-          <p><strong>Discount Percentage:</strong> {0}%</p>
-                    <p><strong>Total:</strong> { addedData.price * fetchedPassengers.length}</p>
+                    <p>
+                      <strong>Fare per Passenger:</strong> {addedData.price}
+                    </p>
+                    <p>
+                      <strong>Passenger Quantity:</strong>{" "}
+                      {fetchedPassengers.length}
+                    </p>
+                    <p>
+                      <strong>Discount Percentage:</strong> {0}%
+                    </p>
+                    <p>
+                      <strong>Total:</strong>{" "}
+                      {addedData.price * fetchedPassengers.length}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -205,14 +218,14 @@ const Payment = () => {
                 <button
                   className="btn btn-primary"
                   id="submit-payment"
-                  onClick={handleSubmit}
+                  onClick={(e) => handleSubmit(e, false)}
                 >
                   Submit
                 </button>
                 <button
                   className="btn btn-primary"
                   id="skip-payment"
-                  onClick=""
+                  onClick={(e) => handleSubmit(e, true)}
                 >
                   Skip For Now
                 </button>
@@ -222,7 +235,7 @@ const Payment = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Payment
+export default Payment;

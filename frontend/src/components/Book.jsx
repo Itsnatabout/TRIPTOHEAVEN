@@ -182,7 +182,7 @@ const Book = ({ airport }) => {
 
               <div className="row">
                 {/* Passenger selection */}
-                <div className="col-sm-4">
+                {/* <div className="col-sm-4">
                   <div className="mb-4">
                     <h3>Children (0-14)</h3>
                     <select
@@ -199,10 +199,10 @@ const Book = ({ airport }) => {
                       <option value="3">3</option>
                     </select>
                   </div>
-                </div>
-                <div className="col-sm-4">
+                </div> */}
+                <div className="col">
                   <div className="mb-4">
-                    <h3>Adults (15-64)</h3>
+                    <h3>Passengers</h3>
                     <select
                       className="form-select"
                       name="adults"
@@ -218,7 +218,7 @@ const Book = ({ airport }) => {
                     </select>
                   </div>
                 </div>
-                <div className="col-sm-4">
+                {/* <div className="col-sm-4">
                   <div className="mb-4">
                     <h3>Seniors (65+)</h3>
                     <select
@@ -235,7 +235,7 @@ const Book = ({ airport }) => {
                       <option value="3">3</option>
                     </select>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="row justify-content-center">

@@ -4,7 +4,7 @@ import RightSection from "./Rightsection"
 import "../../styles/table.css"
 import axios from "axios"
 import { BsPersonFillLock , BsFillPencilFill, BsEyeFill } from "react-icons/bs"
-import Modal from "./UserModal"
+import Modal from "./userModal"
 
 
 const Users = () => {
