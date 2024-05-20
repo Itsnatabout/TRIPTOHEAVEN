@@ -2,9 +2,9 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import Validation from "./LoginValidation"
-import '../styles/Login.css'
-import Header from './Header'
 
+import Header from './Header'
+import '../styles/Login.css'
 
 const Login = () => {
 
@@ -33,9 +33,15 @@ const Login = () => {
           // No errors and form has been submitted, proceed with form submission
           const response = await axios.post("http://localhost:5000/login", values);
           
+          //!!!!!!!!!! TEMPORARY TEST THE AUTH !!!!!!!!!!!!!!
           if (response.data.loggedIn) {
             alert('Successfully Logged in');
-            navigate('/');
+            
+            if (response.data.role === "1") {
+              navigate('/');
+            }
+            else if(response.data.role === "2")
+            navigate('/dashboard')
           } 
 
         } catch (error) {
@@ -52,7 +58,7 @@ const Login = () => {
       }, [values, errors, formSubmitted, navigate]); // This effect depends on errors and values
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         setErrors(Validation(values));
         setFormSubmitted(true);

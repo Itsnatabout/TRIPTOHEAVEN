@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "@react-pdf/renderer": "^3.4.4",
-    "concurrently": "8.2.2"
+    "concurrently": "8.2.2",
+    "react-calendar": "^5.0.0"
   },
   "scripts": {
     "start": "concurrently \"cd ./backend && npm run dev\" \"cd ./frontend && npm run dev\""
