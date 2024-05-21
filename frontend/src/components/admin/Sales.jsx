@@ -1,27 +1,25 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-import Sidebar from "./Sidebar"
-import RightSection from "./Rightsection"
-import "../../styles/table.css"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Sidebar from "./Sidebar";
+import RightSection from "./Rightsection";
+import "../../styles/table.css";
 
 const Sales = () => {
-
-
-  //KELANGAN PA TO AYUSIN PLACEHOLDER LANG MUNA 
-  const [values, setValues] = useState([])
-
+  const [values, setValues] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/")
-        setValues(response.data)
+        const response = await axios.get("http://localhost:5000/getPayments");
+        setValues(response.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-      fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
+
+  console.log(values);
 
   return (
     <>
@@ -30,7 +28,6 @@ const Sales = () => {
         style={{ backgroundColor: "var(--color-background)" }}
       >
         <Sidebar />
-
         <div className="d-flex flex-column table-container">
           <div className="d-flex justify-content-center align-items-start h-50">
             <div className="table-wrapper">
@@ -39,47 +36,37 @@ const Sales = () => {
                 <thead>
                   <tr>
                     <th>Sales ID</th>
-                    <th>Name</th>
+                    <th>Discount ID</th>
                     <th>Amount</th>
                     <th>Mode of Payment</th>
                     <th>Date and Time</th>
+                    <th>Payment Proof</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                
+                  {values.map((value, index) => (
+                    <tr key={index}>
+                      <td>{value.paymentID}</td>
+                      <td>{value.discountID}</td>
+                      <td>{value.Amount}</td>
+                      <td>{value.mop}</td>
+                      <td>{value.paydate} {value.paytime}</td>
+                      <td>{value.payment_proof}</td>
+                      <td>{value.statusID}</td>
+                      <td></td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <RightSection />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Sales
+export default Sales;

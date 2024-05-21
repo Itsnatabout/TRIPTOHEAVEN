@@ -5,6 +5,9 @@ const bcrypt = require("bcrypt")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
+const multer = require("multer")
+const path = require("path")
+
 
 const saltRounds = 10
 // express app
@@ -40,6 +43,9 @@ app.use(
     },
   })
 )
+
+
+
 
 //This is for authentication when the dashboard and admin is completed.
 const isAuth = (req, res, next) => {
@@ -326,9 +332,23 @@ JOIN passenger ON booking.passengerID = passenger.passengerID; -- Join with pass
 })
 
 
-app.post('/postPayment', (req, res) => { 
-  const { data } = req.body;
-  console.log(data);
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '/images')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname, "_" + Date.now() + path.extname(file.originalname));
+  }
+})
+
+const upload = multer({
+  storage: storage
+})
+
+
+
+app.post('/postPayment', upload.single('image'), (req, res) => { 
+  const {data} = req.body
 
   const sql = "INSERT INTO payment (`statusID`, `discountID`, `Amount`, `mop`, `paytime`, `paydate`, `payment_proof`) VALUES ?";
   const values = [
@@ -343,6 +363,8 @@ app.post('/postPayment', (req, res) => {
     ]
   ];
 
+  console.log(values)
+  
   // Execute the SQL query
   db.query(sql, [values], (err, result) => {
     if (err) {
@@ -353,6 +375,17 @@ app.post('/postPayment', (req, res) => {
   });
 });
 
+
+app.get('/getPayments', (req, res) => {
+  const sql = 'SELECT paymentID, discountID, Amount, mop, paydate, paytime, TO_BASE64(payment_proof) AS payment_proof, statusID FROM payment;';
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log('Error executing SQL query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    return res.json(result);
+  });
+});
 
 
 
@@ -474,10 +507,36 @@ app.post('/updatePromos', (req, res) => {
   })
 })
 
-app.get('/getFlights', (req, res) => { 
-  const sql = "SELECT f.FlightID, f.aircraftID, a.Model, f.availableSeats, d.airportID AS departureID, d.airportName AS departureName,dst.airportID AS destinationID, dst.airportName AS destinationName, s.status, s.statusID FROM flight f JOIN aircraft a ON f.aircraftID = a.aircraftID JOIN status s ON f.status = s.statusID JOIN airport d ON f.departureID = d.airportID JOIN airport dst ON f.destinationID = dst.airportID;"
+app.get('/getFlights', (req, res) => {
+  const { departureID, destinationID } = req.query;
+  const sql = `
+    SELECT 
+      f.FlightID, 
+      f.aircraftID, 
+      a.Model, 
+      f.availableSeats, 
+      d.airportID AS departureID, 
+      d.airportName AS departureName, 
+      dst.airportID AS destinationID, 
+      dst.airportName AS destinationName, 
+      s.status, 
+      s.statusID 
+    FROM 
+      flight f 
+    JOIN 
+      aircraft a ON f.aircraftID = a.aircraftID 
+    JOIN 
+      status s ON f.status = s.statusID 
+    JOIN 
+      airport d ON f.departureID = d.airportID 
+    JOIN 
+      airport dst ON f.destinationID = dst.airportID 
+    WHERE 
+      d.airportID = ? AND 
+      dst.airportID = ?;
+  `;
 
-  db.query(sql, (err, result) => {
+  db.query(sql, [departureID, destinationID], (err, result) => {
     if (err) {
       console.log("Error executing SQL query:", err);
       return res.status(500).json({ error: "Internal server error" });
@@ -485,6 +544,7 @@ app.get('/getFlights', (req, res) => {
     return res.json(result);
   });
 });
+
 
 app.get('/getFlightTime', (req, res) => { 
   const sql = "SELECT FlightID, departDateTime, arrivalDateTime, returnDateTime from flight"
