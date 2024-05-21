@@ -46,14 +46,24 @@ const Sales = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {values.map((value, index) => (
-                    <tr key={index}>
+                  {values.map((value) => (
+                    <tr key={value.paymentID}>
                       <td>{value.paymentID}</td>
                       <td>{value.discountID}</td>
                       <td>{value.Amount}</td>
                       <td>{value.mop}</td>
-                      <td>{value.paydate} {value.paytime}</td>
-                      <td>{value.payment_proof}</td>
+                      <td>{`${value.paydate} ${value.paytime}`}</td>
+                      <td>
+                        {value.payment_proof ? (
+                          <img 
+                            src={`data:image/png;base64,${value.payment_proof}`} 
+                            alt="Payment Proof" 
+                            style={{ width: "100px", height: "100px" }}
+                          />
+                        ) : (
+                          "No proof"
+                        )}
+                      </td>
                       <td>{value.statusID}</td>
                       <td></td>
                     </tr>

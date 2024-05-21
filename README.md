@@ -34,4 +34,6 @@ npm i cors
 npm i bcrypt
 
 npm i express-session body-parser cookie-parser
+
+npm i multer path
 ```
